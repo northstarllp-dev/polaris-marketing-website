@@ -136,32 +136,46 @@ export const WORKFLOW_STAGES = [
 
 export const CAPABILITIES = [
   {
+    id: "crm",
     title: "Customer CRM",
     desc: "A directory built for signage jobs — history, contacts, and lifetime value in one place.",
+    color: "#ff7043",
   },
   {
+    id: "quotations",
     title: "Quotations",
     desc: "Catalog-driven quoting with measurements from site visits — not spreadsheet guesswork.",
+    color: "#0ea5e9",
   },
   {
+    id: "portal",
     title: "Customer portal",
     desc: "Magic-link access for clients to approve quotes and designs, track progress, and schedule.",
+    color: "#8b5cf6",
   },
   {
+    id: "whatsapp",
     title: "Automated WhatsApp",
     desc: "Stage notifications that keep customers and teams aligned without chasing threads.",
+    color: "#f59e0b",
   },
   {
+    id: "production",
     title: "Production tracking",
     desc: "Workshop milestones so owners know what is on track — and what is at risk.",
+    color: "#3b82f6",
   },
   {
+    id: "installation",
     title: "Installation scheduling",
     desc: "Dispatch crews with the context they need: access, scaffolding, photos, and sign-off.",
+    color: "#0085ff",
   },
   {
+    id: "analytics",
     title: "Analytics",
     desc: "Funnel, pipeline value, and operational KPIs for signage businesses.",
+    color: "#10b981",
   },
 ] as const;
 

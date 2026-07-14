@@ -21,7 +21,7 @@ export function WhyPolaris() {
             className="font-['Figtree',sans-serif] font-black text-[var(--brand-ink)] leading-tight"
             style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
           >
-            Built different. By design.
+            Not a SaaS shop. A problem studio.
           </h2>
         </FadeIn>
         <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8">

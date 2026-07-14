@@ -71,9 +71,9 @@ export function HomeHero() {
           className="font-['Figtree',sans-serif] font-black text-white leading-[1.08] tracking-tight mb-6"
           style={{ fontSize: "clamp(28px, 4.5vw, 48px)" }}
         >
-          Software that runs modern
+          We map your chaos.
           <br />
-          businesses — <span className="text-[var(--brand-orange)]">end to end.</span>
+          Then we build the <span className="text-[var(--brand-orange)]">software to end it.</span>
         </motion.h1>
 
         <motion.p
@@ -83,8 +83,8 @@ export function HomeHero() {
           className="font-['Figtree',sans-serif] font-normal text-white/55 max-w-xl mx-auto leading-relaxed mb-10"
           style={{ fontSize: "clamp(15px, 1.8vw, 18px)" }}
         >
-          One parent platform. Purpose-built products for operations — starting
-          with PrintOMS for signage and fabrication.
+          Polaris digs deep into how real businesses run — then ships purpose-built
+          software that actually fits. Starting with PrintOMS for signage shops.
         </motion.p>
 
         <motion.div
@@ -102,10 +102,10 @@ export function HomeHero() {
             </Link>
           </motion.div>
           <a
-            href="#contact"
+            href="#how-we-work"
             className="font-['Figtree',sans-serif] font-semibold text-[15px] text-white/70 border border-white/20 px-8 py-3.5 rounded-lg hover:border-white/40 hover:text-white transition-all"
           >
-            Book a Demo
+            See our approach
           </a>
         </motion.div>
       </div>

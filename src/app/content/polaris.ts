@@ -16,21 +16,26 @@ export const CHAOS_ITEMS = [
 export const WHY_PILLARS = [
   {
     id: "purpose",
-    title: "Purpose built",
+    title: "We start with the problem",
     points: [
-      "Designed around real operational workflows.",
-      "Not generic CRM tools.",
+      "Embedded research. Real operator input.",
+      "We don't build on assumptions.",
+      "Every feature earns its place.",
     ],
   },
   {
     id: "modern",
-    title: "Modern experience",
-    points: ["Fast.", "Clear.", "Easy for every team to learn."],
+    title: "Software that actually fits",
+    points: [
+      "Not a generic CRM adapted to your niche.",
+      "Built from scratch around your workflow.",
+      "Fast, clear, easy for every team.",
+    ],
   },
   {
     id: "enterprise",
-    title: "Enterprise ready",
-    points: ["Permissions", "Security", "Audit logs", "Built to scale"],
+    title: "Built to last & scale",
+    points: ["Permissions", "Security", "Audit logs", "Ready to grow with you"],
   },
 ] as const;
 

@@ -13,13 +13,13 @@ export function ProductSpotlight() {
       <div className="max-w-7xl mx-auto px-6">
         <FadeIn className="text-center mb-14">
           <p className="font-['Figtree',sans-serif] text-[12px] font-bold text-[var(--brand-accent)] uppercase tracking-widest mb-3">
-            Flagship product
+            Our first product
           </p>
           <h2
             className="font-['Figtree',sans-serif] font-black text-[var(--brand-ink)] leading-tight"
             style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
           >
-            Meet PrintOMS
+            PrintOMS — built for signage shops
           </h2>
         </FadeIn>
 
@@ -29,8 +29,8 @@ export function ProductSpotlight() {
             transition={{ duration: 0.25 }}
             className="bg-white rounded-2xl border border-[rgba(0,0,0,0.08)] overflow-hidden shadow-sm"
           >
-            <div className="md:flex">
-              <div className="md:w-[46%] p-10 md:p-14 flex flex-col justify-center">
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full md:w-[46%] p-7 md:p-14 flex flex-col justify-center">
                 <div className="flex items-center gap-2 mb-5">
                   <span className="font-['Figtree',sans-serif] font-bold text-[12px] text-[var(--brand-navy)] bg-[var(--brand-surface)] px-3 py-1 rounded">
                     PrintOMS
@@ -43,12 +43,11 @@ export function ProductSpotlight() {
                   className="font-['Figtree',sans-serif] font-black text-[var(--brand-ink)] leading-tight mb-4"
                   style={{ fontSize: "clamp(22px, 2.5vw, 30px)" }}
                 >
-                  Order management for signage and fabrication businesses.
+                  The proof our approach works.
                 </h3>
                 <p className="font-['Figtree',sans-serif] font-normal text-[15px] text-[var(--brand-muted)] mb-8 leading-relaxed">
-                  Replace WhatsApp threads, Excel sheets, and disconnected tools
-                  with one platform — from enquiry and site visit through
-                  production and install.
+                  We spent months inside signage and fabrication businesses before writing a line of code.
+                  PrintOMS is what came out — order management built around real operator workflows, from first enquiry to final install.
                 </p>
                 <Stagger className="grid grid-cols-2 gap-y-3 gap-x-4 mb-8">
                   {PRINTOMS_SPOTLIGHT_FEATURES.map((label) => (
@@ -67,7 +66,7 @@ export function ProductSpotlight() {
                   See PrintOMS <ArrowRight size={14} />
                 </Link>
               </div>
-              <div className="md:w-[54%] bg-gradient-to-br from-[var(--brand-navy)] to-[#1a1b4a] p-8 flex items-center justify-center min-h-[320px]">
+              <div className="w-full md:w-[54%] bg-gradient-to-br from-[var(--brand-navy)] to-[#1a1b4a] p-6 md:p-8 flex items-center justify-center min-h-[240px] md:min-h-[320px]">
                 <div className="w-full max-w-sm space-y-3">
                   <motion.div
                     initial={reduce ? false : { opacity: 0, x: 20 }}
