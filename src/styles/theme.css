@@ -1,6 +1,16 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Polaris brand */
+  --brand-navy: #0f1035;
+  --brand-navy-deep: #08091f;
+  --brand-orange: #ff7043;
+  --brand-slate: #64748b;
+  --brand-accent: #475569;
+  --brand-ink: #1a1a2e;
+  --brand-muted: #666680;
+  --brand-surface: #f6f6f9;
+
   --font-size: 16px;
   --background: #ffffff;
   --foreground: #1a1a2e;
@@ -8,14 +18,14 @@
   --card-foreground: #1a1a2e;
   --popover: #ffffff;
   --popover-foreground: #1a1a2e;
-  --primary: #6161ff;
+  --primary: #0f1035;
   --primary-foreground: #ffffff;
-  --secondary: #f0f0ff;
+  --secondary: #f6f6f9;
   --secondary-foreground: #1a1a2e;
   --muted: #f4f4f8;
   --muted-foreground: #717182;
-  --accent: #ededff;
-  --accent-foreground: #6161ff;
+  --accent: #fff1ec;
+  --accent-foreground: #ff7043;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.08);
@@ -24,7 +34,7 @@
   --switch-background: #cbced4;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #6161ff;
+  --ring: #ff7043;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -119,23 +129,49 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
 
+  html {
+    font-size: var(--font-size);
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-family: Figtree, sans-serif;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .animate-marquee {
+      animation: none !important;
+    }
   }
 
   /**
   * Default typography styles for HTML elements (h1-h4, p, label, button, input).
   * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
   */
-
-  html {
-    font-size: var(--font-size);
-  }
 
   h1 {
     font-size: var(--text-2xl);
