@@ -1,3 +1,5 @@
+"use client";
+
 import { useHashScroll } from "../hooks/useHashScroll";
 import { HomeHero } from "../sections/home/HomeHero";
 import { Marquee } from "../sections/home/Marquee";
@@ -26,3 +28,4 @@ export function HomePage() {
     </>
   );
 }
+

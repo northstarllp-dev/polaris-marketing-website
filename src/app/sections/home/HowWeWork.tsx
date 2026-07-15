@@ -1,4 +1,6 @@
-import { motion, useReducedMotion } from "motion/react";
+"use client";
+
+import { motion } from "motion/react";
 import { Crosshair, Layers, CheckCircle } from "lucide-react";
 import { FadeIn } from "../../components/motion/FadeIn";
 import { WobbleIcon } from "../../components/motion/Tilt3D";
@@ -28,8 +30,6 @@ const STEPS = [
 ] as const;
 
 export function HowWeWork() {
-  const reduce = useReducedMotion();
-
   return (
     <section id="how-we-work" className="py-24 bg-[var(--brand-navy)] scroll-mt-24 relative overflow-hidden">
       {/* Dot texture */}
@@ -43,7 +43,7 @@ export function HowWeWork() {
       <motion.div
         className="absolute top-[-80px] right-[-60px] w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(ellipse, #ff704318 0%, transparent 70%)" }}
-        animate={reduce ? undefined : { scale: [1, 1.1, 1] }}
+        animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
 
@@ -70,7 +70,7 @@ export function HowWeWork() {
             return (
               <motion.div
                 key={step.number}
-                initial={reduce ? false : { opacity: 0, y: 32 }}
+                initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -128,3 +128,4 @@ export function HowWeWork() {
     </section>
   );
 }
+

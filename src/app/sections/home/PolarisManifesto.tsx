@@ -1,5 +1,7 @@
+"use client";
+
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 
 type RevealBlockProps = {
   children: React.ReactNode;
@@ -10,8 +12,6 @@ type RevealBlockProps = {
 
 function RevealBlock({ children, dim = false, size = "md", delay = 0 }: RevealBlockProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-
   const sizeClass = {
     sm: "text-[clamp(16px,2vw,20px)]",
     md: "text-[clamp(20px,3vw,30px)]",
@@ -22,7 +22,7 @@ function RevealBlock({ children, dim = false, size = "md", delay = 0 }: RevealBl
   return (
     <motion.div
       ref={ref}
-      initial={reduce ? false : { opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 1.0, delay, ease: [0.22, 1, 0.36, 1] }}
@@ -36,10 +36,9 @@ function RevealBlock({ children, dim = false, size = "md", delay = 0 }: RevealBl
 }
 
 function DividerPulse() {
-  const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={reduce ? false : { scaleX: 0, opacity: 0 }}
+      initial={{ scaleX: 0, opacity: 0 }}
       whileInView={{ scaleX: 1, opacity: 1 }}
       viewport={{ once: true, amount: 0.8 }}
       transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -51,8 +50,6 @@ function DividerPulse() {
 
 export function PolarisManifesto() {
   const sectionRef = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
-
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -67,7 +64,7 @@ export function PolarisManifesto() {
       className="relative bg-[#080808] overflow-hidden"
     >
       {/* Ambient background glow */}
-      {!reduce && (
+      {true && (
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{ y: glowY }}
@@ -162,3 +159,4 @@ export function PolarisManifesto() {
     </section>
   );
 }
+

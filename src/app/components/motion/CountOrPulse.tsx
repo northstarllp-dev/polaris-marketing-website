@@ -1,18 +1,16 @@
-import { Link } from "react-router";
-import { motion, useReducedMotion, MotionConfig } from "motion/react";
+"use client";
+
+import Link from "next/link";
+import { motion, MotionConfig } from "motion/react";
 
 export function LivePulse({ className = "" }: { className?: string }) {
-  const reduce = useReducedMotion();
-
   return (
     <span className={`relative inline-flex h-2 w-2 ${className}`}>
-      {!reduce && (
-        <motion.span
-          className="absolute inset-0 rounded-full bg-[var(--brand-orange)]"
-          animate={{ scale: [1, 1.8, 1], opacity: [0.7, 0, 0.7] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        />
-      )}
+      <motion.span
+        className="absolute inset-0 rounded-full bg-[var(--brand-orange)]"
+        animate={{ scale: [1, 1.8, 1], opacity: [0.7, 0, 0.7] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+      />
       <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand-orange)]" />
     </span>
   );
@@ -83,10 +81,9 @@ function getPosition(angleDeg: number, radius: number) {
 
 export function SoftOrbit({ className = "" }: { className?: string }) {
   // Soften (don’t disable) — this diagram is meant to feel alive
-  const reduce = useReducedMotion();
   const size = 420;
   const center = size / 2;
-  const floatAmp = reduce ? 4 : 12;
+  const floatAmp = 12;
 
   return (
     <MotionConfig reducedMotion="never">
@@ -183,7 +180,7 @@ export function SoftOrbit({ className = "" }: { className?: string }) {
           ease: "easeInOut",
         }}
       >
-        <Link to="/" aria-label="Polaris home">
+        <Link href="/" aria-label="Polaris home">
           <motion.div
             className="w-20 h-20 rounded-2xl bg-[var(--brand-navy)] flex flex-col items-center justify-center shadow-2xl cursor-pointer"
             style={{ transformStyle: "preserve-3d" }}
@@ -237,7 +234,7 @@ export function SoftOrbit({ className = "" }: { className?: string }) {
             >
               {/* Product chip button */}
               <Link
-                to={product.to}
+                href={product.to}
                 aria-label={
                   product.status === "live"
                     ? `Open ${product.name}`

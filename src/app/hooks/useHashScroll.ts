@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router";
+import { usePathname } from "next/navigation";
 
 const NAV_OFFSET = 80;
 
@@ -18,10 +18,11 @@ export function scrollToHash(hash: string, behavior: ScrollBehavior = "smooth") 
 
 /** Smooth-scroll to hash targets after client-side navigation */
 export function useHashScroll() {
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!location.hash) {
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
+    if (!hash) {
       window.scrollTo({ top: 0, behavior: "auto" });
       return;
     }
@@ -35,10 +36,11 @@ export function useHashScroll() {
     let attempts = 0;
     const tryScroll = () => {
       attempts += 1;
-      if (scrollToHash(location.hash, behavior) || attempts >= 12) return;
+      const currentHash = typeof window !== "undefined" ? window.location.hash : "";
+      if (scrollToHash(currentHash, behavior) || attempts >= 12) return;
       window.setTimeout(tryScroll, 50);
     };
 
     requestAnimationFrame(tryScroll);
-  }, [location.pathname, location.hash, location.key]);
+  }, [pathname]);
 }

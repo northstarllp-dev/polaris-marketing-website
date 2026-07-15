@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { FadeIn } from "./FadeIn";
 
 export type StickyStep = {
@@ -19,8 +21,6 @@ type StickyStepsProps = {
 export function StickySteps({ eyebrow, heading, sub, steps }: StickyStepsProps) {
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
-  const reduce = useReducedMotion();
-
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
     refs.current.forEach((el, i) => {
@@ -106,7 +106,7 @@ export function StickySteps({ eyebrow, heading, sub, steps }: StickyStepsProps) 
           <div className="hidden lg:block sticky top-28">
             <motion.div
               key={current.id}
-              initial={reduce ? false : { opacity: 0, y: 16, scale: 0.98 }}
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="rounded-3xl border border-[rgba(0,0,0,0.08)] overflow-hidden shadow-xl bg-[var(--brand-navy)] text-white min-h-[380px] p-10 flex flex-col justify-between"
@@ -158,3 +158,4 @@ export function StickySteps({ eyebrow, heading, sub, steps }: StickyStepsProps) 
     </section>
   );
 }
+

@@ -1,14 +1,18 @@
+"use client";
+
 import { useEffect, useRef, useState, type MouseEvent } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { BookDemoButton } from "../components/BookDemoButton";
 import { scrollToHash } from "../hooks/useHashScroll";
 
 const NAV_LINKS = [
   { label: "Company", to: "/#about" },
   { label: "How We Work", to: "/#how-we-work" },
   { label: "Why Polaris", to: "/#why" },
-  { label: "Pricing", to: "/products/printoms#pricing" },
+  // { label: "Pricing", to: "/products/printoms#pricing" },
 ] as const;
 
 export function NavBar() {
@@ -17,9 +21,8 @@ export function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
-  const navigate = useNavigate();
-  const reduce = useReducedMotion();
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => {
@@ -36,7 +39,7 @@ export function NavBar() {
   useEffect(() => {
     setOpen(false);
     setProductsOpen(false);
-  }, [location.pathname, location.hash]);
+  }, [pathname]);
 
   useEffect(() => {
     const onDoc = (e: globalThis.MouseEvent) => {
@@ -51,23 +54,23 @@ export function NavBar() {
   function goTo(to: string, e?: MouseEvent) {
     e?.preventDefault();
     const [path, hash = ""] = to.split("#");
-    const pathname = path || "/";
+    const targetPath = path || "/";
     const hashPart = hash ? `#${hash}` : "";
-    const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+    const behavior: ScrollBehavior = (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? "auto" : "smooth";
 
-    if (location.pathname === pathname) {
+    if (pathname === targetPath) {
       if (hash) {
-        if (location.hash === hashPart) {
+        if (typeof window !== "undefined" && window.location.hash === hashPart) {
           scrollToHash(hash, behavior);
         } else {
-          navigate(`${pathname}${hashPart}`);
+          router.push(`${targetPath}${hashPart}`);
         }
       } else {
         window.scrollTo({ top: 0, behavior });
-        navigate(pathname);
+        router.push(targetPath);
       }
     } else {
-      navigate(`${pathname}${hashPart}`);
+      router.push(`${targetPath}${hashPart}`);
     }
     setOpen(false);
     setProductsOpen(false);
@@ -89,7 +92,7 @@ export function NavBar() {
     >
       <div className="relative max-w-7xl mx-auto px-6 h-[80px] flex items-center justify-between gap-6">
         <Link
-          to="/"
+          href="/"
           onClick={(e) => goTo("/", e)}
           className="flex items-center gap-2 shrink-0"
         >
@@ -116,7 +119,7 @@ export function NavBar() {
             <AnimatePresence>
               {productsOpen && (
                 <motion.div
-                  initial={reduce ? false : { opacity: 0, y: 8, height: 0 }}
+                  initial={{ opacity: 0, y: 8, height: 0 }}
                   animate={{ opacity: 1, y: 0, height: "auto" }}
                   exit={{ opacity: 0, y: 8, height: 0 }}
                   transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -124,7 +127,7 @@ export function NavBar() {
                 >
                   <div className="p-2">
                     <Link
-                      to="/products/printoms"
+                      href="/products/printoms"
                       onClick={(e) => goTo("/products/printoms", e)}
                       className="block rounded-xl p-3 hover:bg-[var(--brand-surface)] transition-colors"
                     >
@@ -140,6 +143,7 @@ export function NavBar() {
                         Order management for signage & fabrication
                       </p>
                     </Link>
+                    {/* Temporarily hidden
                     <button
                       type="button"
                       onClick={(e) => goTo("/products/printoms#pricing", e)}
@@ -154,6 +158,7 @@ export function NavBar() {
                         Starter & Professional plans
                       </p>
                     </button>
+                    */}
                     <div className="rounded-xl p-3 opacity-70">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-['Figtree',sans-serif] font-bold text-[14px] text-[var(--brand-ink)]">
@@ -176,7 +181,7 @@ export function NavBar() {
           {NAV_LINKS.map(({ label, to }) => (
             <Link
               key={label}
-              to={to}
+              href={to}
               onClick={(e) => goTo(to, e)}
               className={linkClass}
             >
@@ -186,28 +191,16 @@ export function NavBar() {
         </div>
 
         <div className="hidden lg:flex items-center gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={(e) =>
-              goTo(
-                location.pathname === "/products/printoms"
-                  ? "/products/printoms#contact"
-                  : "/#contact",
-                e
-              )
-            }
-            className="font-['Figtree',sans-serif] text-[14px] font-medium text-[#555] hover:text-[#333] transition-colors px-3 py-2"
+
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            className="ml-1"
           >
-            Contact sales
-          </button>
-          <motion.a
-            href="tel:+918189999998"
-            whileHover={reduce ? undefined : { scale: 1.03 }}
-            whileTap={reduce ? undefined : { scale: 0.98 }}
-            className="font-['Figtree',sans-serif] text-[13px] font-semibold bg-[var(--brand-orange)] text-white px-5 py-2.5 rounded-lg hover:bg-[#f4622d] transition-colors flex items-center gap-1.5 ml-1"
-          >
-            Book a Demo <ArrowRight size={14} />
-          </motion.a>
+            <BookDemoButton className="font-['Figtree',sans-serif] text-[13px] font-semibold bg-[var(--brand-orange)] text-white px-5 py-2.5 rounded-lg hover:bg-[#f4622d] transition-colors inline-flex items-center gap-1.5">
+              Book a Demo <ArrowRight size={14} />
+            </BookDemoButton>
+          </motion.div>
         </div>
 
         <button
@@ -223,7 +216,7 @@ export function NavBar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={reduce ? false : { height: 0, opacity: 0 }}
+            initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -247,12 +240,9 @@ export function NavBar() {
                   {label}
                 </button>
               ))}
-              <a
-                href="tel:+918189999998"
-                className="font-['Figtree',sans-serif] text-[14px] font-semibold bg-[var(--brand-orange)] text-white px-5 py-3 rounded-lg text-center mt-4"
-              >
+              <BookDemoButton className="font-['Figtree',sans-serif] text-[14px] font-semibold bg-[var(--brand-orange)] text-white px-5 py-3 rounded-lg text-center mt-4 w-full">
                 Book a Demo
-              </a>
+              </BookDemoButton>
             </div>
           </motion.div>
         )}

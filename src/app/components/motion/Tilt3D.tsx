@@ -1,10 +1,11 @@
+"use client";
+
 import { useRef, type MouseEvent, type ReactNode } from "react";
 import {
   motion,
   useMotionValue,
   useSpring,
   useTransform,
-  useReducedMotion,
 } from "motion/react";
 
 type Tilt3DProps = {
@@ -30,8 +31,6 @@ export function Tilt3D({
   glare = true,
 }: Tilt3DProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
 
@@ -51,10 +50,6 @@ export function Tilt3D({
     ([x, y]) =>
       `radial-gradient(circle at ${x} ${y}, rgba(255,255,255,0.35), transparent 45%)`
   );
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
 
   function handleMove(e: MouseEvent) {
     const el = ref.current;
@@ -108,12 +103,6 @@ export function WobbleIcon({
   className?: string;
   delay?: number;
 }) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
       className={className}
@@ -140,3 +129,4 @@ export function WobbleIcon({
     </motion.div>
   );
 }
+

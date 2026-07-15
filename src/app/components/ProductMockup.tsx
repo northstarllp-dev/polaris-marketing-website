@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { MOCKUP_SIDEBAR, MOCKUP_TABS } from "../content/printoms";
 import { FadeIn } from "./motion/FadeIn";
 
@@ -152,7 +154,6 @@ export function ProductShowcase({
 }) {
   const [activeTab, setActiveTab] = useState(0);
   const [timerKey, setTimerKey] = useState(0);
-  const reduce = useReducedMotion();
   const pausedRef = useRef(false);
 
   // Always auto-advance — content carousel, intentionally ignores prefers-reduced-motion
@@ -209,7 +210,7 @@ export function ProductShowcase({
             }
           >
             {label}
-            {activeTab === i && !reduce && (
+            {activeTab === i && (
               <motion.span
                 key={`${id}-${timerKey}`}
                 className="absolute bottom-0 left-0 h-[3px] rounded-full"
@@ -228,3 +229,4 @@ export function ProductShowcase({
     </FadeIn>
   );
 }
+

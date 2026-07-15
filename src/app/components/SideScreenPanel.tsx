@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * SideScreenPanel — auto-cycling decorative app-screen panels shown to
  * the left/right of the central ProductMockup in the PrintOMSHero 3-panel layout.
@@ -267,3 +269,4 @@ function RightPanel() {
 export function SideScreenPanel({ variant }: { variant: "left" | "right" }) {
   return variant === "left" ? <LeftPanel /> : <RightPanel />;
 }
+

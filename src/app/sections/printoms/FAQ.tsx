@@ -1,13 +1,13 @@
+"use client";
+
 import { useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { PRINTOMS_FAQS } from "../../content/printoms";
 import { FadeIn } from "../../components/motion/FadeIn";
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
-  const reduce = useReducedMotion();
-
   return (
     <div className="border border-[rgba(0,0,0,0.08)] rounded-xl overflow-hidden bg-white">
       <button
@@ -26,7 +26,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={reduce ? false : { height: 0, opacity: 0 }}
+            initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -65,3 +65,4 @@ export function FAQ() {
     </section>
   );
 }
+

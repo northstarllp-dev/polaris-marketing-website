@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { MARQUEE_CLIENTS } from "../../content/polaris";
 import { FadeIn } from "../../components/motion/FadeIn";
@@ -48,3 +50,4 @@ export function Marquee() {
     </section>
   );
 }
+

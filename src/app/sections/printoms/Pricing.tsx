@@ -1,5 +1,8 @@
+"use client";
+
 import { Check } from "lucide-react";
 import { PRICING_TIERS } from "../../content/printoms";
+import { BookDemoButton } from "../../components/BookDemoButton";
 import { FadeIn } from "../../components/motion/FadeIn";
 import { Stagger, StaggerItem } from "../../components/motion/Stagger";
 
@@ -63,8 +66,7 @@ export function Pricing() {
                     {tier.period}
                   </span>
                 </div>
-                <a
-                  href="tel:+918189999998"
+                <BookDemoButton
                   className={`block w-full text-center font-['Figtree',sans-serif] font-bold text-[14px] py-3 rounded-lg transition-colors mb-8 ${
                     tier.popular
                       ? "bg-[var(--brand-orange)] text-white hover:bg-[#f4622d]"
@@ -72,7 +74,7 @@ export function Pricing() {
                   }`}
                 >
                   Book a Demo
-                </a>
+                </BookDemoButton>
                 <ul className="flex flex-col gap-3 mt-auto">
                   {tier.features.map((feature) => (
                     <li

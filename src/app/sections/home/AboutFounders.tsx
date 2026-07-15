@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
 import { User } from "lucide-react";
@@ -79,6 +81,9 @@ export function AboutFounders() {
                 <p className="font-['Figtree',sans-serif] text-[13px] text-[var(--brand-muted)] uppercase tracking-widest mt-1">
                   Co-Founder
                 </p>
+                <a href="mailto:Akshay@thepolarislabs.com" className="font-['Figtree',sans-serif] text-[14px] font-medium text-[var(--brand-orange)] hover:underline mt-2">
+                  Akshay@thepolarislabs.com
+                </a>
               </div>
 
               <div className="flex flex-col items-center">
@@ -102,6 +107,9 @@ export function AboutFounders() {
                 <p className="font-['Figtree',sans-serif] text-[13px] text-[var(--brand-muted)] uppercase tracking-widest mt-1">
                   Co-Founder
                 </p>
+                <a href="mailto:Hari@thepolarislabs.com" className="font-['Figtree',sans-serif] text-[14px] font-medium text-[var(--brand-orange)] hover:underline mt-2">
+                  Hari@thepolarislabs.com
+                </a>
               </div>
             </div>
           </FadeIn>
@@ -118,3 +126,4 @@ export function AboutFounders() {
     </section>
   );
 }
+

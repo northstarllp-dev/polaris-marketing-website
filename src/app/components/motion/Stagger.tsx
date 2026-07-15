@@ -1,4 +1,6 @@
-import { motion, useReducedMotion } from "motion/react";
+"use client";
+
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
 type StaggerProps = {
@@ -16,12 +18,6 @@ export function Stagger({
   stagger = 0.08,
   once = true,
 }: StaggerProps) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
       className={className}
@@ -49,12 +45,6 @@ export function StaggerItem({
   className?: string;
   y?: number;
 }) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
       className={className}
@@ -71,3 +61,4 @@ export function StaggerItem({
     </motion.div>
   );
 }
+

@@ -1,5 +1,7 @@
+"use client";
+
 import { useCallback, useRef, useState, type MouseEvent } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import {
   CircleHelp,
   EyeOff,
@@ -42,19 +44,16 @@ const POSITIONS = [
 
 type Offset = { x: number; y: number; rot: number };
 type ChaosItem = (typeof CHAOS_ITEMS)[number];
-
 function FlipCard({
   item,
   from,
   to,
   size = "md",
-  reduce,
 }: {
   item: ChaosItem;
   from: string;
   to: string;
   size?: "sm" | "md";
-  reduce: boolean | null;
 }) {
   const [flipped, setFlipped] = useState(false);
   const Icon = ICONS[item.icon];
@@ -76,7 +75,7 @@ function FlipCard({
     >
       <motion.div
         className={`relative ${box}`}
-        animate={reduce ? undefined : { rotateY: flipped ? 180 : 0 }}
+        animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         style={{ transformStyle: "preserve-3d" }}
       >
@@ -113,9 +112,8 @@ function FlipCard({
 
       <div className="min-h-[2.5rem] flex flex-col items-center justify-start px-1">
         <span
-          className={`font-['Figtree',sans-serif] font-semibold text-[11px] uppercase tracking-wider text-center leading-snug max-w-[110px] transition-colors ${
-            flipped ? "text-[var(--brand-orange)]" : "text-[var(--brand-muted)]"
-          }`}
+          className={`font-['Figtree',sans-serif] font-semibold text-[11px] uppercase tracking-wider text-center leading-snug max-w-[110px] transition-colors ${flipped ? "text-[var(--brand-orange)]" : "text-[var(--brand-muted)]"
+            }`}
         >
           {flipped ? "Polaris" : item.label}
         </span>
@@ -141,11 +139,14 @@ export function ProblemPlatform() {
     () => CHAOS_ITEMS.map(() => ({ x: 0, y: 0, rot: 0 }))
   );
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const reduce = useReducedMotion();
-
   const onMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (reduce) return;
+      if (
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        return;
+      }
 
       const next = itemRefs.current.map((el) => {
         if (!el) return { x: 0, y: 0, rot: 0 };
@@ -167,7 +168,7 @@ export function ProblemPlatform() {
       });
       setOffsets(next);
     },
-    [reduce]
+    []
   );
 
   const onMouseLeave = useCallback(() => {
@@ -215,9 +216,25 @@ export function ProblemPlatform() {
             Information is scattered. Approvals get lost. Production stalls
             because no one sees the full job. You manage tools instead of growth.
           </p>
-          <p className="font-['Figtree',sans-serif] text-[13px] font-semibold text-[var(--brand-orange)] mb-14">
+          <p className="font-['Figtree',sans-serif] text-[13px] font-semibold text-[var(--brand-orange)] mb-10">
             Hover or tap a box — each problem flips to its Polaris answer
           </p>
+        </FadeIn>
+
+        <FadeIn delay={0.08} className="mb-16">
+          <div className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-2xl bg-[var(--brand-navy)] aspect-video shadow-2xl shadow-[rgba(15,16,53,0.18)]">
+            <video
+              src="/brag.mp4"
+              className="h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+              aria-label="PrintOMS product demo"
+            />
+          </div>
         </FadeIn>
 
         {/* Mobile grid */}
@@ -238,7 +255,6 @@ export function ProblemPlatform() {
                   from={from}
                   to={to}
                   size="sm"
-                  reduce={reduce}
                 />
               </motion.div>
             );
@@ -249,7 +265,7 @@ export function ProblemPlatform() {
         <div
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
-          className="hidden md:block relative h-[380px] mb-16"
+          className="hidden md:block relative h-[280px] mt-40 mb-1"
         >
           {CHAOS_ITEMS.map((item, i) => {
             const [from, to] = RED_GRADIENTS[i % RED_GRADIENTS.length];
@@ -282,11 +298,7 @@ export function ProblemPlatform() {
               >
                 <motion.div
                   className="-translate-x-1/2 -translate-y-1/2"
-                  animate={
-                    reduce
-                      ? undefined
-                      : { y: [-amp, amp, -amp], rotate: [-2.5, 2.5, -2.5] }
-                  }
+                  animate={{ y: [-amp, amp, -amp], rotate: [-2.5, 2.5, -2.5] }}
                   transition={{
                     duration: 3.4 + i * 0.3,
                     repeat: Infinity,
@@ -299,7 +311,6 @@ export function ProblemPlatform() {
                     from={from}
                     to={to}
                     size="md"
-                    reduce={reduce}
                   />
                 </motion.div>
               </motion.div>
@@ -308,75 +319,6 @@ export function ProblemPlatform() {
         </div>
 
         <div className="mt-10 text-center">
-          {!reduce && (
-            <div
-              className="relative h-8 w-full max-w-2xl mx-auto mb-2 overflow-visible"
-              aria-hidden="true"
-            >
-              <motion.div
-                className="absolute top-1/2 -translate-y-1/2"
-                animate={{
-                  left: ["5%", "42%"],
-                  opacity: [0, 1, 1, 0],
-                }}
-                transition={{
-                  duration: 1.2,
-                  repeat: Infinity,
-                  repeatDelay: 2.5,
-                  ease: [0.4, 0, 0.6, 1],
-                  times: [0, 0.1, 0.75, 1],
-                }}
-              >
-                <svg
-                  width="56"
-                  height="22"
-                  viewBox="0 0 56 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <line
-                    x1="0"
-                    y1="11"
-                    x2="42"
-                    y2="11"
-                    stroke="var(--brand-orange)"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                  <polyline
-                    points="32,3 48,11 32,19"
-                    fill="none"
-                    stroke="var(--brand-orange)"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <circle
-                    cx="18"
-                    cy="11"
-                    r="2.2"
-                    fill="var(--brand-orange)"
-                    opacity="0.45"
-                  />
-                  <circle
-                    cx="8"
-                    cy="11"
-                    r="1.6"
-                    fill="var(--brand-orange)"
-                    opacity="0.22"
-                  />
-                  <circle
-                    cx="2"
-                    cy="11"
-                    r="1.2"
-                    fill="var(--brand-orange)"
-                    opacity="0.10"
-                  />
-                </svg>
-              </motion.div>
-            </div>
-          )}
-
           <div
             className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 mb-5"
             aria-label="One Polaris operating layer"
@@ -395,7 +337,7 @@ export function ProblemPlatform() {
                     color,
                     lineHeight: 1.1,
                   }}
-                  initial={reduce ? false : { y: "110%", opacity: 0 }}
+                  initial={{ y: "110%", opacity: 0 }}
                   whileInView={{ y: "0%", opacity: 1 }}
                   viewport={{ once: true, amount: 0.8 }}
                   transition={{
@@ -412,7 +354,7 @@ export function ProblemPlatform() {
 
           <motion.div
             className="mx-auto h-1 rounded-full bg-[var(--brand-orange)] mb-6"
-            initial={reduce ? false : { width: 0, opacity: 0 }}
+            initial={{ width: 0, opacity: 0 }}
             whileInView={{ width: "80px", opacity: 1 }}
             viewport={{ once: true, amount: 0.8 }}
             transition={{
@@ -424,7 +366,7 @@ export function ProblemPlatform() {
 
           <motion.p
             className="font-['Figtree',sans-serif] text-[15px] text-[var(--brand-muted)] max-w-lg mx-auto"
-            initial={reduce ? false : { opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.8 }}
             transition={{ duration: 0.55, delay: 0.5, ease: "easeOut" }}

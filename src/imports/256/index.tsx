@@ -350,7 +350,7 @@ function Frame14() {
   return (
     <div className="absolute bottom-0 left-[725.94px] rounded-br-[8px] rounded-tr-[8px] top-0 w-[258.063px]" data-name="Frame">
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-br-[8px] rounded-tr-[8px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgFrame} />
+        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgFrame.src} />
       </div>
     </div>
   );
@@ -637,7 +637,7 @@ function Frame37() {
   return (
     <div className="absolute h-[181.688px] left-0 right-0 rounded-tl-[8px] rounded-tr-[8px] top-0" data-name="Frame">
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-tl-[8px] rounded-tr-[8px]">
-        <img alt="" className="absolute h-[100.01%] left-0 max-w-none top-0 w-full" src={imgFrame1} />
+        <img alt="" className="absolute h-[100.01%] left-0 max-w-none top-0 w-full" src={imgFrame1.src} />
       </div>
     </div>
   );
@@ -686,7 +686,7 @@ function Frame42() {
   return (
     <div className="absolute h-[181.688px] left-0 right-0 rounded-tl-[8px] rounded-tr-[8px] top-0" data-name="Frame">
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-tl-[8px] rounded-tr-[8px]">
-        <img alt="" className="absolute h-[100.01%] left-0 max-w-none top-0 w-full" src={imgFrame2} />
+        <img alt="" className="absolute h-[100.01%] left-0 max-w-none top-0 w-full" src={imgFrame2.src} />
       </div>
     </div>
   );
@@ -735,7 +735,7 @@ function Frame47() {
   return (
     <div className="absolute h-[181.703px] left-0 right-0 rounded-tl-[8px] rounded-tr-[8px] top-0" data-name="Frame">
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-tl-[8px] rounded-tr-[8px]">
-        <img alt="" className="absolute h-[100.01%] left-0 max-w-none top-0 w-full" src={imgFrame3} />
+        <img alt="" className="absolute h-[100.01%] left-0 max-w-none top-0 w-full" src={imgFrame3.src} />
       </div>
     </div>
   );
@@ -805,7 +805,7 @@ function Frame53() {
   return (
     <div className="absolute h-[167.922px] left-0 right-0 rounded-tl-[8px] rounded-tr-[8px] top-0" data-name="Frame">
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-tl-[8px] rounded-tr-[8px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgFrame4} />
+        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgFrame4.src} />
       </div>
     </div>
   );
@@ -854,7 +854,7 @@ function Frame58() {
   return (
     <div className="absolute h-[167.781px] left-0 right-0 rounded-tl-[8px] rounded-tr-[8px] top-0" data-name="Frame">
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-tl-[8px] rounded-tr-[8px]">
-        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgFrame5} />
+        <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgFrame5.src} />
       </div>
     </div>
   );
@@ -903,7 +903,7 @@ function Frame63() {
   return (
     <div className="absolute h-[181.688px] left-0 right-0 rounded-tl-[8px] rounded-tr-[8px] top-0" data-name="Frame">
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-tl-[8px] rounded-tr-[8px]">
-        <img alt="" className="absolute h-[100.01%] left-0 max-w-none top-0 w-full" src={imgFrame6} />
+        <img alt="" className="absolute h-[100.01%] left-0 max-w-none top-0 w-full" src={imgFrame6.src} />
       </div>
     </div>
   );
@@ -1025,7 +1025,7 @@ function Frame67() {
     <div className="h-[337.938px] relative shrink-0 w-[224.063px]" data-name="Frame">
       <div className="absolute h-[32px] left-0 top-0 w-[128.375px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage.src} />
         </div>
       </div>
       <AutoLayoutVertical1 />
@@ -1077,7 +1077,7 @@ function Frame68() {
     <div className="h-[22px] relative shrink-0 w-[303.359px]" data-name="Frame">
       <div className="absolute left-0 size-[18px] top-[4px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage1} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage1.src} />
         </div>
       </div>
       <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Poppins:Light',sans-serif] h-[19px] justify-center leading-[0] left-[26px] not-italic text-[#535768] text-[13px] top-[10.5px] w-[181.872px]">
@@ -1092,7 +1092,7 @@ function Frame69() {
     <div className="h-[22px] relative shrink-0 w-[303.359px]" data-name="Frame">
       <div className="absolute left-0 size-[18px] top-[4px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage2} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage2.src} />
         </div>
       </div>
       <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Poppins:Light',sans-serif] h-[19px] justify-center leading-[0] left-[26px] not-italic text-[#535768] text-[13px] top-[10.5px] w-[123.528px]">
@@ -1107,7 +1107,7 @@ function Frame70() {
     <div className="h-[22px] relative shrink-0 w-[303.359px]" data-name="Frame">
       <div className="absolute left-0 size-[18px] top-[4px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage3} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage3.src} />
         </div>
       </div>
       <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Poppins:Light',sans-serif] h-[19px] justify-center leading-[0] left-[26px] not-italic text-[#535768] text-[13px] top-[10.5px] w-[116.778px]">
@@ -1122,7 +1122,7 @@ function Frame71() {
     <div className="h-[22px] relative shrink-0 w-[303.359px]" data-name="Frame">
       <div className="absolute left-0 size-[18px] top-[4px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage4} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage4.src} />
         </div>
       </div>
       <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Poppins:Light',sans-serif] h-[19px] justify-center leading-[0] left-[26px] not-italic text-[#535768] text-[13px] top-[10.5px] w-[110.45px]">
@@ -1137,7 +1137,7 @@ function Frame72() {
     <div className="h-[22px] relative shrink-0 w-[303.359px]" data-name="Frame">
       <div className="absolute left-0 size-[18px] top-[4px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage5} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage5.src} />
         </div>
       </div>
       <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Poppins:Light',sans-serif] h-[19px] justify-center leading-[0] left-[26px] not-italic text-[#535768] text-[13px] top-[10.5px] w-[82.231px]">
@@ -1175,7 +1175,7 @@ function Frame73() {
     <div className="h-[22px] relative shrink-0 w-[303.359px]" data-name="Frame">
       <div className="absolute left-0 size-[18px] top-[4px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage6} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage6.src} />
         </div>
       </div>
       <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Poppins:Light',sans-serif] h-[19px] justify-center leading-[0] left-[26px] not-italic text-[#535768] text-[13px] top-[10.5px] w-[49.747px]">
@@ -1190,7 +1190,7 @@ function Frame74() {
     <div className="h-[22px] relative shrink-0 w-[303.359px]" data-name="Frame">
       <div className="absolute left-0 size-[18px] top-[4px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage7} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage7.src} />
         </div>
       </div>
       <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Poppins:Light',sans-serif] h-[19px] justify-center leading-[0] left-[26px] not-italic text-[#535768] text-[13px] top-[10.5px] w-[71.294px]">
@@ -1443,22 +1443,22 @@ function Frame82() {
     <div className="h-[35.938px] relative shrink-0 w-[166.781px]" data-name="Frame">
       <div className="absolute left-0 size-[32px] top-0" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage8} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage8.src} />
         </div>
       </div>
       <div className="absolute left-[40px] size-[32px] top-0" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage9} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage9.src} />
         </div>
       </div>
       <div className="absolute left-[80px] size-[32px] top-0" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage10} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage10.src} />
         </div>
       </div>
       <div className="absolute h-[32px] left-[120px] top-0 w-[38.781px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage11} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage11.src} />
         </div>
       </div>
     </div>
@@ -2122,7 +2122,7 @@ function Frame101() {
     <div className="-translate-x-1/2 absolute bg-white h-[72px] left-1/2 top-0 w-[1440px]" data-name="Frame">
       <div className="absolute h-[42px] left-[32px] top-[12.8px] w-[168.5px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage.src} />
         </div>
       </div>
       <AutoLayoutHorizontal43 />
@@ -2140,7 +2140,7 @@ export default function Component() {
       <Frame />
       <div className="absolute left-0 size-px top-[2400.47px]" data-name="Image">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage12} />
+          <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgImage12.src} />
         </div>
       </div>
       <Frame101 />

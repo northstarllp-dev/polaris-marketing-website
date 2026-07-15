@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import { motion, useSpring, useTransform } from "motion/react";
 
@@ -55,3 +57,4 @@ function Digit({ target }: { target: number }) {
     </span>
   );
 }
+

@@ -1,4 +1,6 @@
-import { Link } from "react-router";
+"use client";
+
+import Link from "next/link";
 
 const FOOTER_LINKS = {
   Products: [
@@ -9,13 +11,11 @@ const FOOTER_LINKS = {
     { label: "Why Polaris", to: "/#why" },
   ],
   Resources: [
-    { label: "Pricing", to: "/products/printoms#pricing" },
+    // { label: "Pricing", to: "/products/printoms#pricing" },
     { label: "FAQ", to: "/products/printoms#faq" },
   ],
   Contact: [
     { label: "sales@thepolarislabs.com", to: "mailto:sales@thepolarislabs.com" },
-    { label: "Akshay@thepolarislabs.com", to: "mailto:Akshay@thepolarislabs.com" },
-    { label: "Hari@thepolarislabs.com", to: "mailto:Hari@thepolarislabs.com" },
     { label: "+91 9994400311", to: "tel:+919994400311" },
     { label: "+91 8189999998", to: "tel:+918189999998" },
   ],
@@ -63,7 +63,7 @@ export function Footer() {
                     <li key={link.label}>
                       {link.to.startsWith("/") ? (
                         <Link
-                          to={link.to}
+                          href={link.to}
                           className="font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-[var(--brand-orange)] transition-colors"
                         >
                           {link.label}

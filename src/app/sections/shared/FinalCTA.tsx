@@ -1,6 +1,9 @@
+"use client";
+
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { BookDemoButton } from "../../components/BookDemoButton";
 import { FadeIn } from "../../components/motion/FadeIn";
 
 export function FinalCTA({
@@ -16,8 +19,6 @@ export function FinalCTA({
   heading?: ReactNode;
   sub?: string;
 }) {
-  const reduce = useReducedMotion();
-
   return (
     <section id="contact" className="py-28 relative overflow-hidden bg-[var(--brand-navy)] scroll-mt-24">
       <div className="absolute inset-0 pointer-events-none">
@@ -28,9 +29,7 @@ export function FinalCTA({
               "radial-gradient(ellipse at 50% 0%, rgba(255,112,67,0.25) 0%, transparent 65%)",
           }}
           animate={
-            reduce
-              ? undefined
-              : { opacity: [0.6, 1, 0.6], scale: [1, 1.05, 1] }
+            { opacity: [0.6, 1, 0.6], scale: [1, 1.05, 1] }
           }
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -46,22 +45,15 @@ export function FinalCTA({
           {sub}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <motion.a
-            href="tel:+918189999998"
-            whileHover={reduce ? undefined : { scale: 1.03 }}
-            whileTap={reduce ? undefined : { scale: 0.98 }}
-            className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-9 py-4 rounded-lg hover:bg-[#f4622d] transition-colors flex items-center gap-2 shadow-xl shadow-[var(--brand-orange)]/30"
-          >
-            Book a Demo <ArrowRight size={16} />
-          </motion.a>
-          <a
-            href="mailto:hello@polaris.software?subject=Talk%20to%20Sales"
-            className="font-['Figtree',sans-serif] font-semibold text-[15px] text-white/60 border border-white/20 px-9 py-4 rounded-lg hover:border-white/40 hover:text-white transition-all"
-          >
-            Talk to Sales
-          </a>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+            <BookDemoButton className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-9 py-4 rounded-lg hover:bg-[#f4622d] transition-colors inline-flex items-center gap-2 shadow-xl shadow-[var(--brand-orange)]/30">
+              Book a Demo <ArrowRight size={16} />
+            </BookDemoButton>
+          </motion.div>
+
         </div>
       </FadeIn>
     </section>
   );
 }
+

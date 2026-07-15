@@ -1,4 +1,7 @@
+"use client";
+
 import { useRef, useEffect, useState } from "react";
+import { BookDemoButton } from "../../components/BookDemoButton";
 
 const LINES = [
   { text: "You tried the software. Adapted your workflow to fit it.", size: "md", accent: false, bold: false },
@@ -15,21 +18,17 @@ const SIZE_CLASS = {
 const N = LINES.length + 1;
 
 // Each line's center point in [0, 1] scroll progress
-function getLineTransform(progress: number, i: number, customTravel?: number): { opacity: number; y: number } {
+function getLineTransform(progress: number, i: number, customTravel?: number) {
   const center = i / (N - 1); // 0, 0.25, 0.5, 0.75, 1.0
   const dist = (progress - center) * (N - 1); // signed distance from this line's center
 
-  // y offset scales with viewport — smaller on mobile
-  const travel = customTravel ?? (typeof window !== "undefined" ? Math.min(window.innerWidth * 0.45, 200) : 180);
-
   // Only show lines within 1 band of center
-  if (Math.abs(dist) >= 1) return { opacity: 0, y: -Math.sign(dist) * travel };
+  if (Math.abs(dist) >= 1) return { opacity: 0, dist: -Math.sign(dist), customTravel };
 
   // Cosine curve: opacity = 1 at dist=0, smoothly drops to 0 at |dist|=1
   const opacity = Math.max(0, Math.cos((dist * Math.PI) / 2));
-  const y = -dist * travel;
 
-  return { opacity, y };
+  return { opacity, dist, customTravel };
 }
 
 export function ProblemStatement() {
@@ -80,7 +79,9 @@ export function ProblemStatement() {
         {/* All lines stacked at center — each positioned absolutely */}
         <div className="relative w-full max-w-4xl mx-auto px-6 text-center" style={{ height: "clamp(350px, 50vw, 450px)" }}>
           {LINES.map((line, i) => {
-            const { opacity, y } = getLineTransform(progress, i);
+            const { opacity, dist: distVal, customTravel: cTravel } = getLineTransform(progress, i);
+            const travelExpr = cTravel !== undefined ? `${cTravel}px` : `min(45vw, 200px)`;
+            const yExpr = `calc(${-distVal} * ${travelExpr})`;
             return (
               <p
                 key={i}
@@ -92,7 +93,7 @@ export function ProblemStatement() {
                 style={{
                   opacity,
                   top: "50%",
-                  transform: `translateY(calc(-50% + ${y}px))`,
+                  transform: `translateY(calc(-50% + ${yExpr}))`,
                   // no CSS transition — scroll drives it frame-by-frame
                   pointerEvents: "none",
                 }}
@@ -104,14 +105,16 @@ export function ProblemStatement() {
 
           {/* Final block */}
           {(() => {
-            const { opacity, y } = getLineTransform(progress, LINES.length, 600);
+            const { opacity, dist: distVal, customTravel: cTravel } = getLineTransform(progress, LINES.length, 600);
+            const travelExpr = cTravel !== undefined ? `${cTravel}px` : `min(45vw, 200px)`;
+            const yExpr = `calc(${-distVal} * ${travelExpr})`;
             return (
               <div
                 className="absolute left-0 right-0 px-6 flex flex-col items-center justify-center font-['Figtree',sans-serif]"
                 style={{
                   opacity,
                   top: "50%",
-                  transform: `translateY(calc(-50% + ${y}px))`,
+                  transform: `translateY(calc(-50% + ${yExpr}))`,
                   pointerEvents: progress > 0.8 ? "auto" : "none",
                 }}
               >
@@ -134,12 +137,9 @@ export function ProblemStatement() {
                   Stop paying to experiment. <span className="font-bold text-white">Start paying for results.</span>
                 </p>
                 
-                <a
-                  href="tel:+918189999998"
-                  className="inline-block px-8 py-3 bg-white text-black font-bold text-sm tracking-widest uppercase hover:bg-gray-200 transition-colors"
-                >
+                <BookDemoButton className="inline-block px-8 py-3 bg-white text-black font-bold text-sm tracking-widest uppercase hover:bg-gray-200 transition-colors">
                   Book Demo &gt;
-                </a>
+                </BookDemoButton>
               </div>
             );
           })()}
@@ -167,3 +167,4 @@ export function ProblemStatement() {
     </div>
   );
 }
+

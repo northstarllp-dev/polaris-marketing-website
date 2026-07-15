@@ -1,12 +1,13 @@
-import { motion, useReducedMotion } from "motion/react";
+"use client";
+
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { BookDemoButton } from "../../components/BookDemoButton";
 import { LivePulse } from "../../components/motion/CountOrPulse";
 import { ProductShowcase } from "../../components/ProductMockup";
 import { SideScreenPanel } from "../../components/SideScreenPanel";
 
 export function PrintOMSHero() {
-  const reduce = useReducedMotion();
-
   return (
     <section className="relative bg-[var(--brand-navy)] overflow-hidden pt-28 pb-0">
       <div className="absolute inset-0 pointer-events-none">
@@ -15,7 +16,7 @@ export function PrintOMSHero() {
           style={{
             background: "radial-gradient(ellipse, #ff7043 0%, transparent 70%)",
           }}
-          animate={reduce ? undefined : { opacity: [0.2, 0.35, 0.2] }}
+          animate={{ opacity: [0.2, 0.35, 0.2] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
@@ -23,14 +24,14 @@ export function PrintOMSHero() {
           style={{
             background: "radial-gradient(ellipse, #0ea5e9 0%, transparent 70%)",
           }}
-          animate={reduce ? undefined : { x: [0, -30, 0] }}
+          animate={{ x: [0, -30, 0] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
       <div className="max-w-5xl mx-auto px-6 text-center relative pt-6 pb-10">
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           className="inline-flex items-center gap-2 border border-white/15 text-white/70 text-[12px] font-['Figtree',sans-serif] font-semibold px-4 py-1.5 rounded-full mb-8 bg-white/5"
         >
@@ -39,7 +40,7 @@ export function PrintOMSHero() {
         </motion.div>
 
         <motion.p
-          initial={reduce ? false : { opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.06 }}
           className="font-['Figtree',sans-serif] font-bold text-[var(--brand-orange)] text-[14px] tracking-wide uppercase mb-4"
@@ -48,7 +49,7 @@ export function PrintOMSHero() {
         </motion.p>
 
         <motion.h1
-          initial={reduce ? false : { opacity: 0, y: 22 }}
+          initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12 }}
           className="font-['Figtree',sans-serif] font-black text-white leading-[1.06] tracking-tight mb-6"
@@ -60,7 +61,7 @@ export function PrintOMSHero() {
         </motion.h1>
 
         <motion.p
-          initial={reduce ? false : { opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="font-['Figtree',sans-serif] text-white/55 max-w-xl mx-auto leading-relaxed mb-10"
@@ -71,17 +72,14 @@ export function PrintOMSHero() {
         </motion.p>
 
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.28 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12"
         >
-          <a
-            href="tel:+918189999998"
-            className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-8 py-3.5 rounded-lg hover:bg-[#f4622d] transition-all inline-flex items-center gap-2 shadow-lg shadow-[var(--brand-orange)]/30"
-          >
+          <BookDemoButton className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-8 py-3.5 rounded-lg hover:bg-[#f4622d] transition-all inline-flex items-center gap-2 shadow-lg shadow-[var(--brand-orange)]/30">
             Book a Demo <ArrowRight size={16} />
-          </a>
+          </BookDemoButton>
           <a
             href="#workflow"
             className="font-['Figtree',sans-serif] font-semibold text-[15px] text-white/70 border border-white/20 px-8 py-3.5 rounded-lg hover:border-white/40 hover:text-white transition-all"
@@ -111,7 +109,7 @@ export function PrintOMSHero() {
 
           {/* Left side panel — slides in from left on scroll */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, x: -100 }}
+            initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -124,7 +122,7 @@ export function PrintOMSHero() {
 
           {/* Center main mockup */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -135,7 +133,7 @@ export function PrintOMSHero() {
 
           {/* Right side panel — slides in from right on scroll */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -158,3 +156,4 @@ export function PrintOMSHero() {
     </section>
   );
 }
+

@@ -1,5 +1,7 @@
-import { Link } from "react-router";
-import { motion, useReducedMotion } from "motion/react";
+"use client";
+
+import Link from "next/link";
+import { motion } from "motion/react";
 import { ArrowRight, Check, MessageSquare } from "lucide-react";
 import { PRINTOMS_SPOTLIGHT_FEATURES } from "../../content/polaris";
 import { FadeIn } from "../../components/motion/FadeIn";
@@ -7,8 +9,6 @@ import { Stagger, StaggerItem } from "../../components/motion/Stagger";
 import { Tilt3D } from "../../components/motion/Tilt3D";
 
 export function ProductSpotlight() {
-  const reduce = useReducedMotion();
-
   return (
     <section className="py-24 bg-[var(--brand-surface)]">
       <div className="max-w-7xl mx-auto px-6">
@@ -58,7 +58,7 @@ export function ProductSpotlight() {
                     ))}
                   </Stagger>
                   <Link
-                    to="/products/printoms"
+                    href="/products/printoms"
                     className="inline-flex items-center gap-2 font-['Figtree',sans-serif] font-bold text-[14px] bg-[var(--brand-navy)] text-white px-7 py-3 rounded-lg hover:bg-[#1a1b4a] transition-colors self-start"
                   >
                     See PrintOMS <ArrowRight size={14} />
@@ -67,7 +67,7 @@ export function ProductSpotlight() {
                 <div className="w-full md:w-[54%] bg-gradient-to-br from-[var(--brand-navy)] to-[#1a1b4a] p-6 md:p-8 flex items-center justify-center min-h-[240px] md:min-h-[320px]">
                   <motion.div
                     className="w-full max-w-sm space-y-3"
-                    initial={reduce ? false : { opacity: 0, x: 40, rotateY: -8 }}
+                    initial={{ opacity: 0, x: 40, rotateY: -8 }}
                     whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
                     viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}

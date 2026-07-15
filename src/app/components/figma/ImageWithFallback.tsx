@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react'
 
 const ERROR_IMG_SRC =
@@ -25,3 +27,4 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
     <img src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
   )
 }
+

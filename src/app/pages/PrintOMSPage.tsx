@@ -1,9 +1,11 @@
+"use client";
+
 import { useHashScroll } from "../hooks/useHashScroll";
 import { PrintOMSHero } from "../sections/printoms/PrintOMSHero";
 import { ProblemPlatform } from "../sections/home/ProblemPlatform";
 import { PainPoints } from "../sections/printoms/PainPoints";
 import { Roles } from "../sections/printoms/Roles";
-import { Pricing } from "../sections/printoms/Pricing";
+// import { Pricing } from "../sections/printoms/Pricing";
 import { FAQ } from "../sections/printoms/FAQ";
 import { FinalCTA } from "../sections/shared/FinalCTA";
 import { StickySteps } from "../components/motion/StickySteps";
@@ -26,7 +28,9 @@ export function PrintOMSPage() {
         />
       </div>
       <Roles />
+      {/* Temporarily hidden
       <Pricing />
+      */}
       <FAQ />
       <FinalCTA
         heading={
@@ -41,3 +45,4 @@ export function PrintOMSPage() {
     </>
   );
 }
+
