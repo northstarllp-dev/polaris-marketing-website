@@ -140,7 +140,7 @@ export function ProductMockup({ activeTab }: { activeTab: number }) {
   );
 }
 
-/** Interactive showcase: preserved hero tab auto-cycle + ProductMockup */
+/** Interactive showcase: tab auto-cycle every 3s with visible progress bar */
 export function ProductShowcase({
   dark = true,
   className = "",
@@ -149,8 +149,10 @@ export function ProductShowcase({
   className?: string;
 }) {
   const [activeTab, setActiveTab] = useState(0);
+  const [timerKey, setTimerKey] = useState(0); // reset progress bar on manual click
   const reduce = useReducedMotion();
 
+  // Auto-advance every 3s
   useEffect(() => {
     if (reduce) return;
     const id = setInterval(
@@ -158,7 +160,12 @@ export function ProductShowcase({
       3000
     );
     return () => clearInterval(id);
-  }, [reduce]);
+  }, [reduce, timerKey]);
+
+  function handleTabClick(i: number) {
+    setActiveTab(i);
+    setTimerKey((k) => k + 1); // restart the interval + progress bar
+  }
 
   return (
     <FadeIn className={className} y={40}>
@@ -167,24 +174,41 @@ export function ProductShowcase({
           <button
             key={id}
             type="button"
-            onClick={() => setActiveTab(i)}
-            className="font-['Figtree',sans-serif] text-[12px] font-semibold px-4 py-1.5 rounded-full transition-all"
+            onClick={() => handleTabClick(i)}
+            className="relative font-['Figtree',sans-serif] text-[12px] font-semibold px-5 py-2 rounded-full transition-all overflow-hidden border border-transparent"
             style={
               activeTab === i
-                ? { backgroundColor: color, color: "#fff" }
+                ? { 
+                    background: `linear-gradient(135deg, ${color}, ${color}cc)`,
+                    boxShadow: `0 8px 24px ${color}55, inset 0 2px 4px rgba(255,255,255,0.25)`,
+                    color: "#fff",
+                    borderColor: `${color}44`
+                  }
                 : {
                     backgroundColor: dark
                       ? "rgba(255,255,255,0.08)"
                       : "rgba(15,16,53,0.06)",
                     color: dark ? "rgba(255,255,255,0.45)" : "rgba(15,16,53,0.45)",
+                    borderColor: dark ? "rgba(255,255,255,0.05)" : "rgba(15,16,53,0.05)"
                   }
             }
           >
             {label}
+            {/* Progress sweep — only shown on active tab */}
+            {activeTab === i && !reduce && (
+              <motion.span
+                key={`${id}-${timerKey}`}
+                className="absolute bottom-0 left-0 h-[3px] rounded-full"
+                style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
+                initial={{ width: "0%" }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 3, ease: "linear" }}
+              />
+            )}
           </button>
         ))}
       </div>
-      <div className="relative">
+      <div className="relative mt-8">
         <ProductMockup activeTab={activeTab} />
       </div>
     </FadeIn>

@@ -19,11 +19,11 @@ export function EcosystemTeaser() {
           </h2>
           <p className="font-['Figtree',sans-serif] text-[16px] text-[var(--brand-muted)] leading-relaxed max-w-xl mx-auto mb-14">
             We're already mapping the next business niche. PrintOMS is just the start.
-            If you think your industry needs software built around how it actually runs — talk to us.
+            If you think your industry needs software built around how it actually runs - talk to us.
           </p>
         </FadeIn>
-        <FadeIn delay={0.1} className="flex justify-center py-8">
-          <SoftOrbit className="w-[280px] h-[280px] flex items-center justify-center" />
+        <FadeIn delay={0.1} className="flex justify-center py-4">
+          <SoftOrbit className="flex items-center justify-center" />
         </FadeIn>
         <FadeIn delay={0.2} className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
           <p className="font-['Figtree',sans-serif] text-[14px] font-semibold text-[var(--brand-muted)] tracking-wide">

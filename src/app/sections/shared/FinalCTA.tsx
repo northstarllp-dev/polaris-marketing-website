@@ -19,7 +19,7 @@ export function FinalCTA({
   const reduce = useReducedMotion();
 
   return (
-    <section id="contact" className="py-28 relative overflow-hidden bg-[var(--brand-navy)]">
+    <section id="contact" className="py-28 relative overflow-hidden bg-[var(--brand-navy)] scroll-mt-24">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute inset-0"
@@ -47,7 +47,7 @@ export function FinalCTA({
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <motion.a
-            href="mailto:hello@polaris.software?subject=Book%20a%20Demo"
+            href="tel:+918189999998"
             whileHover={reduce ? undefined : { scale: 1.03 }}
             whileTap={reduce ? undefined : { scale: 0.98 }}
             className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-9 py-4 rounded-lg hover:bg-[#f4622d] transition-colors flex items-center gap-2 shadow-xl shadow-[var(--brand-orange)]/30"

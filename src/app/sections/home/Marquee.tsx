@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MARQUEE_CLIENTS } from "../../content/polaris";
 import { FadeIn } from "../../components/motion/FadeIn";
 
@@ -5,13 +6,19 @@ import { FadeIn } from "../../components/motion/FadeIn";
 const LOOP = Array.from({ length: 8 }, () => MARQUEE_CLIENTS).flat();
 
 export function Marquee() {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <section className="bg-white border-y border-[rgba(0,0,0,0.06)] py-6 overflow-hidden">
       <FadeIn>
         <p className="font-['Figtree',sans-serif] text-[11px] font-semibold text-[#bbb] text-center uppercase tracking-widest mb-5">
           Trusted by signage businesses
         </p>
-        <div className="relative overflow-hidden">
+        <div
+          className="relative overflow-hidden"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
           <div
             className="pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-gradient-to-r from-white to-transparent"
             aria-hidden
@@ -20,7 +27,12 @@ export function Marquee() {
             className="pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-gradient-to-l from-white to-transparent"
             aria-hidden
           />
-          <div className="flex gap-16 items-center w-max animate-marquee motion-reduce:animate-none hover:[animation-play-state:paused]">
+          <div
+            className="flex gap-16 items-center w-max animate-marquee motion-reduce:animate-none"
+            style={{
+              animationDuration: hovered ? "12s" : "28s",
+            }}
+          >
             {[...LOOP, ...LOOP].map((name, i) => (
               <span
                 key={`${name}-${i}`}

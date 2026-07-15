@@ -47,9 +47,9 @@ export function Pricing() {
                 >
                   {tier.blurb}
                 </p>
-                <div className="mb-6">
+                <div className="mb-6 flex flex-col gap-0.5">
                   <span
-                    className={`font-['Figtree',sans-serif] font-black text-[40px] ${
+                    className={`font-['Figtree',sans-serif] font-black text-[40px] leading-none ${
                       tier.popular ? "text-white" : "text-[var(--brand-ink)]"
                     }`}
                   >
@@ -64,7 +64,7 @@ export function Pricing() {
                   </span>
                 </div>
                 <a
-                  href="#contact"
+                  href="tel:+918189999998"
                   className={`block w-full text-center font-['Figtree',sans-serif] font-bold text-[14px] py-3 rounded-lg transition-colors mb-8 ${
                     tier.popular
                       ? "bg-[var(--brand-orange)] text-white hover:bg-[#f4622d]"

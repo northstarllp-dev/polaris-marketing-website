@@ -1,12 +1,12 @@
 import { useCallback, useRef, useState, type MouseEvent } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
-  ArrowDown,
   CircleHelp,
   EyeOff,
   FileText,
   Megaphone,
   MessageCircle,
+  Sparkles,
   Table2,
   type LucideIcon,
 } from "lucide-react";
@@ -22,7 +22,6 @@ const ICONS: Record<(typeof CHAOS_ITEMS)[number]["icon"], LucideIcon> = {
   EyeOff,
 };
 
-// Red family — gradient stops per card for variety within one red theme
 const RED_GRADIENTS = [
   ["#ff7043", "#ef4444"],
   ["#f43f5e", "#e11d48"],
@@ -32,7 +31,6 @@ const RED_GRADIENTS = [
   ["#f87171", "#dc2626"],
 ];
 
-// Scattered positions (%) across the stage — tuned for a single row band
 const POSITIONS = [
   { x: 8, y: 30, r: -6 },
   { x: 25, y: 58, r: 4 },
@@ -43,9 +41,102 @@ const POSITIONS = [
 ];
 
 type Offset = { x: number; y: number; rot: number };
+type ChaosItem = (typeof CHAOS_ITEMS)[number];
+
+function FlipCard({
+  item,
+  from,
+  to,
+  size = "md",
+  reduce,
+}: {
+  item: ChaosItem;
+  from: string;
+  to: string;
+  size?: "sm" | "md";
+  reduce: boolean | null;
+}) {
+  const [flipped, setFlipped] = useState(false);
+  const Icon = ICONS[item.icon];
+  const box = size === "sm" ? "h-20 w-20" : "h-24 w-24";
+  const iconSize = size === "sm" ? 36 : 38;
+
+  return (
+    <button
+      type="button"
+      className="group relative flex flex-col items-center gap-3 cursor-pointer border-0 bg-transparent p-0"
+      aria-pressed={flipped}
+      aria-label={`${item.label}. Solution: Polaris — ${item.solution}`}
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+      onFocus={() => setFlipped(true)}
+      onBlur={() => setFlipped(false)}
+      onClick={() => setFlipped((v) => !v)}
+      style={{ perspective: 900 }}
+    >
+      <motion.div
+        className={`relative ${box}`}
+        animate={reduce ? undefined : { rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* Front — problem */}
+        <div
+          className={`absolute inset-0 flex items-center justify-center rounded-[22px] shadow-lg ${box}`}
+          style={{
+            background: `linear-gradient(135deg, ${from}, ${to})`,
+            boxShadow: `0 16px 34px ${to}44`,
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+          }}
+        >
+          <Icon size={iconSize} strokeWidth={1.9} className="text-white" />
+        </div>
+
+        {/* Back — Polaris solution */}
+        <div
+          className={`absolute inset-0 flex flex-col items-center justify-center gap-1 rounded-[22px] px-2 ${box}`}
+          style={{
+            background: "linear-gradient(135deg, #0f1035, #1a1b4a)",
+            boxShadow: "0 16px 34px rgba(15,16,53,0.35)",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+          }}
+        >
+          <Sparkles size={18} className="text-[var(--brand-orange)]" />
+          <span className="font-['Figtree',sans-serif] font-black text-[10px] text-white uppercase tracking-wider">
+            Polaris
+          </span>
+        </div>
+      </motion.div>
+
+      <div className="min-h-[2.5rem] flex flex-col items-center justify-start px-1">
+        <span
+          className={`font-['Figtree',sans-serif] font-semibold text-[11px] uppercase tracking-wider text-center leading-snug max-w-[110px] transition-colors ${
+            flipped ? "text-[var(--brand-orange)]" : "text-[var(--brand-muted)]"
+          }`}
+        >
+          {flipped ? "Polaris" : item.label}
+        </span>
+        <motion.span
+          className="font-['Figtree',sans-serif] text-[11px] text-[var(--brand-ink)] leading-snug text-center max-w-[140px] mt-1"
+          initial={false}
+          animate={{
+            opacity: flipped ? 1 : 0,
+            y: flipped ? 0 : 6,
+            height: flipped ? "auto" : 0,
+          }}
+          transition={{ duration: 0.25 }}
+        >
+          {item.solution}
+        </motion.span>
+      </div>
+    </button>
+  );
+}
 
 export function ProblemPlatform() {
-  const [united, setUnited] = useState(false);
   const [offsets, setOffsets] = useState<Offset[]>(
     () => CHAOS_ITEMS.map(() => ({ x: 0, y: 0, rot: 0 }))
   );
@@ -54,7 +145,7 @@ export function ProblemPlatform() {
 
   const onMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (reduce || united) return;
+      if (reduce) return;
 
       const next = itemRefs.current.map((el) => {
         if (!el) return { x: 0, y: 0, rot: 0 };
@@ -67,15 +158,16 @@ export function ProblemPlatform() {
         const radius = 190;
         if (dist > radius || dist < 1) return { x: 0, y: 0, rot: 0 };
 
-        const force = (1 - dist / radius) * 46;
-        const pushX = -(dx / dist) * force;
-        const pushY = -(dy / dist) * force;
-        const rot = (dx / dist) * -10 * (1 - dist / radius);
-        return { x: pushX, y: pushY, rot };
+        const force = (1 - dist / radius) * 36;
+        return {
+          x: -(dx / dist) * force,
+          y: -(dy / dist) * force,
+          rot: (dx / dist) * -8 * (1 - dist / radius),
+        };
       });
       setOffsets(next);
     },
-    [reduce, united]
+    [reduce]
   );
 
   const onMouseLeave = useCallback(() => {
@@ -84,7 +176,6 @@ export function ProblemPlatform() {
 
   return (
     <section className="relative py-28 bg-white border-b border-[rgba(0,0,0,0.06)] overflow-hidden">
-      {/* Red gradient glows only */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute left-1/2 top-1/4 -translate-x-1/2 w-[760px] h-[440px] rounded-full opacity-40"
@@ -120,20 +211,47 @@ export function ProblemPlatform() {
           >
             Your business is running on chaos.
           </h2>
-          <p className="font-['Figtree',sans-serif] font-normal text-[17px] text-[var(--brand-muted)] leading-relaxed max-w-2xl mx-auto mb-16">
+          <p className="font-['Figtree',sans-serif] font-normal text-[17px] text-[var(--brand-muted)] leading-relaxed max-w-2xl mx-auto mb-4">
             Information is scattered. Approvals get lost. Production stalls
             because no one sees the full job. You manage tools instead of growth.
           </p>
+          <p className="font-['Figtree',sans-serif] text-[13px] font-semibold text-[var(--brand-orange)] mb-14">
+            Hover or tap a box — each problem flips to its Polaris answer
+          </p>
         </FadeIn>
 
-        {/* Floating stage */}
+        {/* Mobile grid */}
+        <div className="grid grid-cols-2 gap-y-10 gap-x-4 sm:grid-cols-3 md:hidden mb-16 px-2">
+          {CHAOS_ITEMS.map((item, i) => {
+            const [from, to] = RED_GRADIENTS[i % RED_GRADIENTS.length];
+            return (
+              <motion.div
+                key={item.id}
+                className="flex justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <FlipCard
+                  item={item}
+                  from={from}
+                  to={to}
+                  size="sm"
+                  reduce={reduce}
+                />
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Desktop floating stage */}
         <div
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
-          className="relative h-[360px] sm:h-[320px] mb-16"
+          className="hidden md:block relative h-[380px] mb-16"
         >
           {CHAOS_ITEMS.map((item, i) => {
-            const Icon = ICONS[item.icon];
             const [from, to] = RED_GRADIENTS[i % RED_GRADIENTS.length];
             const pos = POSITIONS[i % POSITIONS.length];
             const mouse = offsets[i] ?? { x: 0, y: 0, rot: 0 };
@@ -150,24 +268,22 @@ export function ProblemPlatform() {
                 initial={{ opacity: 0, scale: 0.7 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
-                animate={
-                  reduce
-                    ? undefined
-                    : united
-                      ? { y: 80, scale: 0.6, opacity: 0.12, rotate: 0 }
-                      : { x: mouse.x, y: mouse.y, rotate: pos.r + mouse.rot }
-                }
-                transition={
-                  united
-                    ? { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-                    : { type: "spring", stiffness: 140, damping: 14, mass: 0.7 }
-                }
+                animate={{
+                  x: mouse.x,
+                  y: mouse.y,
+                  rotate: pos.r + mouse.rot,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 140,
+                  damping: 14,
+                  mass: 0.7,
+                }}
               >
-                {/* Sine water float — inner motion so push + float compose */}
                 <motion.div
-                  className="group flex flex-col items-center gap-3 -translate-x-1/2 -translate-y-1/2 cursor-default"
+                  className="-translate-x-1/2 -translate-y-1/2"
                   animate={
-                    reduce || united
+                    reduce
                       ? undefined
                       : { y: [-amp, amp, -amp], rotate: [-2.5, 2.5, -2.5] }
                   }
@@ -177,62 +293,146 @@ export function ProblemPlatform() {
                     ease: "easeInOut",
                     delay: i * 0.25,
                   }}
-                  whileHover={
-                    reduce || united
-                      ? undefined
-                      : { scale: 1.12, transition: { duration: 0.25 } }
-                  }
                 >
-                  <div
-                    className="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-[22px] shadow-lg transition-shadow duration-300 group-hover:shadow-2xl"
-                    style={{
-                      background: `linear-gradient(135deg, ${from}, ${to})`,
-                      boxShadow: `0 16px 34px ${to}44`,
-                    }}
-                  >
-                    <Icon
-                      size={38}
-                      strokeWidth={1.9}
-                      className="text-white transition-transform duration-300 group-hover:scale-110"
-                    />
-                  </div>
-                  <span className="font-['Figtree',sans-serif] font-semibold text-[11px] text-[var(--brand-muted)] uppercase tracking-wider whitespace-nowrap transition-colors group-hover:text-[#ef4444]">
-                    {item.label}
-                  </span>
+                  <FlipCard
+                    item={item}
+                    from={from}
+                    to={to}
+                    size="md"
+                    reduce={reduce}
+                  />
                 </motion.div>
               </motion.div>
             );
           })}
         </div>
 
-        <FadeIn delay={0.15}>
-          <button
-            type="button"
-            onClick={() => setUnited(true)}
-            onMouseEnter={() => setUnited(true)}
-            className="group inline-flex flex-col items-center gap-4"
+        <div className="mt-10 text-center">
+          {!reduce && (
+            <div
+              className="relative h-8 w-full max-w-2xl mx-auto mb-2 overflow-visible"
+              aria-hidden="true"
+            >
+              <motion.div
+                className="absolute top-1/2 -translate-y-1/2"
+                animate={{
+                  left: ["5%", "42%"],
+                  opacity: [0, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 1.2,
+                  repeat: Infinity,
+                  repeatDelay: 2.5,
+                  ease: [0.4, 0, 0.6, 1],
+                  times: [0, 0.1, 0.75, 1],
+                }}
+              >
+                <svg
+                  width="56"
+                  height="22"
+                  viewBox="0 0 56 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line
+                    x1="0"
+                    y1="11"
+                    x2="42"
+                    y2="11"
+                    stroke="var(--brand-orange)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  <polyline
+                    points="32,3 48,11 32,19"
+                    fill="none"
+                    stroke="var(--brand-orange)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle
+                    cx="18"
+                    cy="11"
+                    r="2.2"
+                    fill="var(--brand-orange)"
+                    opacity="0.45"
+                  />
+                  <circle
+                    cx="8"
+                    cy="11"
+                    r="1.6"
+                    fill="var(--brand-orange)"
+                    opacity="0.22"
+                  />
+                  <circle
+                    cx="2"
+                    cy="11"
+                    r="1.2"
+                    fill="var(--brand-orange)"
+                    opacity="0.10"
+                  />
+                </svg>
+              </motion.div>
+            </div>
+          )}
+
+          <div
+            className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 mb-5"
+            aria-label="One Polaris operating layer"
           >
-            <motion.span
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--brand-orange)] text-white shadow-lg shadow-[var(--brand-orange)]/40"
-              animate={reduce ? undefined : { y: [0, 8, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-              whileHover={reduce ? undefined : { scale: 1.1 }}
-            >
-              <ArrowDown size={20} strokeWidth={2.5} />
-            </motion.span>
-            <motion.div
-              layout
-              whileHover={reduce ? undefined : { scale: 1.03 }}
-              className="inline-flex items-center gap-2 bg-[var(--brand-navy)] text-white px-6 py-3 rounded-xl font-['Figtree',sans-serif] font-bold text-[14px] shadow-lg"
-            >
-              One Polaris operating layer
-            </motion.div>
-          </button>
-          <p className="mt-6 font-['Figtree',sans-serif] text-[15px] text-[var(--brand-muted)] max-w-lg mx-auto">
-            Polaris connects the work — starting with PrintOMS for signage
-            shops that need more than a CRM.
-          </p>
-        </FadeIn>
+            {[
+              { word: "One", color: "var(--brand-navy)" },
+              { word: "Polaris", color: "var(--brand-orange)" },
+              { word: "operating", color: "var(--brand-navy)" },
+              { word: "layer", color: "var(--brand-navy)" },
+            ].map(({ word, color }, i) => (
+              <div key={word} className="overflow-hidden py-1">
+                <motion.span
+                  className="block font-['Figtree',sans-serif] font-black"
+                  style={{
+                    fontSize: "clamp(28px, 5vw, 52px)",
+                    color,
+                    lineHeight: 1.1,
+                  }}
+                  initial={reduce ? false : { y: "110%", opacity: 0 }}
+                  whileInView={{ y: "0%", opacity: 1 }}
+                  viewport={{ once: true, amount: 0.8 }}
+                  transition={{
+                    duration: 0.65,
+                    delay: i * 0.1,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
+                  {word}
+                </motion.span>
+              </div>
+            ))}
+          </div>
+
+          <motion.div
+            className="mx-auto h-1 rounded-full bg-[var(--brand-orange)] mb-6"
+            initial={reduce ? false : { width: 0, opacity: 0 }}
+            whileInView={{ width: "80px", opacity: 1 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.45,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          />
+
+          <motion.p
+            className="font-['Figtree',sans-serif] text-[15px] text-[var(--brand-muted)] max-w-lg mx-auto"
+            initial={reduce ? false : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ duration: 0.55, delay: 0.5, ease: "easeOut" }}
+          >
+            Every chaos box above has the same answer: Polaris — starting with
+            PrintOMS for signage shops that need more than a CRM.
+          </motion.p>
+        </div>
       </div>
     </section>
   );

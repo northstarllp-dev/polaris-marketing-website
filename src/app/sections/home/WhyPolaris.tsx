@@ -2,6 +2,7 @@ import { Layers, Shield, Zap } from "lucide-react";
 import { WHY_PILLARS } from "../../content/polaris";
 import { FadeIn } from "../../components/motion/FadeIn";
 import { Stagger, StaggerItem } from "../../components/motion/Stagger";
+import { WobbleIcon } from "../../components/motion/Tilt3D";
 
 const ICONS = {
   purpose: Layers,
@@ -25,14 +26,17 @@ export function WhyPolaris() {
           </h2>
         </FadeIn>
         <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {WHY_PILLARS.map(({ id, title, points }) => {
+          {WHY_PILLARS.map(({ id, title, points }, i) => {
             const Icon = ICONS[id];
             return (
               <StaggerItem key={id}>
-                <div className="text-center p-8 rounded-2xl border border-[rgba(0,0,0,0.07)] bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full">
-                  <div className="w-14 h-14 bg-[var(--brand-surface)] rounded-2xl flex items-center justify-center mx-auto mb-5">
+                <div className="group text-center p-8 rounded-2xl border border-[rgba(0,0,0,0.07)] bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full">
+                  <WobbleIcon
+                    delay={i * 0.4}
+                    className="w-14 h-14 bg-[var(--brand-surface)] rounded-2xl flex items-center justify-center mx-auto mb-5"
+                  >
                     <Icon size={26} className="text-[var(--brand-orange)]" />
-                  </div>
+                  </WobbleIcon>
                   <h3 className="font-['Figtree',sans-serif] font-black text-[20px] text-[var(--brand-ink)] mb-4">
                     {title}
                   </h3>

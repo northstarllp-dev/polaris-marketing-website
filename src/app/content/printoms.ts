@@ -22,11 +22,11 @@ export const MOCKUP_TABS: MockupTab[] = [
     color: "#ff7043",
     sidebarKey: "Enquiries",
     rows: [
-      { job: "Emirates Mall LED Sign", client: "Al Futtaim Group", value: "AED 48,500", status: "New", statusColor: "#3b82f6" },
-      { job: "Expo 2025 Banners", client: "Dubai Tourism", value: "AED 22,000", status: "Quoted", statusColor: "#f59e0b" },
-      { job: "DIFC Office Wrap", client: "JLL MENA", value: "AED 67,000", status: "Won", statusColor: "#10b981" },
-      { job: "Al Quoz Fleet Graphics", client: "Arabian Motors", value: "AED 14,800", status: "New", statusColor: "#3b82f6" },
-      { job: "Marina Walk Wayfinding", client: "Emaar Properties", value: "AED 91,200", status: "In Review", statusColor: "#8b5cf6" },
+      { job: "Phoenix Mall LED Sign", client: "Landmark Group", value: "₹4,05,000", status: "New", statusColor: "#3b82f6" },
+      { job: "Metro Station Banners", client: "Chennai Metro Rail", value: "₹1,84,000", status: "Quoted", statusColor: "#f59e0b" },
+      { job: "IT Park Office Wrap", client: "Prestige Estates", value: "₹5,60,000", status: "Won", statusColor: "#10b981" },
+      { job: "Fleet Graphics – 12 vans", client: "Delhivery Logistics", value: "₹1,23,500", status: "New", statusColor: "#3b82f6" },
+      { job: "Marina Mall Wayfinding", client: "DLF Properties", value: "₹7,62,000", status: "In Review", statusColor: "#8b5cf6" },
     ],
   },
   {
@@ -35,9 +35,21 @@ export const MOCKUP_TABS: MockupTab[] = [
     color: "#0ea5e9",
     sidebarKey: "Site Visits",
     rows: [
-      { job: "Emirates Mall LED Sign", client: "Recce scheduled", value: "Today 2pm", status: "Booked", statusColor: "#0ea5e9" },
-      { job: "Marina Walk Wayfinding", client: "Measurements frozen", value: "3 locations", status: "Done", statusColor: "#10b981" },
-      { job: "DIFC Office Wrap", client: "Awaiting access", value: "Tomorrow", status: "Pending", statusColor: "#f59e0b" },
+      { job: "Phoenix Mall LED Sign", client: "Recce scheduled", value: "Today 2pm", status: "Booked", statusColor: "#0ea5e9" },
+      { job: "Marina Mall Wayfinding", client: "Measurements frozen", value: "3 locations", status: "Done", statusColor: "#10b981" },
+      { job: "IT Park Office Wrap", client: "Awaiting access", value: "Tomorrow", status: "Pending", statusColor: "#f59e0b" },
+    ],
+  },
+  {
+    id: "quotation",
+    label: "Quotation",
+    color: "#f59e0b",
+    sidebarKey: "Quotations",
+    rows: [
+      { job: "Phoenix Mall LED Sign", client: "Sent · awaiting approval", value: "₹4,05,000", status: "Sent", statusColor: "#f59e0b" },
+      { job: "Metro Station Banners", client: "Revision requested", value: "₹1,84,000", status: "Revising", statusColor: "#ef4444" },
+      { job: "IT Park Office Wrap", client: "Approved via portal", value: "₹5,60,000", status: "Approved", statusColor: "#10b981" },
+      { job: "Fleet Graphics – 12 vans", client: "Draft · from site visit", value: "₹1,23,500", status: "Draft", statusColor: "#8b5cf6" },
     ],
   },
   {
@@ -46,10 +58,10 @@ export const MOCKUP_TABS: MockupTab[] = [
     color: "#3b82f6",
     sidebarKey: "Production",
     rows: [
-      { job: "Emirates Mall LED Sign", client: "Printing — 75%", value: "Due 18 Jul", status: "On Track", statusColor: "#10b981" },
-      { job: "Expo 2025 Banners", client: "Design Review", value: "Due 16 Jul", status: "Pending", statusColor: "#f59e0b" },
-      { job: "DIFC Office Wrap", client: "Installation", value: "Due 20 Jul", status: "On Track", statusColor: "#10b981" },
-      { job: "Marina Walk Wayfinding", client: "Fabrication — 40%", value: "Due 25 Jul", status: "At Risk", statusColor: "#ef4444" },
+      { job: "Phoenix Mall LED Sign", client: "Printing — 75%", value: "Due 18 Jul", status: "On Track", statusColor: "#10b981" },
+      { job: "Metro Station Banners", client: "Design Review", value: "Due 16 Jul", status: "Pending", statusColor: "#f59e0b" },
+      { job: "IT Park Office Wrap", client: "Installation", value: "Due 20 Jul", status: "On Track", statusColor: "#10b981" },
+      { job: "Marina Mall Wayfinding", client: "Fabrication — 40%", value: "Due 25 Jul", status: "At Risk", statusColor: "#ef4444" },
     ],
   },
   {
@@ -58,9 +70,9 @@ export const MOCKUP_TABS: MockupTab[] = [
     color: "#8b5cf6",
     sidebarKey: "Approvals",
     rows: [
-      { job: "Emirates Mall LED Sign", client: "Sent via portal", value: "2h ago", status: "Awaiting", statusColor: "#f59e0b" },
-      { job: "DIFC Office Wrap", client: "Customer approved", value: "Yesterday", status: "Approved", statusColor: "#10b981" },
-      { job: "Marina Walk Wayfinding", client: "Revision requested", value: "3h ago", status: "Changes", statusColor: "#ef4444" },
+      { job: "Phoenix Mall LED Sign", client: "Sent via portal", value: "2h ago", status: "Awaiting", statusColor: "#f59e0b" },
+      { job: "IT Park Office Wrap", client: "Customer approved", value: "Yesterday", status: "Approved", statusColor: "#10b981" },
+      { job: "Marina Mall Wayfinding", client: "Revision requested", value: "3h ago", status: "Changes", statusColor: "#ef4444" },
     ],
   },
   {
@@ -69,13 +81,14 @@ export const MOCKUP_TABS: MockupTab[] = [
     color: "#10b981",
     sidebarKey: "Analytics",
     stats: [
-      { label: "Revenue This Month", value: "AED 243,500", change: "+18%", up: true },
+      { label: "Revenue This Month", value: "₹20,35,000", change: "+18%", up: true },
       { label: "Jobs Completed", value: "47", change: "+12%", up: true },
       { label: "Avg. Turnaround", value: "4.2 days", change: "-0.8d", up: true },
       { label: "Customer Satisfaction", value: "4.8 / 5", change: "+0.2", up: true },
     ],
   },
 ];
+
 
 export const MOCKUP_SIDEBAR = [
   "Dashboard",
@@ -211,8 +224,8 @@ export const PRICING_TIERS = [
   {
     id: "starter",
     name: "Starter",
-    price: "$99",
-    period: "/month",
+    price: "$999",
+    period: "One-time setup fee + $49/month maintenance",
     blurb: "Perfect for growing print shops.",
     features: ["Up to 5 team members", "Unlimited enquiries", "Basic CRM", "Standard support"],
     popular: false,
@@ -220,8 +233,8 @@ export const PRICING_TIERS = [
   {
     id: "professional",
     name: "Professional",
-    price: "$249",
-    period: "/month",
+    price: "$1299",
+    period: "One-time setup fee + $49/month maintenance",
     blurb: "For established signage businesses.",
     features: [
       "Unlimited team members",

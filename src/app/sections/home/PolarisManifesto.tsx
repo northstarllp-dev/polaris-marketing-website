@@ -108,7 +108,7 @@ export function PolarisManifesto() {
             Nobody knows what's actually happening.
           </RevealBlock>
           <RevealBlock size="md" delay={0.2} dim>
-            And the tools you bought? Still open in 12 different browser tabs — unused.
+            And the tools you bought? Still open in 12 different browser tabs - unused.
           </RevealBlock>
         </div>
 
@@ -141,7 +141,7 @@ export function PolarisManifesto() {
           </RevealBlock>
           <RevealBlock dim size="md" delay={0.1}>
             We go deep into a business niche. Map every handoff, every tool, every workaround.
-            Then we build software around that reality — not the other way around.
+            Then we build software around that reality - not the other way around.
           </RevealBlock>
         </div>
 

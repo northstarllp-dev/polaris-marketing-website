@@ -1,34 +1,94 @@
 import { Link } from "react-router";
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { useRef } from "react";
 import { LivePulse } from "../../components/motion/CountOrPulse";
 
-export function HomeHero() {
+const HEADLINE_TOP = ["We", "map", "your", "chaos."];
+const HEADLINE_BOTTOM = ["Then", "we", "build", "the"];
+const HEADLINE_ACCENT = ["software", "to", "end", "it."];
+
+function WordReveal({
+  words,
+  delay = 0,
+  className = "",
+  accent = false,
+}: {
+  words: string[];
+  delay?: number;
+  className?: string;
+  accent?: boolean;
+}) {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative bg-[var(--brand-navy)] overflow-hidden pt-28 pb-24 min-h-screen flex items-center">
+    <span className={className}>
+      {words.map((word, i) => (
+        <motion.span
+          key={`${word}-${i}`}
+          className={`inline-block mr-[0.28em] last:mr-0 ${accent ? "text-[var(--brand-orange)]" : ""}`}
+          initial={reduce ? false : { opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.45,
+            delay: delay + i * 0.06,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+export function HomeHero() {
+  const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const orbY = useTransform(scrollYProgress, [0, 1], [0, 160]);
+  const orbYSlow = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.35]);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative bg-[var(--brand-navy)] overflow-hidden pt-28 pb-24 min-h-screen flex items-center"
+    >
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full opacity-25"
           style={{
             background: "radial-gradient(ellipse, #ff7043 0%, transparent 70%)",
+            y: reduce ? 0 : orbY,
           }}
-          animate={reduce ? undefined : { x: [0, 40, 0], y: [0, 20, 0] }}
+          animate={reduce ? undefined : { x: [0, 40, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute top-[180px] left-[-80px] w-[420px] h-[420px] rounded-full opacity-20"
           style={{
             background: "radial-gradient(ellipse, #64748b 0%, transparent 70%)",
+            y: reduce ? 0 : orbYSlow,
           }}
-          animate={reduce ? undefined : { x: [0, 30, 0], y: [0, -25, 0] }}
+          animate={reduce ? undefined : { x: [0, 30, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-[10%] right-[-60px] w-[380px] h-[380px] rounded-full opacity-15"
           style={{
             background: "radial-gradient(ellipse, #0ea5e9 0%, transparent 70%)",
+            y: reduce ? 0 : orbY,
           }}
           animate={reduce ? undefined : { scale: [1, 1.12, 1] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
@@ -43,7 +103,14 @@ export function HomeHero() {
         />
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 text-center relative w-full">
+      <motion.div
+        className="max-w-5xl mx-auto px-6 text-center relative w-full"
+        style={
+          reduce
+            ? undefined
+            : { y: contentY, opacity: contentOpacity }
+        }
+      >
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,7 +118,7 @@ export function HomeHero() {
           className="inline-flex items-center gap-2 border border-white/15 text-white/70 text-[12px] font-['Figtree',sans-serif] font-semibold px-4 py-1.5 rounded-full mb-8 bg-white/5 backdrop-blur-sm"
         >
           <LivePulse />
-          PrintOMS is live — the first Polaris product
+          PrintOMS is live - the first Polaris product
         </motion.div>
 
         <motion.p
@@ -64,36 +131,37 @@ export function HomeHero() {
           Polaris
         </motion.p>
 
-        <motion.h1
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.16 }}
+        <h1
           className="font-['Figtree',sans-serif] font-black text-white leading-[1.08] tracking-tight mb-6"
           style={{ fontSize: "clamp(28px, 4.5vw, 48px)" }}
         >
-          We map your chaos.
+          <WordReveal words={HEADLINE_TOP} delay={0.16} />
           <br />
-          Then we build the <span className="text-[var(--brand-orange)]">software to end it.</span>
-        </motion.h1>
+          <WordReveal words={HEADLINE_BOTTOM} delay={0.4} />{" "}
+          <WordReveal words={HEADLINE_ACCENT} delay={0.64} accent />
+        </h1>
 
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.26 }}
+          transition={{ duration: 0.55, delay: 0.9 }}
           className="font-['Figtree',sans-serif] font-normal text-white/55 max-w-xl mx-auto leading-relaxed mb-10"
           style={{ fontSize: "clamp(15px, 1.8vw, 18px)" }}
         >
-          Polaris digs deep into how real businesses run — then ships purpose-built
+          Polaris digs deep into how real businesses run - then ships purpose-built
           software that actually fits. Starting with PrintOMS for signage shops.
         </motion.p>
 
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.36 }}
+          transition={{ duration: 0.5, delay: 1.05 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.98 }}>
+          <motion.div
+            whileHover={reduce ? undefined : { scale: 1.03 }}
+            whileTap={reduce ? undefined : { scale: 0.98 }}
+          >
             <Link
               to="/products/printoms"
               className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-8 py-3.5 rounded-lg hover:bg-[#f4622d] transition-colors inline-flex items-center gap-2 shadow-lg shadow-[var(--brand-orange)]/30"
@@ -108,7 +176,7 @@ export function HomeHero() {
             See our approach
           </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

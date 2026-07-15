@@ -1,19 +1,36 @@
-import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { Progress } from "../components/ui/progress";
+import { scrollToHash } from "../hooks/useHashScroll";
+
+const NAV_LINKS = [
+  { label: "Company", to: "/#about" },
+  { label: "How We Work", to: "/#how-we-work" },
+  { label: "Why Polaris", to: "/#why" },
+  { label: "Pricing", to: "/products/printoms#pricing" },
+] as const;
 
 export function NavBar() {
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const reduce = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - window.innerHeight;
+      setScrollProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -23,7 +40,7 @@ export function NavBar() {
   }, [location.pathname, location.hash]);
 
   useEffect(() => {
-    const onDoc = (e: MouseEvent) => {
+    const onDoc = (e: globalThis.MouseEvent) => {
       if (!dropdownRef.current?.contains(e.target as Node)) {
         setProductsOpen(false);
       }
@@ -31,6 +48,36 @@ export function NavBar() {
     document.addEventListener("mousedown", onDoc);
     return () => document.removeEventListener("mousedown", onDoc);
   }, []);
+
+  function goTo(to: string, e?: MouseEvent) {
+    e?.preventDefault();
+    const [path, hash = ""] = to.split("#");
+    const pathname = path || "/";
+    const hashPart = hash ? `#${hash}` : "";
+    const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+
+    if (location.pathname === pathname) {
+      if (hash) {
+        if (location.hash === hashPart) {
+          scrollToHash(hash, behavior);
+        } else {
+          navigate(`${pathname}${hashPart}`);
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior });
+        navigate(pathname);
+      }
+    } else {
+      navigate(`${pathname}${hashPart}`);
+    }
+    setOpen(false);
+    setProductsOpen(false);
+  }
+
+  const linkClass =
+    "font-['Figtree',sans-serif] text-[14px] font-medium text-[#333] hover:text-[var(--brand-navy)] transition-colors px-3 py-2 rounded-lg hover:bg-[var(--brand-surface)]";
+  const mobileLinkClass =
+    "font-['Figtree',sans-serif] text-[15px] font-medium text-[#333] py-2.5 border-b border-[rgba(0,0,0,0.05)] text-left";
 
   return (
     <nav
@@ -41,21 +88,25 @@ export function NavBar() {
           : "0 1px 0 rgba(0,0,0,0.06)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 h-[64px] flex items-center justify-between gap-6">
-        <Link to="/" className="flex items-center gap-2 shrink-0">
+      <div className="relative max-w-7xl mx-auto px-6 h-[80px] flex items-center justify-between gap-6">
+        <Link
+          to="/"
+          onClick={(e) => goTo("/", e)}
+          className="flex items-center gap-2 shrink-0"
+        >
           <img
             src="/light withoutbg.png"
             alt="Polaris"
-            className="h-32 w-auto object-contain"
+            className="h-12 w-auto object-contain"
           />
         </Link>
 
-        <div className="hidden lg:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setProductsOpen((v) => !v)}
-              className="flex items-center gap-0.5 font-['Figtree',sans-serif] text-[14px] font-medium text-[#333] hover:text-[var(--brand-navy)] transition-colors px-3 py-2 rounded-lg hover:bg-[var(--brand-surface)]"
+              className={`flex items-center gap-0.5 ${linkClass}`}
             >
               Products
               <ChevronDown
@@ -75,6 +126,7 @@ export function NavBar() {
                   <div className="p-2">
                     <Link
                       to="/products/printoms"
+                      onClick={(e) => goTo("/products/printoms", e)}
                       className="block rounded-xl p-3 hover:bg-[var(--brand-surface)] transition-colors"
                     >
                       <div className="flex items-center gap-2 mb-1">
@@ -89,6 +141,20 @@ export function NavBar() {
                         Order management for signage & fabrication
                       </p>
                     </Link>
+                    <button
+                      type="button"
+                      onClick={(e) => goTo("/products/printoms#pricing", e)}
+                      className="w-full text-left rounded-xl p-3 hover:bg-[var(--brand-surface)] transition-colors"
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-['Figtree',sans-serif] font-bold text-[14px] text-[var(--brand-ink)]">
+                          PrintOMS Pricing
+                        </span>
+                      </div>
+                      <p className="font-['Figtree',sans-serif] text-[12px] text-[var(--brand-muted)]">
+                        Starter & Professional plans
+                      </p>
+                    </button>
                     <div className="rounded-xl p-3 opacity-70">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-['Figtree',sans-serif] font-bold text-[14px] text-[var(--brand-ink)]">
@@ -108,29 +174,35 @@ export function NavBar() {
             </AnimatePresence>
           </div>
 
-          <Link
-            to="/#why"
-            className="font-['Figtree',sans-serif] text-[14px] font-medium text-[#333] hover:text-[var(--brand-navy)] transition-colors px-3 py-2 rounded-lg hover:bg-[var(--brand-surface)]"
-          >
-            Company
-          </Link>
-          <Link
-            to="/products/printoms#pricing"
-            className="font-['Figtree',sans-serif] text-[14px] font-medium text-[#333] hover:text-[var(--brand-navy)] transition-colors px-3 py-2 rounded-lg hover:bg-[var(--brand-surface)]"
-          >
-            Pricing
-          </Link>
+          {NAV_LINKS.map(({ label, to }) => (
+            <Link
+              key={label}
+              to={to}
+              onClick={(e) => goTo(to, e)}
+              className={linkClass}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
 
         <div className="hidden lg:flex items-center gap-2 shrink-0">
-          <a
-            href="#contact"
+          <button
+            type="button"
+            onClick={(e) =>
+              goTo(
+                location.pathname === "/products/printoms"
+                  ? "/products/printoms#contact"
+                  : "/#contact",
+                e
+              )
+            }
             className="font-['Figtree',sans-serif] text-[14px] font-medium text-[#555] hover:text-[#333] transition-colors px-3 py-2"
           >
             Contact sales
-          </a>
+          </button>
           <motion.a
-            href="#contact"
+            href="tel:+918189999998"
             whileHover={reduce ? undefined : { scale: 1.03 }}
             whileTap={reduce ? undefined : { scale: 0.98 }}
             className="font-['Figtree',sans-serif] text-[13px] font-semibold bg-[var(--brand-orange)] text-white px-5 py-2.5 rounded-lg hover:bg-[#f4622d] transition-colors flex items-center gap-1.5 ml-1"
@@ -155,29 +227,29 @@ export function NavBar() {
             initial={reduce ? false : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="lg:hidden overflow-hidden bg-white border-t border-[rgba(0,0,0,0.06)]"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
-              <Link
-                to="/products/printoms"
-                className="font-['Figtree',sans-serif] text-[15px] font-medium text-[#333] py-2.5 border-b border-[rgba(0,0,0,0.05)]"
+              <button
+                type="button"
+                onClick={(e) => goTo("/products/printoms", e)}
+                className={mobileLinkClass}
               >
                 PrintOMS
-              </Link>
-              <Link
-                to="/#why"
-                className="font-['Figtree',sans-serif] text-[15px] font-medium text-[#333] py-2.5 border-b border-[rgba(0,0,0,0.05)]"
-              >
-                Company
-              </Link>
-              <Link
-                to="/products/printoms#pricing"
-                className="font-['Figtree',sans-serif] text-[15px] font-medium text-[#333] py-2.5 border-b border-[rgba(0,0,0,0.05)]"
-              >
-                Pricing
-              </Link>
+              </button>
+              {NAV_LINKS.map(({ label, to }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={(e) => goTo(to, e)}
+                  className={mobileLinkClass}
+                >
+                  {label}
+                </button>
+              ))}
               <a
-                href="#contact"
+                href="tel:+918189999998"
                 className="font-['Figtree',sans-serif] text-[14px] font-semibold bg-[var(--brand-orange)] text-white px-5 py-3 rounded-lg text-center mt-4"
               >
                 Book a Demo
@@ -186,6 +258,11 @@ export function NavBar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <Progress
+        value={reduce ? 0 : scrollProgress}
+        className="absolute bottom-0 left-0 right-0 h-[2.5px] rounded-none bg-transparent [&>[data-slot=progress-indicator]]:bg-[var(--brand-orange)] [&>[data-slot=progress-indicator]]:transition-none"
+      />
     </nav>
   );
 }

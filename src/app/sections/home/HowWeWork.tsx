@@ -1,27 +1,28 @@
 import { motion, useReducedMotion } from "motion/react";
 import { Crosshair, Layers, CheckCircle } from "lucide-react";
 import { FadeIn } from "../../components/motion/FadeIn";
+import { WobbleIcon } from "../../components/motion/Tilt3D";
 
 const STEPS = [
   {
     number: "1",
     icon: Crosshair,
     title: "Identify",
-    desc: "Every project starts with clarity. We understand how your business actually works — where time is being lost, what slows things down, and why problems pile up. From there, we find the exact pain worth solving.",
+    desc: "Every project starts with clarity. We understand how your business actually works - where time is being lost, what slows things down, and why problems pile up. From there, we find the exact pain worth solving.",
     color: "#ff7043",
   },
   {
     number: "2",
     icon: Layers,
     title: "Develop",
-    desc: "Once we know what matters, we move fast. We design and build software that fits seamlessly into how your business runs — built the right way from day one, so it works exactly as it should.",
+    desc: "Once we know what matters, we move fast. We design and build software that fits seamlessly into how your business runs - built the right way from day one, so it works exactly as it should.",
     color: "#8b5cf6",
   },
   {
     number: "3",
     icon: CheckCircle,
     title: "Adopt",
-    desc: "Then we make it real. We work alongside your team — fine-tuning and making sure the solution actually sticks. By the time we step back, it's not a project anymore — it's just how work gets done.",
+    desc: "Then we make it real. We work alongside your team - fine-tuning and making sure the solution actually sticks. By the time we step back, it's not a project anymore - it's just how work gets done.",
     color: "#0ea5e9",
   },
 ] as const;
@@ -58,7 +59,7 @@ export function HowWeWork() {
             We don't guess. We go deep.
           </h2>
           <p className="font-['Figtree',sans-serif] text-[17px] text-white/50 leading-relaxed max-w-xl mx-auto">
-            Every Polaris product starts with the same obsession — understanding a business niche completely before writing a single line of code.
+            Every Polaris product starts with the same obsession - understanding a business niche completely before writing a single line of code.
           </p>
         </FadeIn>
 
@@ -91,15 +92,17 @@ export function HowWeWork() {
                 </div>
 
                 {/* Icon box */}
-                <div
-                  className="shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
-                  style={{
-                    backgroundColor: `${step.color}14`,
-                    border: `1px solid ${step.color}28`,
-                  }}
-                >
-                  <Icon size={22} style={{ color: step.color }} />
-                </div>
+                <WobbleIcon delay={i * 0.35}>
+                  <div
+                    className="shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center"
+                    style={{
+                      backgroundColor: `${step.color}14`,
+                      border: `1px solid ${step.color}28`,
+                    }}
+                  >
+                    <Icon size={22} style={{ color: step.color }} />
+                  </div>
+                </WobbleIcon>
 
                 {/* Text */}
                 <div className="flex-1 min-w-0">

@@ -1,6 +1,7 @@
 import { ROLES } from "../../content/printoms";
 import { FadeIn } from "../../components/motion/FadeIn";
 import { Stagger, StaggerItem } from "../../components/motion/Stagger";
+import { Tilt3D } from "../../components/motion/Tilt3D";
 
 export function Roles() {
   return (
@@ -20,14 +21,16 @@ export function Roles() {
         <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {ROLES.map((r) => (
             <StaggerItem key={r.title}>
-              <div className="border border-[rgba(0,0,0,0.07)] rounded-2xl p-6 hover:border-[var(--brand-orange)]/40 hover:shadow-md transition-all duration-300 h-full">
-                <h3 className="font-['Figtree',sans-serif] font-black text-[16px] text-[var(--brand-ink)] mb-2">
-                  {r.title}
-                </h3>
-                <p className="font-['Figtree',sans-serif] text-[14px] text-[var(--brand-muted)] leading-relaxed">
-                  {r.desc}
-                </p>
-              </div>
+              <Tilt3D className="group h-full" max={10}>
+                <div className="border border-[rgba(0,0,0,0.07)] rounded-2xl p-6 hover:border-[var(--brand-orange)]/40 hover:shadow-md transition-all duration-300 h-full bg-white">
+                  <h3 className="font-['Figtree',sans-serif] font-black text-[16px] text-[var(--brand-ink)] mb-2">
+                    {r.title}
+                  </h3>
+                  <p className="font-['Figtree',sans-serif] text-[14px] text-[var(--brand-muted)] leading-relaxed">
+                    {r.desc}
+                  </p>
+                </div>
+              </Tilt3D>
             </StaggerItem>
           ))}
         </Stagger>

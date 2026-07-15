@@ -5,12 +5,42 @@ export const MARQUEE_CLIENTS = [
 ];
 
 export const CHAOS_ITEMS = [
-  { id: "whatsapp", label: "WhatsApp threads", icon: "MessageCircle" },
-  { id: "excel", label: "Excel sheets", icon: "Table2" },
-  { id: "pdfs", label: "Scattered PDFs", icon: "FileText" },
-  { id: "approvals", label: "Lost approvals", icon: "CircleHelp" },
-  { id: "word", label: "Word of mouth", icon: "Megaphone" },
-  { id: "pipeline", label: "No pipeline view", icon: "EyeOff" },
+  {
+    id: "whatsapp",
+    label: "WhatsApp threads",
+    icon: "MessageCircle",
+    solution: "One shared job timeline — no buried chats",
+  },
+  {
+    id: "excel",
+    label: "Excel sheets",
+    icon: "Table2",
+    solution: "Live pipeline instead of stale spreadsheets",
+  },
+  {
+    id: "pdfs",
+    label: "Scattered PDFs",
+    icon: "FileText",
+    solution: "Quotes & files live on the order",
+  },
+  {
+    id: "approvals",
+    label: "Lost approvals",
+    icon: "CircleHelp",
+    solution: "Portal sign-off before production starts",
+  },
+  {
+    id: "word",
+    label: "Word of mouth",
+    icon: "Megaphone",
+    solution: "Every lead captured from one inbox",
+  },
+  {
+    id: "pipeline",
+    label: "No pipeline view",
+    icon: "EyeOff",
+    solution: "End-to-end visibility, enquiry to install",
+  },
 ] as const;
 
 export const WHY_PILLARS = [
