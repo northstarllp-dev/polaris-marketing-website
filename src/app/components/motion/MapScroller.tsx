@@ -161,14 +161,14 @@ function ActiveBox({ highlightColor, activeIndex, index }: { highlightColor: str
 // Helper component for the nodes on the SVG map
 function MapNode({ step, index, pos, activeIndex }: { step: StickyStep, index: number, pos: {x: number, y: number}, activeIndex: any }) {
   
-  const isActive = useTransform(activeIndex, (v) => v >= index);
-  const isCurrent = useTransform(activeIndex, (v) => v === index);
+  const isActive = useTransform(activeIndex, (v: number) => v >= index);
+  const isCurrent = useTransform(activeIndex, (v: number) => v === index);
 
-  const scale = useTransform(isActive, (active) => (active ? 1.1 : 0.8));
-  const opacity = useTransform(isActive, (active) => (active ? 1 : 0.5));
+  const scale = useTransform(isActive, (active: boolean) => (active ? 1.1 : 0.8));
+  const opacity = useTransform(isActive, (active: boolean) => (active ? 1 : 0.5));
   
-  const ringScale = useTransform(isCurrent, (current) => (current ? 1.5 : 1));
-  const ringOpacity = useTransform(isCurrent, (current) => (current ? 0.3 : 0));
+  const ringScale = useTransform(isCurrent, (current: boolean) => (current ? 1.5 : 1));
+  const ringOpacity = useTransform(isCurrent, (current: boolean) => (current ? 0.3 : 0));
 
   return (
     <motion.div
