@@ -134,9 +134,12 @@ export function ProblemStatement() {
                   Stop paying to experiment. <span className="font-bold text-white">Start paying for results.</span>
                 </p>
                 
-                <button className="px-8 py-3 bg-white text-black font-bold text-sm tracking-widest uppercase hover:bg-gray-200 transition-colors">
-                  GET IN TOUCH &gt;
-                </button>
+                <a
+                  href="tel:+918189999998"
+                  className="inline-block px-8 py-3 bg-white text-black font-bold text-sm tracking-widest uppercase hover:bg-gray-200 transition-colors"
+                >
+                  Book Demo &gt;
+                </a>
               </div>
             );
           })()}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { MOCKUP_SIDEBAR, MOCKUP_TABS } from "../content/printoms";
 import { FadeIn } from "./motion/FadeIn";
@@ -140,6 +140,8 @@ export function ProductMockup({ activeTab }: { activeTab: number }) {
   );
 }
 
+const CYCLE_MS = 3000;
+
 /** Interactive showcase: tab auto-cycle every 3s with visible progress bar */
 export function ProductShowcase({
   dark = true,
@@ -149,27 +151,36 @@ export function ProductShowcase({
   className?: string;
 }) {
   const [activeTab, setActiveTab] = useState(0);
-  const [timerKey, setTimerKey] = useState(0); // reset progress bar on manual click
+  const [timerKey, setTimerKey] = useState(0);
   const reduce = useReducedMotion();
+  const pausedRef = useRef(false);
 
-  // Auto-advance every 3s
+  // Always auto-advance — content carousel, intentionally ignores prefers-reduced-motion
   useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(
-      () => setActiveTab((t) => (t + 1) % MOCKUP_TABS.length),
-      3000
-    );
-    return () => clearInterval(id);
-  }, [reduce, timerKey]);
+    const id = window.setInterval(() => {
+      if (pausedRef.current) return;
+      setActiveTab((t) => (t + 1) % MOCKUP_TABS.length);
+      setTimerKey((k) => k + 1);
+    }, CYCLE_MS);
+    return () => window.clearInterval(id);
+  }, [timerKey]);
 
   function handleTabClick(i: number) {
     setActiveTab(i);
-    setTimerKey((k) => k + 1); // restart the interval + progress bar
+    setTimerKey((k) => k + 1);
   }
 
   return (
     <FadeIn className={className} y={40}>
-      <div className="flex items-center justify-center gap-1 mb-6 flex-wrap">
+      <div
+        className="flex items-center justify-center gap-1 mb-6 flex-wrap"
+        onMouseEnter={() => {
+          pausedRef.current = true;
+        }}
+        onMouseLeave={() => {
+          pausedRef.current = false;
+        }}
+      >
         {MOCKUP_TABS.map(({ id, label, color }, i) => (
           <button
             key={id}
@@ -178,23 +189,26 @@ export function ProductShowcase({
             className="relative font-['Figtree',sans-serif] text-[12px] font-semibold px-5 py-2 rounded-full transition-all overflow-hidden border border-transparent"
             style={
               activeTab === i
-                ? { 
+                ? {
                     background: `linear-gradient(135deg, ${color}, ${color}cc)`,
                     boxShadow: `0 8px 24px ${color}55, inset 0 2px 4px rgba(255,255,255,0.25)`,
                     color: "#fff",
-                    borderColor: `${color}44`
+                    borderColor: `${color}44`,
                   }
                 : {
                     backgroundColor: dark
                       ? "rgba(255,255,255,0.08)"
                       : "rgba(15,16,53,0.06)",
-                    color: dark ? "rgba(255,255,255,0.45)" : "rgba(15,16,53,0.45)",
-                    borderColor: dark ? "rgba(255,255,255,0.05)" : "rgba(15,16,53,0.05)"
+                    color: dark
+                      ? "rgba(255,255,255,0.45)"
+                      : "rgba(15,16,53,0.45)",
+                    borderColor: dark
+                      ? "rgba(255,255,255,0.05)"
+                      : "rgba(15,16,53,0.05)",
                   }
             }
           >
             {label}
-            {/* Progress sweep — only shown on active tab */}
             {activeTab === i && !reduce && (
               <motion.span
                 key={`${id}-${timerKey}`}
@@ -202,7 +216,7 @@ export function ProductShowcase({
                 style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
-                transition={{ duration: 3, ease: "linear" }}
+                transition={{ duration: CYCLE_MS / 1000, ease: "linear" }}
               />
             )}
           </button>

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
-import { Progress } from "../components/ui/progress";
 import { scrollToHash } from "../hooks/useHashScroll";
 
 const NAV_LINKS = [
@@ -259,10 +258,24 @@ export function NavBar() {
         )}
       </AnimatePresence>
 
-      <Progress
-        value={reduce ? 0 : scrollProgress}
-        className="absolute bottom-0 left-0 right-0 h-[2.5px] rounded-none bg-transparent [&>[data-slot=progress-indicator]]:bg-[var(--brand-orange)] [&>[data-slot=progress-indicator]]:transition-none"
-      />
+      {/* Gradient scroll progress — navy → orange → amber */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[3px] bg-black/5 overflow-hidden"
+        role="progressbar"
+        aria-valuenow={Math.round(scrollProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Page scroll progress"
+      >
+        <div
+          className="h-full origin-left transition-[width] duration-75 ease-out"
+          style={{
+            width: `${scrollProgress}%`,
+            background:
+              "linear-gradient(90deg, #0f1035 0%, #ff7043 55%, #ffb74d 100%)",
+          }}
+        />
+      </div>
     </nav>
   );
 }

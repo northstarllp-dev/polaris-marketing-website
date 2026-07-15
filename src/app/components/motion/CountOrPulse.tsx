@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from "motion/react";
+import { Link } from "react-router";
+import { motion, useReducedMotion, MotionConfig } from "motion/react";
 
 export function LivePulse({ className = "" }: { className?: string }) {
   const reduce = useReducedMotion();
@@ -21,10 +22,12 @@ type Product = {
   name: string;
   status: "live" | "soon";
   color: string;
-  angle: number; // degrees
-  radius: number; // px from center
+  angle: number;
+  radius: number;
   floatDuration: number;
   floatDelay: number;
+  /** Route for this product chip */
+  to: string;
 };
 
 const PRODUCTS: Product[] = [
@@ -36,6 +39,7 @@ const PRODUCTS: Product[] = [
     radius: 155,
     floatDuration: 4.2,
     floatDelay: 0,
+    to: "/products/printoms",
   },
   {
     name: "PrintFloww",
@@ -45,6 +49,7 @@ const PRODUCTS: Product[] = [
     radius: 155,
     floatDuration: 5.0,
     floatDelay: 0.8,
+    to: "/#contact",
   },
   {
     name: "StayFloww",
@@ -54,6 +59,7 @@ const PRODUCTS: Product[] = [
     radius: 165,
     floatDuration: 4.6,
     floatDelay: 1.4,
+    to: "/#contact",
   },
   {
     name: "LogisticOS",
@@ -63,6 +69,7 @@ const PRODUCTS: Product[] = [
     radius: 160,
     floatDuration: 5.4,
     floatDelay: 0.4,
+    to: "/#contact",
   },
 ];
 
@@ -75,14 +82,17 @@ function getPosition(angleDeg: number, radius: number) {
 }
 
 export function SoftOrbit({ className = "" }: { className?: string }) {
+  // Soften (don’t disable) — this diagram is meant to feel alive
   const reduce = useReducedMotion();
   const size = 420;
   const center = size / 2;
+  const floatAmp = reduce ? 4 : 12;
 
   return (
+    <MotionConfig reducedMotion="never">
     <div
       className={`relative ${className}`}
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size, perspective: 900 }}
     >
       {/* Rotating ring decorations */}
       {[0, 1, 2].map((i) => (
@@ -95,22 +105,17 @@ export function SoftOrbit({ className = "" }: { className?: string }) {
             left: center - (100 + i * 64) / 2,
             top: center - (100 + i * 64) / 2,
           }}
-          animate={
-            reduce
-              ? undefined
-              : {
-                  rotate: i % 2 === 0 ? 360 : -360,
-                  opacity: [0.2, 0.45, 0.2],
-                }
-          }
+          animate={{
+            rotate: i % 2 === 0 ? 360 : -360,
+            opacity: [0.18, 0.4, 0.18],
+          }}
           transition={{
-            rotate: { duration: 20 + i * 8, repeat: Infinity, ease: "linear" },
+            rotate: { duration: 22 + i * 8, repeat: Infinity, ease: "linear" },
             opacity: { duration: 5 + i, repeat: Infinity, ease: "easeInOut" },
           }}
         />
       ))}
 
-      {/* Outer dashed orbit ring */}
       <div
         className="absolute rounded-full border border-dashed border-[var(--brand-orange)]/10"
         style={{
@@ -121,119 +126,11 @@ export function SoftOrbit({ className = "" }: { className?: string }) {
         }}
       />
 
-      {/* Center Polaris logo */}
-      <motion.div
-        className="absolute z-10 w-20 h-20 rounded-2xl bg-[var(--brand-navy)] flex flex-col items-center justify-center shadow-2xl"
-        style={{ left: center - 40, top: center - 40 }}
-        animate={reduce ? undefined : { scale: [1, 1.04, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <span className="font-['Figtree',sans-serif] font-black text-white text-2xl leading-none">
-          P
-        </span>
-        <span className="font-['Figtree',sans-serif] font-bold text-white/40 text-[9px] tracking-widest mt-0.5">
-          POLARIS
-        </span>
-      </motion.div>
-
-      {/* Floating product chips */}
-      {PRODUCTS.map((product) => {
-        const pos = getPosition(product.angle, product.radius);
-        return (
-          <div
-            key={`wrapper-${product.name}`}
-            className="absolute z-20 pointer-events-none"
-            style={{
-              left: center + pos.x,
-              top: center + pos.y,
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <motion.div
-              key={product.name}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white shadow-lg border border-gray-100 cursor-default select-none pointer-events-auto"
-              style={{ transformStyle: "preserve-3d" }}
-              initial={reduce ? false : { opacity: 0, scale: 0.7 }}
-              animate={
-                reduce
-                  ? undefined
-                  : {
-                      opacity: 1,
-                      scale: 1,
-                      y: [0, -10, -4, -12, 0, -6, 0],
-                      x: [0, 3, -4, 2, -3, 5, 0],
-                      rotateZ: [-2, 2, -2],
-                      rotateY: [-4, 4, -4],
-                    }
-              }
-              transition={{
-                opacity: { duration: 0.5, delay: product.floatDelay + 0.3 },
-                scale: { duration: 0.5, delay: product.floatDelay + 0.3 },
-                y: {
-                  duration: product.floatDuration,
-                  delay: product.floatDelay,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                },
-                x: {
-                  duration: product.floatDuration * 1.3,
-                  delay: product.floatDelay + 0.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                },
-                rotateZ: {
-                  duration: product.floatDuration * 1.1,
-                  delay: product.floatDelay,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                },
-                rotateY: {
-                  duration: product.floatDuration * 1.4,
-                  delay: product.floatDelay + 0.2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                },
-              }}
-              whileHover={
-                reduce
-                  ? undefined
-                  : {
-                      scale: 1.12,
-                      rotateY: 18,
-                      rotateX: -8,
-                      transition: { type: "spring", stiffness: 280, damping: 14 },
-                    }
-              }
-            >
-              {/* Colored dot */}
-              <span
-                className="inline-block w-2 h-2 rounded-full shrink-0"
-                style={{ background: product.color }}
-              />
-              <span className="font-['Figtree',sans-serif] font-semibold text-[13px] text-[var(--brand-ink)] whitespace-nowrap">
-                {product.name}
-              </span>
-              <span
-                className="font-['Figtree',sans-serif] font-bold text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wide"
-                style={{
-                  color: product.status === "live" ? product.color : "#999",
-                  background:
-                    product.status === "live"
-                      ? `${product.color}18`
-                      : "#f3f4f6",
-                }}
-              >
-                {product.status === "live" ? "Live" : "Soon"}
-              </span>
-            </motion.div>
-          </div>
-        );
-      })}
-
-      {/* Connector lines from center to each chip */}
+      {/* Connector lines — drawn under chips */}
       <svg
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 z-0 pointer-events-none"
         style={{ width: size, height: size }}
+        aria-hidden
       >
         {PRODUCTS.map((product) => {
           const pos = getPosition(product.angle, product.radius);
@@ -246,15 +143,170 @@ export function SoftOrbit({ className = "" }: { className?: string }) {
               x2={center + pos.x}
               y2={center + pos.y}
               stroke={product.color}
-              strokeWidth="1"
-              strokeDasharray="4 4"
-              initial={reduce ? false : { pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.3 }}
-              transition={{ duration: 0.8, delay: product.floatDelay + 0.1 }}
+              strokeWidth="1.25"
+              strokeDasharray="4 5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{
+                pathLength: 1,
+                opacity: [0.22, 0.45, 0.22],
+              }}
+              transition={{
+                pathLength: { duration: 0.85, delay: product.floatDelay + 0.1 },
+                opacity: {
+                  duration: product.floatDuration,
+                  delay: product.floatDelay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+              }}
             />
           );
         })}
       </svg>
+
+      {/* Center hub — links home */}
+      <motion.div
+        className="absolute z-10"
+        style={{
+          left: center - 40,
+          top: center - 40,
+          transformStyle: "preserve-3d",
+        }}
+        animate={{
+          y: [0, -floatAmp * 0.55, 0],
+          rotateY: [-8, 8, -8],
+          rotateX: [4, -4, 4],
+        }}
+        transition={{
+          duration: 5.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <Link to="/" aria-label="Polaris home">
+          <motion.div
+            className="w-20 h-20 rounded-2xl bg-[var(--brand-navy)] flex flex-col items-center justify-center shadow-2xl cursor-pointer"
+            style={{ transformStyle: "preserve-3d" }}
+            whileHover={{
+              scale: 1.1,
+              rotateY: 18,
+              rotateX: -10,
+              boxShadow: "0 22px 40px rgba(15,16,53,0.45)",
+              transition: { type: "spring", stiffness: 260, damping: 14 },
+            }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <span className="font-['Figtree',sans-serif] font-black text-white text-2xl leading-none">
+              P
+            </span>
+            <span className="font-['Figtree',sans-serif] font-bold text-white/40 text-[9px] tracking-widest mt-0.5">
+              POLARIS
+            </span>
+          </motion.div>
+        </Link>
+      </motion.div>
+
+      {/* Product chips — float layer + hover layer (separated so they don't fight) */}
+      {PRODUCTS.map((product) => {
+        const pos = getPosition(product.angle, product.radius);
+        return (
+          <div
+            key={product.name}
+            className="absolute z-20"
+            style={{
+              left: center + pos.x,
+              top: center + pos.y,
+              transform: "translate(-50%, -50%)",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            {/* Float layer */}
+            <motion.div
+              animate={{
+                y: [0, -floatAmp, -floatAmp * 0.3, -floatAmp * 0.85, 0],
+                x: [0, 3, -2, 4, 0],
+                rotateZ: [-2.5, 2.5, -2.5],
+              }}
+              transition={{
+                duration: product.floatDuration,
+                delay: product.floatDelay,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* Product chip button */}
+              <Link
+                to={product.to}
+                aria-label={
+                  product.status === "live"
+                    ? `Open ${product.name}`
+                    : `${product.name} — coming soon, get in touch`
+                }
+              >
+                <motion.div
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-gray-100 cursor-pointer select-none shadow-lg"
+                  style={{ transformStyle: "preserve-3d" }}
+                  initial={{ opacity: 0, scale: 0.75 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.45,
+                    delay: product.floatDelay + 0.25,
+                    type: "spring",
+                    stiffness: 220,
+                    damping: 16,
+                  }}
+                  whileHover={{
+                    scale: 1.14,
+                    rotateY: 22,
+                    rotateX: -12,
+                    z: 40,
+                    boxShadow: `0 16px 32px ${product.color}44, 0 4px 12px rgba(15,16,53,0.12)`,
+                    borderColor: `${product.color}55`,
+                    transition: { type: "spring", stiffness: 300, damping: 12 },
+                  }}
+                  whileTap={{ scale: 1.05 }}
+                >
+                  <motion.span
+                    className="inline-block w-2 h-2 rounded-full shrink-0"
+                    style={{ background: product.color }}
+                    animate={{
+                      scale: [1, 1.35, 1],
+                      boxShadow: [
+                        `0 0 0 0 ${product.color}00`,
+                        `0 0 0 4px ${product.color}33`,
+                        `0 0 0 0 ${product.color}00`,
+                      ],
+                    }}
+                    transition={{
+                      duration: 2.4,
+                      delay: product.floatDelay,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <span className="font-['Figtree',sans-serif] font-semibold text-[13px] text-[var(--brand-ink)] whitespace-nowrap">
+                    {product.name}
+                  </span>
+                  <span
+                    className="font-['Figtree',sans-serif] font-bold text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wide"
+                    style={{
+                      color: product.status === "live" ? product.color : "#999",
+                      background:
+                        product.status === "live"
+                          ? `${product.color}18`
+                          : "#f3f4f6",
+                    }}
+                  >
+                    {product.status === "live" ? "Live" : "Soon"}
+                  </span>
+                </motion.div>
+              </Link>
+            </motion.div>
+          </div>
+        );
+      })}
     </div>
+    </MotionConfig>
   );
 }

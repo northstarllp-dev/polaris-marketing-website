@@ -7,9 +7,9 @@ import { SlidingNumber } from "../../components/motion/SlidingNumber";
 import { Stagger, StaggerItem } from "../../components/motion/Stagger";
 
 const STATS = [
-  { label: "NIT Trichy alumni", value: 2, suffix: "" },
-  { label: "Niche markets mapped", value: 4, suffix: "+" },
-  { label: "Live product", value: 1, suffix: "" },
+  { label: "Niche markets", value: 4, suffix: "+" },
+  { label: "Customers", value: 3, suffix: "+" },
+  { label: "Live products", value: 1, suffix: "" },
 ] as const;
 
 function CountUpStat({

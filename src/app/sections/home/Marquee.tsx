@@ -27,10 +27,11 @@ export function Marquee() {
             className="pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-gradient-to-l from-white to-transparent"
             aria-hidden
           />
+          {/* Inline animation — not gated by prefers-reduced-motion (content carousel, not decorative) */}
           <div
-            className="flex gap-16 items-center w-max animate-marquee motion-reduce:animate-none"
+            className="flex gap-16 items-center w-max will-change-transform"
             style={{
-              animationDuration: hovered ? "12s" : "28s",
+              animation: `polaris-marquee ${hovered ? 12 : 28}s linear infinite`,
             }}
           >
             {[...LOOP, ...LOOP].map((name, i) => (
