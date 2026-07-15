@@ -148,7 +148,7 @@ export function MapScroller({ eyebrow, heading, sub, steps }: MapScrollerProps) 
 // Helper component to subscribe to activeIndex and highlight the box
 function ActiveBox({ highlightColor, activeIndex, index }: { highlightColor: string, activeIndex: any, index: number }) {
   // Keep the highlight active for current AND past stages (so it doesn't fade when done)
-  const opacity = useTransform(activeIndex, (v) => (v >= index ? 0.08 : 0));
+  const opacity = useTransform(activeIndex, (v: number) => (v >= index ? 0.08 : 0));
   
   return (
     <motion.div
