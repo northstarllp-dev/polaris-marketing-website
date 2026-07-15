@@ -218,14 +218,14 @@ function AnimatedStackedBox({
   const start = Math.max(0, (index - 0.5) / total);
   const end = Math.min(1, index / total);
 
-  const y = useTransform(scrollYProgress, (v) => {
+  const y = useTransform(scrollYProgress, (v: number) => {
     if (index === 0) return 0;
     if (v < start) return 150;
     if (v > end) return 0;
     return 150 - ((v - start) / (end - start)) * 150;
   });
 
-  const opacity = useTransform(scrollYProgress, (v) => {
+  const opacity = useTransform(scrollYProgress, (v: number) => {
     if (index === 0) return 1;
     if (v < start) return 0;
     if (v > end) return 1;
