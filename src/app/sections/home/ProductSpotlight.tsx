@@ -51,7 +51,7 @@ export function ProductSpotlight() {
                     {PRINTOMS_SPOTLIGHT_FEATURES.map((label) => (
                       <StaggerItem key={label}>
                         <div className="flex items-center gap-2.5 text-[13px] font-['Figtree',sans-serif] font-semibold text-[#444]">
-                          <Check size={14} className="text-[var(--brand-orange)] shrink-0" />
+                          <Check size={14} className="text-brand-gradient shrink-0" />
                           {label}
                         </div>
                       </StaggerItem>
@@ -59,63 +59,24 @@ export function ProductSpotlight() {
                   </Stagger>
                   <Link
                     href="/products/printoms"
-                    className="inline-flex items-center gap-2 font-['Figtree',sans-serif] font-bold text-[14px] bg-[var(--brand-navy)] text-white px-7 py-3 rounded-lg hover:bg-[#1a1b4a] transition-colors self-start"
+                    className="inline-flex items-center gap-2 font-['Figtree',sans-serif] font-bold text-[14px] bg-brand-gradient text-white px-7 py-3 rounded-lg hover:brightness-110 transition-colors self-start shadow-lg shadow-orange-500/30"
                   >
                     See PrintOMS <ArrowRight size={14} />
                   </Link>
                 </div>
-                <div className="w-full md:w-[54%] bg-gradient-to-br from-[var(--brand-navy)] to-[#1a1b4a] p-6 md:p-8 flex items-center justify-center min-h-[240px] md:min-h-[320px]">
-                  <motion.div
-                    className="w-full max-w-sm space-y-3"
-                    initial={{ opacity: 0, x: 40, rotateY: -8 }}
-                    whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                    viewport={{ once: true, amount: 0.4 }}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ transformStyle: "preserve-3d" }}
-                  >
-                    <div className="bg-white/8 rounded-xl p-4 border border-white/6">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-white/50 text-[11px] font-['Figtree',sans-serif]">
-                          Incoming Enquiry
-                        </span>
-                        <span className="bg-[var(--brand-orange)] text-white text-[9px] font-['Figtree',sans-serif] font-bold px-2 py-0.5 rounded uppercase">
-                          New
-                        </span>
-                      </div>
-                      <div className="text-white font-['Figtree',sans-serif] font-bold text-[14px] mb-0.5">
-                        Emirates Mall LED Signage
-                      </div>
-                      <div className="text-white/40 text-[11px] font-['Figtree',sans-serif]">
-                        Al Futtaim Group · AED 48,500
-                      </div>
-                    </div>
-                    <div className="flex gap-1.5">
-                      {["Enquiry", "Visit", "Quote", "Production", "Install"].map(
-                        (s, i) => (
-                          <div key={s} className="flex-1 text-center">
-                            <div
-                              className={`h-1 rounded-full mb-1 ${i <= 2 ? "bg-[var(--brand-orange)]" : "bg-white/10"}`}
-                            />
-                            <div className="text-[9px] font-['Figtree',sans-serif] text-white/30">
-                              {s}
-                            </div>
-                          </div>
-                        )
-                      )}
-                    </div>
-                    <div className="bg-[#075e54]/50 rounded-xl p-3 border border-[#075e54]/30">
-                      <div className="flex items-center gap-1.5 mb-2">
-                        <MessageSquare size={11} className="text-[#25d366]" />
-                        <span className="text-white/40 text-[10px] font-['Figtree',sans-serif] font-semibold">
-                          WhatsApp - Sent automatically
-                        </span>
-                      </div>
-                      <p className="text-white/70 text-[11px] font-['Figtree',sans-serif] leading-relaxed">
-                        “Hi Ahmed, your design proof is ready. Tap to approve.”
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
+                <Link 
+                  href="/products/printoms"
+                  className="block w-full md:w-[54%] bg-black relative min-h-[240px] md:min-h-[320px] overflow-hidden flex items-center justify-center cursor-pointer group"
+                >
+                  <video
+                    src="/brag.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                  />
+                </Link>
               </div>
             </div>
           </Tilt3D>

@@ -49,7 +49,7 @@ export function HowWeWork() {
 
       <div className="max-w-5xl mx-auto px-6 relative">
         <FadeIn className="text-center mb-16">
-          <p className="font-['Figtree',sans-serif] text-[12px] font-bold text-[var(--brand-orange)] uppercase tracking-widest mb-3">
+          <p className="font-['Figtree',sans-serif] text-[12px] font-bold text-brand-gradient uppercase tracking-widest mb-3">
             Our approach
           </p>
           <h2
@@ -63,7 +63,7 @@ export function HowWeWork() {
           </p>
         </FadeIn>
 
-        {/* Stacked card rows — large number left, icon + content right */}
+        {/* Stacked card rows , large number left, icon + content right */}
         <div className="flex flex-col gap-5">
           {STEPS.map((step, i) => {
             const Icon = step.icon;

@@ -51,6 +51,17 @@ export function NavBar() {
     return () => document.removeEventListener("mousedown", onDoc);
   }, []);
 
+  useEffect(() => {
+    if (productsOpen || open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [productsOpen, open]);
+
   function goTo(to: string, e?: MouseEvent) {
     e?.preventDefault();
     const [path, hash = ""] = to.split("#");
@@ -90,7 +101,7 @@ export function NavBar() {
           : "0 1px 0 rgba(0,0,0,0.06)",
       }}
     >
-      <div className="relative max-w-7xl mx-auto px-6 h-[80px] flex items-center justify-between gap-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 h-[80px] flex items-center justify-between gap-6">
         <Link
           href="/"
           onClick={(e) => goTo("/", e)}
@@ -123,7 +134,7 @@ export function NavBar() {
                   animate={{ opacity: 1, y: 0, height: "auto" }}
                   exit={{ opacity: 0, y: 8, height: 0 }}
                   transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute left-0 top-full mt-2 w-72 overflow-hidden rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white shadow-xl"
+                  className="absolute z-10 left-0 top-full mt-2 w-72 overflow-hidden rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white shadow-xl"
                 >
                   <div className="p-2">
                     <Link
@@ -197,7 +208,7 @@ export function NavBar() {
             whileTap={{ scale: 0.98 }}
             className="ml-1"
           >
-            <BookDemoButton className="font-['Figtree',sans-serif] text-[13px] font-semibold bg-[var(--brand-orange)] text-white px-5 py-2.5 rounded-lg hover:bg-[#f4622d] transition-colors inline-flex items-center gap-1.5">
+            <BookDemoButton className="font-['Figtree',sans-serif] text-[13px] font-semibold bg-brand-gradient text-white px-5 py-2.5 rounded-lg hover:brightness-110 transition-colors inline-flex items-center gap-1.5">
               Book a Demo <ArrowRight size={14} />
             </BookDemoButton>
           </motion.div>
@@ -240,7 +251,7 @@ export function NavBar() {
                   {label}
                 </button>
               ))}
-              <BookDemoButton className="font-['Figtree',sans-serif] text-[14px] font-semibold bg-[var(--brand-orange)] text-white px-5 py-3 rounded-lg text-center mt-4 w-full">
+              <BookDemoButton className="font-['Figtree',sans-serif] text-[14px] font-semibold bg-brand-gradient text-white px-5 py-3 rounded-lg text-center mt-4 w-full">
                 Book a Demo
               </BookDemoButton>
             </div>
@@ -248,7 +259,7 @@ export function NavBar() {
         )}
       </AnimatePresence>
 
-      {/* Gradient scroll progress — navy → orange → amber */}
+      {/* Gradient scroll progress , navy → orange → amber */}
       <div
         className="absolute bottom-0 left-0 right-0 h-[3px] bg-black/5 overflow-hidden"
         role="progressbar"

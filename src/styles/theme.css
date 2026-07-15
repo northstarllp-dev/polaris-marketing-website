@@ -136,18 +136,20 @@
     0% {
       transform: translateX(0);
     }
+
     100% {
       transform: translateX(-50%);
     }
   }
 }
 
-/* Explicit keyframes for trusted-by strip — used via inline style so reduced-motion
+/* Explicit keyframes for trusted-by strip , used via inline style so reduced-motion
    overrides targeting `.animate-marquee` do not freeze this content carousel */
 @keyframes polaris-marquee {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }

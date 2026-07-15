@@ -30,7 +30,7 @@ function WordReveal({
       {words.map((word, i) => (
         <motion.span
           key={`${word}-${i}`}
-          className={`inline-block mr-[0.28em] last:mr-0 ${accent ? "text-[var(--brand-orange)]" : ""}`}
+          className={`inline-block mr-[0.28em] last:mr-0 ${accent ? "text-brand-gradient" : ""}`}
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -160,7 +160,7 @@ export function HomeHero() {
           >
             <Link
               href="/products/printoms"
-              className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-8 py-3.5 rounded-lg hover:bg-[#f4622d] transition-colors inline-flex items-center gap-2 shadow-lg shadow-[var(--brand-orange)]/30"
+              className="font-['Figtree',sans-serif] font-bold text-[15px] bg-brand-gradient text-white px-8 py-3.5 rounded-lg hover:brightness-110 transition-colors inline-flex items-center gap-2 shadow-lg shadow-orange-500/30"
             >
               Explore PrintOMS <ArrowRight size={16} />
             </Link>

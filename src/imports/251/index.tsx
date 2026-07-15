@@ -2008,7 +2008,7 @@ function Frame116() {
     <div className="absolute h-[152px] left-[904.81px] right-[96px] top-[209.47px]" data-name="Frame">
       <Frame117 />
       <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Poppins:Light',sans-serif] h-[89px] justify-center leading-[0] left-0 not-italic text-[#333] text-[18px] top-[103.5px] w-[434.075px]">
-        <p className="leading-[32px]">Everything starts with a visual board — the core of monday.com Work OS. Tailor it your way and manage anything from projects to departments.</p>
+        <p className="leading-[32px]">Everything starts with a visual board , the core of monday.com Work OS. Tailor it your way and manage anything from projects to departments.</p>
       </div>
     </div>
   );

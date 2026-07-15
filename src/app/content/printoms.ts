@@ -58,10 +58,10 @@ export const MOCKUP_TABS: MockupTab[] = [
     color: "#3b82f6",
     sidebarKey: "Production",
     rows: [
-      { job: "Phoenix Mall LED Sign", client: "Printing — 75%", value: "Due 18 Jul", status: "On Track", statusColor: "#10b981" },
+      { job: "Phoenix Mall LED Sign", client: "Printing , 75%", value: "Due 18 Jul", status: "On Track", statusColor: "#10b981" },
       { job: "Metro Station Banners", client: "Design Review", value: "Due 16 Jul", status: "Pending", statusColor: "#f59e0b" },
       { job: "IT Park Office Wrap", client: "Installation", value: "Due 20 Jul", status: "On Track", statusColor: "#10b981" },
-      { job: "Marina Mall Wayfinding", client: "Fabrication — 40%", value: "Due 25 Jul", status: "At Risk", statusColor: "#ef4444" },
+      { job: "Marina Mall Wayfinding", client: "Fabrication , 40%", value: "Due 25 Jul", status: "At Risk", statusColor: "#ef4444" },
     ],
   },
   {
@@ -106,7 +106,7 @@ export const WORKFLOW_STAGES = [
   {
     id: "enquiry",
     title: "Enquiry",
-    desc: "Capture leads from Meta, website, phone, or walk-in into one inbox — then assign and convert.",
+    desc: "Capture leads from Meta, website, phone, or walk-in into one inbox , then assign and convert.",
     color: "#ff7043",
   },
   {
@@ -130,7 +130,7 @@ export const WORKFLOW_STAGES = [
   {
     id: "production",
     title: "Production",
-    desc: "Track fabrication milestones — procurement, cutting, wiring, QC — with live job status.",
+    desc: "Track fabrication milestones , procurement, cutting, wiring, QC , with live job status.",
     color: "#3b82f6",
   },
   {
@@ -151,13 +151,13 @@ export const CAPABILITIES = [
   {
     id: "crm",
     title: "Customer CRM",
-    desc: "A directory built for signage jobs — history, contacts, and lifetime value in one place.",
+    desc: "A directory built for signage jobs , history, contacts, and lifetime value in one place.",
     color: "#ff7043",
   },
   {
     id: "quotations",
     title: "Quotations",
-    desc: "Catalog-driven quoting with measurements from site visits — not spreadsheet guesswork.",
+    desc: "Catalog-driven quoting with measurements from site visits , not spreadsheet guesswork.",
     color: "#0ea5e9",
   },
   {
@@ -175,7 +175,7 @@ export const CAPABILITIES = [
   {
     id: "production",
     title: "Production tracking",
-    desc: "Workshop milestones so owners know what is on track — and what is at risk.",
+    desc: "Workshop milestones so owners know what is on track , and what is at risk.",
     color: "#3b82f6",
   },
   {
@@ -212,7 +212,7 @@ export const PAIN_POINTS = [
   },
   {
     title: "Approval friction",
-    desc: "Jobs start without clear consent on cost or design — then disputes follow.",
+    desc: "Jobs start without clear consent on cost or design , then disputes follow.",
   },
   {
     title: "No operational view",
@@ -250,7 +250,7 @@ export const PRICING_TIERS = [
 export const PRINTOMS_FAQS = [
   {
     q: "Do I need technical skills to use PrintOMS?",
-    a: "No. PrintOMS is built for sales, design, workshop, and install teams — not IT departments.",
+    a: "No. PrintOMS is built for sales, design, workshop, and install teams , not IT departments.",
   },
   {
     q: "Can PrintOMS integrate with accounting software?",
@@ -266,6 +266,6 @@ export const PRINTOMS_FAQS = [
   },
   {
     q: "Is this just another CRM?",
-    a: "No. PrintOMS is an order management system for custom signage — site visits, materials, fabrication, and install included.",
+    a: "No. PrintOMS is an order management system for custom signage , site visits, materials, fabrication, and install included.",
   },
 ] as const;

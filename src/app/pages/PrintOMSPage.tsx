@@ -8,7 +8,7 @@ import { Roles } from "../sections/printoms/Roles";
 // import { Pricing } from "../sections/printoms/Pricing";
 import { FAQ } from "../sections/printoms/FAQ";
 import { FinalCTA } from "../sections/shared/FinalCTA";
-import { StickySteps } from "../components/motion/StickySteps";
+import { MapScroller } from "../components/motion/MapScroller";
 import { CAPABILITIES } from "../content/printoms";
 
 export function PrintOMSPage() {
@@ -20,7 +20,7 @@ export function PrintOMSPage() {
       <ProblemPlatform />
       <PainPoints />
       <div id="workflow" className="scroll-mt-24">
-        <StickySteps
+        <MapScroller
           eyebrow="Capabilities"
           heading="Everything your shop needs in one place"
           sub="All the tools to run your signage business, connected in PrintOMS."

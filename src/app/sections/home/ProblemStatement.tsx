@@ -52,13 +52,13 @@ export function ProblemStatement() {
   }, []);
 
   return (
-    /* Tall container — creates scroll distance */
+    /* Tall container , creates scroll distance */
     <div
       ref={containerRef}
-      className="relative bg-[var(--brand-navy)]"
+      className="relative bg-gradient-to-br from-[var(--brand-navy)] via-[#151642] to-[var(--brand-navy)]"
       style={{ minHeight: `${N * 150}vh` }}
     >
-      {/* Sticky panel — stays locked in viewport */}
+      {/* Sticky panel , stays locked in viewport */}
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
 
         {/* Dot grid */}
@@ -76,7 +76,7 @@ export function ProblemStatement() {
           style={{ background: "radial-gradient(ellipse, rgba(255,112,67,0.07) 0%, transparent 70%)" }}
         />
 
-        {/* All lines stacked at center — each positioned absolutely */}
+        {/* All lines stacked at center , each positioned absolutely */}
         <div className="relative w-full max-w-4xl mx-auto px-6 text-center" style={{ height: "clamp(350px, 50vw, 450px)" }}>
           {LINES.map((line, i) => {
             const { opacity, dist: distVal, customTravel: cTravel } = getLineTransform(progress, i);
@@ -85,16 +85,14 @@ export function ProblemStatement() {
             return (
               <p
                 key={i}
-                className={`absolute left-0 right-0 px-8 font-['Figtree',sans-serif] ${SIZE_CLASS[line.size]} ${
-                  line.bold ? "font-black" : "font-light"
-                } ${
-                  line.accent ? "text-[var(--brand-orange)]" : "text-white"
-                }`}
+                className={`absolute left-0 right-0 px-8 font-['Figtree',sans-serif] ${SIZE_CLASS[line.size]} ${line.bold ? "font-black" : "font-light"
+                  } ${line.accent ? "text-brand-gradient" : "text-white"
+                  }`}
                 style={{
                   opacity,
                   top: "50%",
                   transform: `translateY(calc(-50% + ${yExpr}))`,
-                  // no CSS transition — scroll drives it frame-by-frame
+                  // no CSS transition , scroll drives it frame-by-frame
                   pointerEvents: "none",
                 }}
               >
@@ -124,20 +122,19 @@ export function ProblemStatement() {
                     Polaris.
                   </span>
                 </h2>
-                
+
                 <p className="text-[clamp(18px,2.2vw,24px)] font-bold text-white mb-8">
                   AI that actually moves the needle.
                 </p>
-                
+
                 <p className="text-[clamp(16px,2vw,20px)] text-white/80 max-w-2xl mx-auto text-center mb-8 leading-relaxed">
                   Polaris defines what's worth building, builds it for you, then trains your people to make it stick.
                 </p>
-                
+
                 <p className="text-[clamp(16px,2vw,20px)] text-white/80 mb-10">
                   Stop paying to experiment. <span className="font-bold text-white">Start paying for results.</span>
                 </p>
-                
-                <BookDemoButton className="inline-block px-8 py-3 bg-white text-black font-bold text-sm tracking-widest uppercase hover:bg-gray-200 transition-colors">
+                <BookDemoButton className="inline-block px-8 py-3 bg-brand-gradient text-white font-bold text-sm tracking-widest uppercase hover:brightness-110 transition-colors shadow-lg shadow-orange-500/30 rounded-lg">
                   Book Demo &gt;
                 </BookDemoButton>
               </div>

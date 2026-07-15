@@ -32,7 +32,7 @@ export function Pricing() {
                 }`}
               >
                 {tier.popular && (
-                  <div className="absolute top-0 right-0 bg-[var(--brand-orange)] text-white font-['Figtree',sans-serif] font-bold text-[10px] px-3 py-1 rounded-bl-lg uppercase tracking-wider">
+                  <div className="absolute top-0 right-0 bg-brand-gradient text-white font-['Figtree',sans-serif] font-bold text-[10px] px-3 py-1 rounded-bl-lg uppercase tracking-wider">
                     Most Popular
                   </div>
                 )}
@@ -69,7 +69,7 @@ export function Pricing() {
                 <BookDemoButton
                   className={`block w-full text-center font-['Figtree',sans-serif] font-bold text-[14px] py-3 rounded-lg transition-colors mb-8 ${
                     tier.popular
-                      ? "bg-[var(--brand-orange)] text-white hover:bg-[#f4622d]"
+                      ? "bg-brand-gradient text-white hover:brightness-110"
                       : "bg-[var(--brand-surface)] text-[var(--brand-navy)] hover:bg-[#e8e8f0]"
                   }`}
                 >

@@ -65,7 +65,7 @@ function FlipCard({
       type="button"
       className="group relative flex flex-col items-center gap-3 cursor-pointer border-0 bg-transparent p-0"
       aria-pressed={flipped}
-      aria-label={`${item.label}. Solution: Polaris — ${item.solution}`}
+      aria-label={`${item.label}. Solution: Polaris , ${item.solution}`}
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
       onFocus={() => setFlipped(true)}
@@ -79,7 +79,7 @@ function FlipCard({
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         style={{ transformStyle: "preserve-3d" }}
       >
-        {/* Front — problem */}
+        {/* Front , problem */}
         <div
           className={`absolute inset-0 flex items-center justify-center rounded-[22px] shadow-lg ${box}`}
           style={{
@@ -92,7 +92,7 @@ function FlipCard({
           <Icon size={iconSize} strokeWidth={1.9} className="text-white" />
         </div>
 
-        {/* Back — Polaris solution */}
+        {/* Back , Polaris solution */}
         <div
           className={`absolute inset-0 flex flex-col items-center justify-center gap-1 rounded-[22px] px-2 ${box}`}
           style={{
@@ -103,7 +103,7 @@ function FlipCard({
             transform: "rotateY(180deg)",
           }}
         >
-          <Sparkles size={18} className="text-[var(--brand-orange)]" />
+          <Sparkles size={18} className="text-brand-gradient" />
           <span className="font-['Figtree',sans-serif] font-black text-[10px] text-white uppercase tracking-wider">
             Polaris
           </span>
@@ -112,7 +112,7 @@ function FlipCard({
 
       <div className="min-h-[2.5rem] flex flex-col items-center justify-start px-1">
         <span
-          className={`font-['Figtree',sans-serif] font-semibold text-[11px] uppercase tracking-wider text-center leading-snug max-w-[110px] transition-colors ${flipped ? "text-[var(--brand-orange)]" : "text-[var(--brand-muted)]"
+          className={`font-['Figtree',sans-serif] font-semibold text-[11px] uppercase tracking-wider text-center leading-snug max-w-[110px] transition-colors ${flipped ? "text-brand-gradient" : "text-[var(--brand-muted)]"
             }`}
         >
           {flipped ? "Polaris" : item.label}
@@ -216,8 +216,8 @@ export function ProblemPlatform() {
             Information is scattered. Approvals get lost. Production stalls
             because no one sees the full job. You manage tools instead of growth.
           </p>
-          <p className="font-['Figtree',sans-serif] text-[13px] font-semibold text-[var(--brand-orange)] mb-10">
-            Hover or tap a box — each problem flips to its Polaris answer
+          <p className="font-['Figtree',sans-serif] text-[13px] font-semibold text-brand-gradient mb-10">
+            Hover or tap a box , each problem flips to its Polaris answer
           </p>
         </FadeIn>
 
@@ -265,7 +265,7 @@ export function ProblemPlatform() {
         <div
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
-          className="hidden md:block relative h-[280px] mt-40 mb-1"
+          className="hidden md:block relative h-[180px] mt-24 mb-1"
         >
           {CHAOS_ITEMS.map((item, i) => {
             const [from, to] = RED_GRADIENTS[i % RED_GRADIENTS.length];
@@ -318,7 +318,7 @@ export function ProblemPlatform() {
           })}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-2 text-center">
           <div
             className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 mb-5"
             aria-label="One Polaris operating layer"
@@ -339,7 +339,7 @@ export function ProblemPlatform() {
                   }}
                   initial={{ y: "110%", opacity: 0 }}
                   whileInView={{ y: "0%", opacity: 1 }}
-                  viewport={{ once: true, amount: 0.8 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{
                     duration: 0.65,
                     delay: i * 0.1,
@@ -353,10 +353,10 @@ export function ProblemPlatform() {
           </div>
 
           <motion.div
-            className="mx-auto h-1 rounded-full bg-[var(--brand-orange)] mb-6"
+            className="mx-auto h-1 rounded-full bg-brand-gradient mb-6"
             initial={{ width: 0, opacity: 0 }}
             whileInView={{ width: "80px", opacity: 1 }}
-            viewport={{ once: true, amount: 0.8 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{
               duration: 0.5,
               delay: 0.45,
@@ -368,10 +368,10 @@ export function ProblemPlatform() {
             className="font-['Figtree',sans-serif] text-[15px] text-[var(--brand-muted)] max-w-lg mx-auto"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.8 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, delay: 0.5, ease: "easeOut" }}
           >
-            Every chaos box above has the same answer: Polaris — starting with
+            Every chaos box above has the same answer: Polaris , starting with
             PrintOMS for signage shops that need more than a CRM.
           </motion.p>
         </div>

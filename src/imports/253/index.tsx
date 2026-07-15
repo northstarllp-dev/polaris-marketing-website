@@ -99,7 +99,7 @@ function AutoLayoutVertical1() {
   return (
     <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Poppins:Light',sans-serif] gap-[25.781px] items-start leading-[0] left-[705px] not-italic pb-[1.375px] pr-[4.362px] text-[#323338] text-[18px] top-[29.42px]" data-name="Auto Layout Vertical">
       <div className="flex flex-col justify-center relative shrink-0 w-[550.638px]">
-        <p className="leading-[30.6px]">June 10th, 2021 marked the start of a new era for monday.com—we rang the opening bell and officially became a publicly traded company on Nasdaq.</p>
+        <p className="leading-[30.6px]">June 10th, 2021 marked the start of a new era for monday.com,we rang the opening bell and officially became a publicly traded company on Nasdaq.</p>
       </div>
       <div className="flex flex-col justify-center relative shrink-0 w-[542.059px]">
         <p>

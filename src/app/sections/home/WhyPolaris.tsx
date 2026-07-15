@@ -35,7 +35,7 @@ export function WhyPolaris() {
                     delay={i * 0.4}
                     className="w-14 h-14 bg-[var(--brand-surface)] rounded-2xl flex items-center justify-center mx-auto mb-5"
                   >
-                    <Icon size={26} className="text-[var(--brand-orange)]" />
+                    <Icon size={26} className="text-brand-gradient" />
                   </WobbleIcon>
                   <h3 className="font-['Figtree',sans-serif] font-black text-[20px] text-[var(--brand-ink)] mb-4">
                     {title}

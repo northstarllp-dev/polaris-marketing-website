@@ -23,7 +23,7 @@ export function Capabilities() {
             <StaggerItem key={c.title}>
               <Tilt3D className="group h-full" max={10}>
                 <div className="bg-white border border-[rgba(0,0,0,0.07)] rounded-2xl p-7 h-full hover:shadow-xl transition-shadow duration-300">
-                  <span className="font-['Figtree',sans-serif] text-[11px] font-bold text-[var(--brand-orange)] uppercase tracking-wider">
+                  <span className="font-['Figtree',sans-serif] text-[11px] font-bold text-brand-gradient uppercase tracking-wider">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="font-['Figtree',sans-serif] font-black text-[18px] text-[var(--brand-ink)] mt-2 mb-2">

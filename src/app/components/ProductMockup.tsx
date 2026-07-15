@@ -156,7 +156,7 @@ export function ProductShowcase({
   const [timerKey, setTimerKey] = useState(0);
   const pausedRef = useRef(false);
 
-  // Always auto-advance — content carousel, intentionally ignores prefers-reduced-motion
+  // Always auto-advance , content carousel, intentionally ignores prefers-reduced-motion
   useEffect(() => {
     const id = window.setInterval(() => {
       if (pausedRef.current) return;
@@ -191,22 +191,22 @@ export function ProductShowcase({
             style={
               activeTab === i
                 ? {
-                    background: `linear-gradient(135deg, ${color}, ${color}cc)`,
-                    boxShadow: `0 8px 24px ${color}55, inset 0 2px 4px rgba(255,255,255,0.25)`,
-                    color: "#fff",
-                    borderColor: `${color}44`,
-                  }
+                  background: `linear-gradient(135deg, ${color}, ${color}cc)`,
+                  boxShadow: `0 8px 24px ${color}55, inset 0 2px 4px rgba(255,255,255,0.25)`,
+                  color: "#fff",
+                  borderColor: `${color}44`,
+                }
                 : {
-                    backgroundColor: dark
-                      ? "rgba(255,255,255,0.08)"
-                      : "rgba(15,16,53,0.06)",
-                    color: dark
-                      ? "rgba(255,255,255,0.45)"
-                      : "rgba(15,16,53,0.45)",
-                    borderColor: dark
-                      ? "rgba(255,255,255,0.05)"
-                      : "rgba(15,16,53,0.05)",
-                  }
+                  backgroundColor: dark
+                    ? "rgba(255,255,255,0.08)"
+                    : "rgba(15,16,53,0.06)",
+                  color: dark
+                    ? "rgba(255,255,255,0.45)"
+                    : "rgba(15,16,53,0.45)",
+                  borderColor: dark
+                    ? "rgba(255,255,255,0.05)"
+                    : "rgba(15,16,53,0.05)",
+                }
             }
           >
             {label}

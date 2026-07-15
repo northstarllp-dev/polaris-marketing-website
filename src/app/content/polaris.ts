@@ -9,7 +9,7 @@ export const CHAOS_ITEMS = [
     id: "whatsapp",
     label: "WhatsApp threads",
     icon: "MessageCircle",
-    solution: "One shared job timeline — no buried chats",
+    solution: "One shared job timeline , no buried chats",
   },
   {
     id: "excel",

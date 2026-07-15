@@ -46,7 +46,7 @@ export function FinalCTA({
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-            <BookDemoButton className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-9 py-4 rounded-lg hover:bg-[#f4622d] transition-colors inline-flex items-center gap-2 shadow-xl shadow-[var(--brand-orange)]/30">
+            <BookDemoButton className="font-['Figtree',sans-serif] font-bold text-[15px] bg-brand-gradient text-white px-9 py-4 rounded-lg hover:brightness-110 transition-colors inline-flex items-center gap-2 shadow-xl shadow-orange-500/30">
               Book a Demo <ArrowRight size={16} />
             </BookDemoButton>
           </motion.div>

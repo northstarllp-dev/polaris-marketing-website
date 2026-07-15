@@ -26,9 +26,8 @@ function RevealBlock({ children, dim = false, size = "md", delay = 0 }: RevealBl
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 1.0, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`font-['Figtree',sans-serif] leading-[1.25] text-center ${sizeClass} ${
-        dim ? "text-white/30 font-normal" : "text-white font-black"
-      }`}
+      className={`font-['Figtree',sans-serif] leading-[1.25] text-center ${sizeClass} ${dim ? "text-white/30 font-normal" : "text-white font-black"
+        }`}
     >
       {children}
     </motion.div>
@@ -82,7 +81,7 @@ export function PolarisManifesto() {
 
       <div className="max-w-4xl mx-auto px-6 py-36 flex flex-col gap-20">
 
-        {/* Act 1 — The familiar pain */}
+        {/* Act 1 , The familiar pain */}
         <div className="flex flex-col gap-8">
           <RevealBlock dim size="md">
             You bought the tools. Hired someone to manage the spreadsheets.
@@ -95,7 +94,7 @@ export function PolarisManifesto() {
 
         <DividerPulse />
 
-        {/* Act 2 — The gut punch */}
+        {/* Act 2 , The gut punch */}
         <div className="flex flex-col gap-6">
           <RevealBlock size="lg">
             But months later, jobs are still slipping through the cracks.
@@ -111,7 +110,7 @@ export function PolarisManifesto() {
 
         <DividerPulse />
 
-        {/* Act 3 — The insight */}
+        {/* Act 3 , The insight */}
         <div className="flex flex-col gap-6">
           <RevealBlock dim size="md">
             You're not doing it wrong.
@@ -127,7 +126,7 @@ export function PolarisManifesto() {
 
         <DividerPulse />
 
-        {/* Act 4 — The resolution */}
+        {/* Act 4 , The resolution */}
         <div className="flex flex-col gap-6">
           <RevealBlock dim size="sm">
             That's why we started Polaris.
@@ -144,7 +143,7 @@ export function PolarisManifesto() {
 
         <DividerPulse />
 
-        {/* Act 5 — The promise */}
+        {/* Act 5 , The promise */}
         <div className="flex flex-col gap-5">
           <RevealBlock size="lg">
             Stop adapting your business to tools.

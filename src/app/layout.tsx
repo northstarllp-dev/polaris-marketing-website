@@ -4,8 +4,8 @@ import { Footer } from "./layout/Footer";
 import "../styles/index.css";
 
 export const metadata: Metadata = {
-  title: "Polaris — Build Better Businesses",
-  description: "Polaris builds purpose-built software for modern businesses. PrintOMS — order management for signage and fabrication — is live now.",
+  title: "Polaris , Build Better Businesses",
+  description: "Polaris builds purpose-built software for modern businesses. PrintOMS , order management for signage and fabrication , is live now.",
 };
 
 export default function RootLayout({

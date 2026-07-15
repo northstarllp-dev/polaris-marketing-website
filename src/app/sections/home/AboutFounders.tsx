@@ -61,7 +61,7 @@ export function AboutFounders() {
               Passionate about solving real-world problems
             </h2>
             <p className="font-['Figtree',sans-serif] text-[18px] text-[var(--brand-muted)] leading-relaxed mb-12">
-              We are NIT Trichy alumni dedicated to building technology that simplifies complex workflows and brings order to chaos.
+              We started Polaris because we saw firsthand how much time and energy businesses waste wrestling with disconnected tools and broken processes. As NIT Trichy alumni, we are dedicated to building technology that actually solves these real-world problems,simplifying complex workflows and bringing order to chaos.
             </p>
 
             <div className="flex flex-wrap items-start justify-center gap-8 sm:gap-16 mt-16 mb-4">
@@ -81,7 +81,7 @@ export function AboutFounders() {
                 <p className="font-['Figtree',sans-serif] text-[13px] text-[var(--brand-muted)] uppercase tracking-widest mt-1">
                   Co-Founder
                 </p>
-                <a href="mailto:Akshay@thepolarislabs.com" className="font-['Figtree',sans-serif] text-[14px] font-medium text-[var(--brand-orange)] hover:underline mt-2">
+                <a href="mailto:Akshay@thepolarislabs.com" className="font-['Figtree',sans-serif] text-[14px] font-medium text-brand-gradient hover:underline mt-2">
                   Akshay@thepolarislabs.com
                 </a>
               </div>
@@ -107,7 +107,7 @@ export function AboutFounders() {
                 <p className="font-['Figtree',sans-serif] text-[13px] text-[var(--brand-muted)] uppercase tracking-widest mt-1">
                   Co-Founder
                 </p>
-                <a href="mailto:Hari@thepolarislabs.com" className="font-['Figtree',sans-serif] text-[14px] font-medium text-[var(--brand-orange)] hover:underline mt-2">
+                <a href="mailto:Hari@thepolarislabs.com" className="font-['Figtree',sans-serif] text-[14px] font-medium text-brand-gradient hover:underline mt-2">
                   Hari@thepolarislabs.com
                 </a>
               </div>

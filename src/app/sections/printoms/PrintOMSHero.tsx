@@ -43,7 +43,7 @@ export function PrintOMSHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.06 }}
-          className="font-['Figtree',sans-serif] font-bold text-[var(--brand-orange)] text-[14px] tracking-wide uppercase mb-4"
+          className="font-['Figtree',sans-serif] font-bold text-brand-gradient text-[14px] tracking-wide uppercase mb-4"
         >
           PrintOMS
         </motion.p>
@@ -67,7 +67,7 @@ export function PrintOMSHero() {
           className="font-['Figtree',sans-serif] text-white/55 max-w-xl mx-auto leading-relaxed mb-10"
           style={{ fontSize: "clamp(15px, 1.8vw, 18px)" }}
         >
-          From enquiry and site visit to quote, design, production, and install —
+          From enquiry and site visit to quote, design, production, and install ,
           one system built for physical work, not generic CRM.
         </motion.p>
 
@@ -77,7 +77,7 @@ export function PrintOMSHero() {
           transition={{ delay: 0.28 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12"
         >
-          <BookDemoButton className="font-['Figtree',sans-serif] font-bold text-[15px] bg-[var(--brand-orange)] text-white px-8 py-3.5 rounded-lg hover:bg-[#f4622d] transition-all inline-flex items-center gap-2 shadow-lg shadow-[var(--brand-orange)]/30">
+          <BookDemoButton className="font-['Figtree',sans-serif] font-bold text-[15px] bg-brand-gradient text-white px-8 py-3.5 rounded-lg hover:brightness-110 transition-all inline-flex items-center gap-2 shadow-lg shadow-orange-500/30">
             Book a Demo <ArrowRight size={16} />
           </BookDemoButton>
           <a
@@ -100,14 +100,14 @@ export function PrintOMSHero() {
           style={{ perspective: "1200px" }}
         >
           {/* Ambient background glow behind the screens */}
-          <div 
+          <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] rounded-full blur-[120px] opacity-40 pointer-events-none z-[-1]"
             style={{
               background: "radial-gradient(circle, var(--brand-orange) 0%, #8b5cf6 50%, transparent 100%)"
             }}
           />
 
-          {/* Left side panel — slides in from left on scroll */}
+          {/* Left side panel , slides in from left on scroll */}
           <motion.div
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -131,7 +131,7 @@ export function PrintOMSHero() {
             <ProductShowcase dark />
           </motion.div>
 
-          {/* Right side panel — slides in from right on scroll */}
+          {/* Right side panel , slides in from right on scroll */}
           <motion.div
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}

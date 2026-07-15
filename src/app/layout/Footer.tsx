@@ -26,7 +26,7 @@ export function Footer() {
     <footer className="relative bg-[var(--brand-navy-deep)] pt-12 pb-6 overflow-hidden">
       {/* Ambient top border & glow */}
       <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[400px] bg-[var(--brand-orange)] opacity-5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[400px] bg-brand-gradient opacity-5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-10">
@@ -64,14 +64,14 @@ export function Footer() {
                       {link.to.startsWith("/") ? (
                         <Link
                           href={link.to}
-                          className="font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-[var(--brand-orange)] transition-colors"
+                          className="font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-brand-gradient transition-colors"
                         >
                           {link.label}
                         </Link>
                       ) : (
                         <a
                           href={link.to}
-                          className="font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-[var(--brand-orange)] transition-colors"
+                          className="font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-brand-gradient transition-colors"
                         >
                           {link.label}
                         </a>

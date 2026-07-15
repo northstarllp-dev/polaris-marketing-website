@@ -15,7 +15,7 @@ const EMAIL = "akshay@thepolarislabs.com";
 
 const DEMO_MESSAGE =
   "Hi! I'd like to book a demo of Polaris / PrintOMS. Please let me know a good time to connect.";
-const DEMO_SUBJECT = "Book a Demo — Polaris";
+const DEMO_SUBJECT = "Book a Demo , Polaris";
 
 export const bookDemoWhatsAppHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEMO_MESSAGE)}`;
 export const bookDemoEmailHref = `mailto:${EMAIL}?subject=${encodeURIComponent(DEMO_SUBJECT)}&body=${encodeURIComponent(DEMO_MESSAGE)}`;

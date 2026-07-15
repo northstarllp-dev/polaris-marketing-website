@@ -33,7 +33,7 @@ export function EcosystemTeaser() {
           </p>
           <Link
             href="/products/printoms#contact"
-            className="inline-flex items-center gap-2 font-['Figtree',sans-serif] font-bold text-[14px] text-[var(--brand-orange)] hover:underline"
+            className="inline-flex items-center gap-2 font-['Figtree',sans-serif] font-bold text-[14px] text-brand-gradient hover:underline"
           >
             Talk to us <ArrowRight size={14} />
           </Link>

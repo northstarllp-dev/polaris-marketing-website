@@ -1,6 +1,6 @@
 # Polaris
 
-Marketing site for **Polaris** — the parent company building purpose-built software for real business niches. **PrintOMS** is the first live product: order management for signage and fabrication shops.
+Marketing site for **Polaris** , the parent company building purpose-built software for real business niches. **PrintOMS** is the first live product: order management for signage and fabrication shops.
 
 ## Stack
 
@@ -28,8 +28,8 @@ npm run build   # production build → dist/
 
 | Route | Page |
 |-------|------|
-| `/` | Polaris home — brand hero, problem story, how we work, PrintOMS spotlight, ecosystem, why Polaris, founders, CTA |
-| `/products/printoms` | PrintOMS product page — showcase mockup, pain points, workflow, roles, pricing, FAQ |
+| `/` | Polaris home , brand hero, problem story, how we work, PrintOMS spotlight, ecosystem, why Polaris, founders, CTA |
+| `/products/printoms` | PrintOMS product page , showcase mockup, pain points, workflow, roles, pricing, FAQ |
 
 Nav links smooth-scroll to section hashes (`#how-we-work`, `#why`, `#about`, `#pricing`, `#contact`). **Book a Demo** dials `+91 8189999998`.
 

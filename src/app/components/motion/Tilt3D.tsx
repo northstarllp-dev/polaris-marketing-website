@@ -92,7 +92,7 @@ export function Tilt3D({
 
 /**
  * Continuous gentle 3D wobble for an icon tile, with a stronger pop on hover.
- * Wrap an icon (or small tile) — it rotates subtly in 3D on a loop.
+ * Wrap an icon (or small tile) , it rotates subtly in 3D on a loop.
  */
 export function WobbleIcon({
   children,
