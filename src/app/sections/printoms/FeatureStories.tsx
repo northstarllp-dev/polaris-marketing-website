@@ -133,37 +133,46 @@ export function FeatureStories() {
   return (
     <section ref={ref} className="py-24 bg-[var(--brand-navy)] text-white">
       <div className="max-w-7xl mx-auto px-6">
-        <FadeIn className="mb-16 max-w-2xl">
-          <p className="font-['Figtree',sans-serif] text-[12px] font-bold text-[var(--brand-orange)] uppercase tracking-widest mb-3">
-            Product deep dive
-          </p>
-          <h2
-            className="font-['Figtree',sans-serif] font-black leading-tight"
-            style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
-          >
-            Each feature is a story
-          </h2>
-        </FadeIn>
+        <div className="sticky top-[80px] z-20 bg-[var(--brand-navy)] pt-8 pb-4 mb-8">
+          <FadeIn className="max-w-2xl">
+            <p className="font-['Figtree',sans-serif] text-[12px] font-bold text-[var(--brand-orange)] uppercase tracking-widest mb-3">
+              Product deep dive
+            </p>
+            <h2
+              className="font-['Figtree',sans-serif] font-black leading-tight"
+              style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
+            >
+              Each feature is a story
+            </h2>
+          </FadeIn>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="space-y-24 lg:space-y-40">
-            {FEATURE_STORIES.map((f) => (
-              <div key={f.id} data-feature-card className="min-h-[40vh] flex flex-col justify-center">
-                <div
-                  className="w-12 h-1 rounded-full mb-5"
-                  style={{ background: f.color }}
-                />
-                <h3 className="font-['Figtree',sans-serif] font-black text-[28px] mb-3">
-                  {f.title}
-                </h3>
-                <p className="font-['Figtree',sans-serif] text-[16px] text-white/55 max-w-md leading-relaxed">
-                  {f.desc}
-                </p>
+          <div className="relative pb-[20vh] flex flex-col">
+            {FEATURE_STORIES.map((f, i) => (
+              <div key={f.id} className="contents">
+                <div 
+                  className="sticky z-10 bg-[var(--brand-navy)] pt-2 pb-4 w-full max-w-md"
+                  style={{ top: `${200 + i * 80}px` }}
+                >
+                  <div
+                    className="w-12 h-1 rounded-full mb-4"
+                    style={{ background: f.color }}
+                  />
+                  <h3 className="font-['Figtree',sans-serif] font-black text-[28px] leading-none">
+                    {f.title}
+                  </h3>
+                </div>
+                <div data-feature-card className="mt-4 mb-40 lg:mb-56 min-h-[25vh]">
+                  <p className="font-['Figtree',sans-serif] text-[16px] text-white/55 max-w-md leading-relaxed">
+                    {f.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="lg:sticky lg:top-28 h-fit">
+          <div className="lg:sticky lg:top-64 h-fit">
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6 min-h-[280px]">
               <AnimatePresence mode="wait">
                 <motion.div

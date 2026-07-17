@@ -5,7 +5,7 @@ import { PrintOMSHero } from "../sections/printoms/PrintOMSHero";
 import { TrustedBy } from "../sections/printoms/TrustedBy";
 import { ProblemSplit } from "../sections/printoms/ProblemSplit";
 import { Outcomes } from "../sections/printoms/Outcomes";
-import { WorkflowPinned } from "../sections/printoms/WorkflowPinned";
+import { QuantifiedImpact } from "../sections/printoms/QuantifiedImpact";
 import { FeatureStories } from "../sections/printoms/FeatureStories";
 import { Teams } from "../sections/printoms/Teams";
 import { CustomerPortal } from "../sections/printoms/CustomerPortal";
@@ -24,7 +24,7 @@ export function PrintOMSPage() {
       <TrustedBy />
       <ProblemSplit />
       <Outcomes />
-      <WorkflowPinned />
+      <QuantifiedImpact />
       <FeatureStories />
       <Teams />
       <CustomerPortal />

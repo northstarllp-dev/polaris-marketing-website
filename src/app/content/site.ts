@@ -1,5 +1,5 @@
 /** Canonical PrintOMS product site (subdomain). */
-export const PRINTOMS_SITE_URL = "https://printoms.thepolaris.com";
+export const PRINTOMS_SITE_URL = "https://printoms.thepolarislabs.com";
 
 /** In-app path on the parent Next.js app. */
 export const PRINTOMS_APP_PATH = "/products/printoms";
@@ -7,7 +7,7 @@ export const PRINTOMS_APP_PATH = "/products/printoms";
 /**
  * URL for PrintOMS links.
  * - Local / Vercel preview / printoms host → same-origin paths
- * - Production parent site → https://printoms.thepolaris.com
+ * - Production parent site → https://printoms.thepolarislabs.com
  */
 export function getPrintomsUrl(hash = "") {
   const h = !hash ? "" : hash.startsWith("#") ? hash : `#${hash}`;

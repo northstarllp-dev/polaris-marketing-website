@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { getPrintomsUrl } from "../content/site";
+import { PRINTOMS_APP_PATH } from "../content/site";
 
 const FOOTER_LINKS = {
   Products: [
@@ -60,9 +60,9 @@ export function Footer() {
                   {links.map((link) => {
                     const href =
                       link.kind === "printoms"
-                        ? getPrintomsUrl()
+                        ? PRINTOMS_APP_PATH
                         : link.kind === "printoms-hash"
-                          ? getPrintomsUrl("#faq")
+                          ? `${PRINTOMS_APP_PATH}#faq`
                           : link.to;
                     const className =
                       "font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-brand-gradient transition-colors";

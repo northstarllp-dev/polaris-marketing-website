@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { BookDemoButton } from "../components/BookDemoButton";
 import { scrollToHash } from "../hooks/useHashScroll";
-import { PRINTOMS_SITE_URL, getPrintomsUrl } from "../content/site";
+import { PRINTOMS_APP_PATH } from "../content/site";
 
 const NAV_LINKS = [
   { label: "Company", to: "/#about" },
@@ -139,10 +139,10 @@ export function NavBar() {
                 >
                   <div className="p-2">
                     <a
-                      href={PRINTOMS_SITE_URL}
+                      href={PRINTOMS_APP_PATH}
                       onClick={(e) => {
                         e.preventDefault();
-                        window.location.href = getPrintomsUrl();
+                        window.location.href = PRINTOMS_APP_PATH;
                         setProductsOpen(false);
                       }}
                       className="block rounded-xl p-3 hover:bg-[var(--brand-surface)] transition-colors"
@@ -242,7 +242,7 @@ export function NavBar() {
               <button
                 type="button"
                 onClick={() => {
-                  window.location.href = getPrintomsUrl();
+                  window.location.href = PRINTOMS_APP_PATH;
                   setOpen(false);
                 }}
                 className={mobileLinkClass}

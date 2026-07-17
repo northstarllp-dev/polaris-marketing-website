@@ -170,6 +170,41 @@ export const PROBLEM_CHAOS = [
   "Forgotten Follow-ups",
 ] as const;
 
+export const IMPACT_METRICS = [
+  { 
+    target: 40, 
+    suffix: "%", 
+    prefix: "",
+    label: "Faster Approvals", 
+    desc: "Clients approve quotes and designs in one tap via the portal, eliminating email delays.",
+    color: "#10b981" 
+  },
+  { 
+    target: 15, 
+    suffix: "hrs", 
+    prefix: "+",
+    label: "Saved Weekly", 
+    desc: "No more copying data between WhatsApp, Excel, and whiteboards.",
+    color: "#3b82f6" 
+  },
+  { 
+    target: 100, 
+    suffix: "%", 
+    prefix: "",
+    label: "Pipeline Visibility", 
+    desc: "Owners see exactly what's pending, in production, and at risk in real-time.",
+    color: "#8b5cf6" 
+  },
+  { 
+    target: 0, 
+    suffix: "", 
+    prefix: "",
+    label: "Lost Orders", 
+    desc: "Centralized tracking ensures every enquiry becomes a tracked, completed job.",
+    color: "#ff7043" 
+  }
+] as const;
+
 export const FEATURE_STORIES = [
   {
     id: "crm",

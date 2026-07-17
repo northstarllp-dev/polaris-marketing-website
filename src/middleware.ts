@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isPrintomsHost =
-    host === "printoms.thepolaris.com" ||
+    host === "printoms.thepolarislabs.com" ||
     host === "printoms.localhost" ||
     host.startsWith("printoms.");
 
