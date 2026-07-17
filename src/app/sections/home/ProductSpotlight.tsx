@@ -7,6 +7,7 @@ import { PRINTOMS_SPOTLIGHT_FEATURES } from "../../content/polaris";
 import { FadeIn } from "../../components/motion/FadeIn";
 import { Stagger, StaggerItem } from "../../components/motion/Stagger";
 import { Tilt3D } from "../../components/motion/Tilt3D";
+import { getPrintomsUrl } from "../../content/site";
 
 export function ProductSpotlight() {
   return (
@@ -58,14 +59,14 @@ export function ProductSpotlight() {
                     ))}
                   </Stagger>
                   <Link
-                    href="/products/printoms"
+                    href={getPrintomsUrl()}
                     className="inline-flex items-center gap-2 font-['Figtree',sans-serif] font-bold text-[14px] bg-brand-gradient text-white px-7 py-3 rounded-lg hover:brightness-110 transition-colors self-start shadow-lg shadow-orange-500/30"
                   >
                     See PrintOMS <ArrowRight size={14} />
                   </Link>
                 </div>
                 <Link 
-                  href="/products/printoms"
+                  href={getPrintomsUrl()}
                   className="block w-full md:w-[54%] bg-black relative min-h-[240px] md:min-h-[320px] overflow-hidden flex items-center justify-center cursor-pointer group"
                 >
                   <video

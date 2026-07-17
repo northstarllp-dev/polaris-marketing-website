@@ -25,9 +25,10 @@ export default function RootLayout({
       <body>
         <div id="root" className="min-h-screen font-['Figtree',sans-serif]">
           <NavBar />
-          <main>
-            {children}
-          </main>
+          {/* Higher stack than sticky footer so content lifts away and reveals it */}
+          <div className="relative z-10">
+            <main>{children}</main>
+          </div>
           <Footer />
         </div>
       </body>

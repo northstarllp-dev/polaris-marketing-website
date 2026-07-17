@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion, MotionConfig } from "motion/react";
+import { getPrintomsUrl } from "../../content/site";
 
 export function LivePulse({ className = "" }: { className?: string }) {
   return (
@@ -37,7 +38,7 @@ const PRODUCTS: Product[] = [
     radius: 155,
     floatDuration: 4.2,
     floatDelay: 0,
-    to: "/products/printoms",
+    to: getPrintomsUrl(),
   },
   {
     name: "PrintFloww",

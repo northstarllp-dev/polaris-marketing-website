@@ -106,44 +106,143 @@ export const WORKFLOW_STAGES = [
   {
     id: "enquiry",
     title: "Enquiry",
-    desc: "Capture leads from Meta, website, phone, or walk-in into one inbox , then assign and convert.",
+    desc: "Capture leads from Meta, website, phone, or walk-in into one inbox.",
     color: "#ff7043",
   },
   {
     id: "site-visit",
     title: "Site Visit",
-    desc: "Schedule recce, capture measurements and photos, freeze site data that feeds quoting and design.",
+    desc: "Schedule recce, capture measurements and photos that feed quoting.",
     color: "#0ea5e9",
   },
   {
     id: "quotation",
     title: "Quotation",
-    desc: "Build catalog-based quotes with material pricing, send for portal approval, revise with a clear trail.",
+    desc: "Build catalog-based quotes and send for portal approval.",
     color: "#8b5cf6",
   },
   {
-    id: "design",
-    title: "Design Approval",
-    desc: "Share proofs, collect pinpoint feedback, and lock design before anything hits the workshop.",
+    id: "approval",
+    title: "Customer Approval",
+    desc: "Clients approve cost and design from the portal — no buried emails.",
     color: "#f59e0b",
+  },
+  {
+    id: "design",
+    title: "Design",
+    desc: "Share proofs, collect feedback, lock files before production.",
+    color: "#ec4899",
   },
   {
     id: "production",
     title: "Production",
-    desc: "Track fabrication milestones , procurement, cutting, wiring, QC , with live job status.",
+    desc: "Track cutting, printing, fabrication, and QC with live status.",
     color: "#3b82f6",
   },
   {
     id: "installation",
     title: "Installation",
-    desc: "Schedule crews, run checklists, capture after photos, and collect digital sign-off on site.",
+    desc: "Schedule crews, checklists, after photos, and digital sign-off.",
     color: "#0085ff",
   },
   {
-    id: "analytics",
-    title: "Analytics",
-    desc: "See pipeline value, turnaround, lost reasons, and team performance in one view.",
+    id: "completed",
+    title: "Completed",
+    desc: "Job closed, portal updated, analytics recorded.",
     color: "#10b981",
+  },
+] as const;
+
+export const OUTCOMES = [
+  { title: "Save Time", desc: "One workspace instead of WhatsApp, Excel, and email threads.", color: "#ff7043" },
+  { title: "Never Lose Orders", desc: "Every enquiry captured and tracked to completion.", color: "#0ea5e9" },
+  { title: "Track Every Job", desc: "Live stage status from quote to install.", color: "#8b5cf6" },
+  { title: "Faster Customer Approvals", desc: "Portal magic-links — approve quotes and designs in one tap.", color: "#f59e0b" },
+  { title: "Real-time Production Tracking", desc: "Workshop milestones visible to owners and sales.", color: "#3b82f6" },
+  { title: "Customer Portal", desc: "Clients see progress without calling your team.", color: "#10b981" },
+] as const;
+
+export const PROBLEM_CHAOS = [
+  "WhatsApp",
+  "Excel",
+  "Lost Orders",
+  "Calling Customers",
+  "Forgotten Follow-ups",
+] as const;
+
+export const FEATURE_STORIES = [
+  {
+    id: "crm",
+    title: "Customer CRM",
+    desc: "A directory built for signage jobs — history, contacts, and lifetime value.",
+    color: "#ff7043",
+    demo: "crm" as const,
+  },
+  {
+    id: "quotation",
+    title: "Quotation",
+    desc: "Quotes build themselves from catalog, site data, GST, and totals.",
+    color: "#0ea5e9",
+    demo: "quote" as const,
+  },
+  {
+    id: "approvals",
+    title: "Approvals",
+    desc: "Customer clicks Approve — status updates across the job instantly.",
+    color: "#8b5cf6",
+    demo: "approve" as const,
+  },
+  {
+    id: "production",
+    title: "Production",
+    desc: "Pending → Cutting → Printing → Fabrication → Installation.",
+    color: "#3b82f6",
+    demo: "production" as const,
+  },
+] as const;
+
+export const TEAM_ROLES = [
+  { title: "Owner", desc: "Full pipeline visibility, stage locks, and overrides.", preview: "Pipeline value & KPIs" },
+  { title: "Sales", desc: "Quotes grounded in catalog and site measurements.", preview: "Enquiry inbox & quotes" },
+  { title: "Design", desc: "Proofs, revisions, and production file handoff.", preview: "Approval queue" },
+  { title: "Production", desc: "Milestone checklists from procurement through QC.", preview: "Workshop board" },
+  { title: "Installation", desc: "Schedules, checklists, photos, and digital handover.", preview: "Crew calendar" },
+  { title: "Customer", desc: "Portal access to approve, revise, and track.", preview: "Order timeline" },
+] as const;
+
+export const PORTAL_STEPS = [
+  { id: "quote", label: "Quotation", color: "#f59e0b" },
+  { id: "approved", label: "Approved", color: "#10b981" },
+  { id: "production", label: "Production", color: "#3b82f6" },
+  { id: "install", label: "Installation", color: "#0085ff" },
+  { id: "done", label: "Completed", color: "#10b981" },
+] as const;
+
+export const REPORT_METRICS = [
+  { label: "Revenue", value: 2035000, prefix: "₹", suffix: "", format: "currency" as const },
+  { label: "Orders", value: 47, prefix: "", suffix: "", format: "number" as const },
+  { label: "Pending", value: 12, prefix: "", suffix: "", format: "number" as const },
+  { label: "Completed", value: 35, prefix: "", suffix: "", format: "number" as const },
+] as const;
+
+export const TESTIMONIALS = [
+  {
+    quote: "We stopped chasing quotes on WhatsApp. PrintOMS gave us one pipeline the whole shop can see.",
+    name: "Operations Lead",
+    company: "Printec",
+    initials: "P",
+  },
+  {
+    quote: "Customer approvals that used to take days now happen in the portal the same afternoon.",
+    name: "Sales Manager",
+    company: "The Board Company",
+    initials: "B",
+  },
+  {
+    quote: "Production and install finally talk to the same job card. Fewer surprises on site.",
+    name: "Workshop Head",
+    company: "SignWorld",
+    initials: "S",
   },
 ] as const;
 
@@ -225,25 +324,34 @@ export const PRICING_TIERS = [
     id: "starter",
     name: "Starter",
     price: "$999",
-    period: "One-time setup fee + $49/month maintenance",
-    blurb: "Perfect for growing print shops.",
+    period: "Setup + $49/mo",
+    blurb: "For growing print shops.",
     features: ["Up to 5 team members", "Unlimited enquiries", "Basic CRM", "Standard support"],
     popular: false,
   },
   {
     id: "professional",
     name: "Professional",
-    price: "$1299",
-    period: "One-time setup fee + $49/month maintenance",
+    price: "$1,299",
+    period: "Setup + $49/mo",
     blurb: "For established signage businesses.",
     features: [
       "Unlimited team members",
       "Automated WhatsApp",
       "Production tracking",
-      "Priority 24/7 support",
-      "API access",
+      "Customer portal",
+      "Priority support",
     ],
     popular: true,
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    price: "Custom",
+    period: "Tailored rollout",
+    blurb: "Multi-branch and custom workflows.",
+    features: ["Everything in Professional", "SSO & advanced permissions", "API access", "Dedicated success manager"],
+    popular: false,
   },
 ] as const;
 

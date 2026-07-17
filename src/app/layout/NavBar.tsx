@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { BookDemoButton } from "../components/BookDemoButton";
 import { scrollToHash } from "../hooks/useHashScroll";
+import { PRINTOMS_SITE_URL, getPrintomsUrl } from "../content/site";
 
 const NAV_LINKS = [
   { label: "Company", to: "/#about" },
@@ -137,9 +138,13 @@ export function NavBar() {
                   className="absolute z-10 left-0 top-full mt-2 w-72 overflow-hidden rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white shadow-xl"
                 >
                   <div className="p-2">
-                    <Link
-                      href="/products/printoms"
-                      onClick={(e) => goTo("/products/printoms", e)}
+                    <a
+                      href={PRINTOMS_SITE_URL}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = getPrintomsUrl();
+                        setProductsOpen(false);
+                      }}
                       className="block rounded-xl p-3 hover:bg-[var(--brand-surface)] transition-colors"
                     >
                       <div className="flex items-center gap-2 mb-1">
@@ -153,7 +158,7 @@ export function NavBar() {
                       <p className="font-['Figtree',sans-serif] text-[12px] text-[var(--brand-muted)] leading-relaxed">
                         Order management for signage & fabrication
                       </p>
-                    </Link>
+                    </a>
                     {/* Temporarily hidden
                     <button
                       type="button"
@@ -236,7 +241,10 @@ export function NavBar() {
             <div className="px-6 py-4 flex flex-col gap-1">
               <button
                 type="button"
-                onClick={(e) => goTo("/products/printoms", e)}
+                onClick={() => {
+                  window.location.href = getPrintomsUrl();
+                  setOpen(false);
+                }}
                 className={mobileLinkClass}
               >
                 PrintOMS

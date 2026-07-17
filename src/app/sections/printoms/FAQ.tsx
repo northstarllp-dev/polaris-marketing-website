@@ -20,7 +20,11 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         </h4>
         <ChevronDown
           size={18}
-          className={`shrink-0 text-[var(--brand-muted)] transition-transform ${open ? "rotate-180" : ""}`}
+          className="shrink-0 text-[var(--brand-muted)]"
+          style={{
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 0.28s ease",
+          }}
         />
       </button>
       <AnimatePresence initial={false}>

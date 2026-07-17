@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SoftOrbit } from "../../components/motion/CountOrPulse";
 import { FadeIn } from "../../components/motion/FadeIn";
+import { getPrintomsUrl } from "../../content/site";
 
 export function EcosystemTeaser() {
   return (
@@ -32,7 +33,7 @@ export function EcosystemTeaser() {
             More Polaris products coming
           </p>
           <Link
-            href="/products/printoms#contact"
+            href={getPrintomsUrl("#contact")}
             className="inline-flex items-center gap-2 font-['Figtree',sans-serif] font-bold text-[14px] text-brand-gradient hover:underline"
           >
             Talk to us <ArrowRight size={14} />

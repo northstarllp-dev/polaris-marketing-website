@@ -7,6 +7,12 @@ import { LivePulse } from "../../components/motion/CountOrPulse";
 import { ProductShowcase } from "../../components/ProductMockup";
 import { SideScreenPanel } from "../../components/SideScreenPanel";
 
+const blurUp = {
+  initial: { opacity: 0, y: 28, filter: "blur(8px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+};
+
+/** Hero — Motion text sequence; existing dashboard mockup stays running */
 export function PrintOMSHero() {
   return (
     <section className="relative bg-[var(--brand-navy)] overflow-hidden pt-28 pb-0">
@@ -19,62 +25,43 @@ export function PrintOMSHero() {
           animate={{ opacity: [0.2, 0.35, 0.2] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
-          className="absolute top-[160px] right-[-100px] w-[400px] h-[400px] rounded-full opacity-15"
-          style={{
-            background: "radial-gradient(ellipse, #0ea5e9 0%, transparent 70%)",
-          }}
-          animate={{ x: [0, -30, 0] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
       </div>
 
       <div className="max-w-5xl mx-auto px-6 text-center relative pt-6 pb-10">
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...blurUp}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="inline-flex items-center gap-2 border border-white/15 text-white/70 text-[12px] font-['Figtree',sans-serif] font-semibold px-4 py-1.5 rounded-full mb-8 bg-white/5"
         >
           <LivePulse />
-          A Polaris product · Live now
+          PrintOMS · A Polaris product
         </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.06 }}
-          className="font-['Figtree',sans-serif] font-bold text-brand-gradient text-[14px] tracking-wide uppercase mb-4"
-        >
-          PrintOMS
-        </motion.p>
-
         <motion.h1
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.12 }}
+          {...blurUp}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="font-['Figtree',sans-serif] font-black text-white leading-[1.06] tracking-tight mb-6"
-          style={{ fontSize: "clamp(36px, 6vw, 64px)" }}
+          style={{ fontSize: "clamp(32px, 5.5vw, 56px)" }}
         >
-          Order management for
+          Stop Running Your Signage Business
           <br />
-          signage &amp; fabrication
+          on WhatsApp &amp; Excel.
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="font-['Figtree',sans-serif] text-white/55 max-w-xl mx-auto leading-relaxed mb-10"
+          {...blurUp}
+          transition={{ duration: 0.55, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          className="font-['Figtree',sans-serif] text-white/55 max-w-2xl mx-auto leading-relaxed mb-10"
           style={{ fontSize: "clamp(15px, 1.8vw, 18px)" }}
         >
-          From enquiry and site visit to quote, design, production, and install ,
-          one system built for physical work, not generic CRM.
+          PrintOMS manages enquiries, quotations, approvals, production,
+          installation and customer communication in one place.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.28 }}
+          initial={{ opacity: 0, scale: 0.92, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.36, type: "spring", stiffness: 260, damping: 18 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12"
         >
           <BookDemoButton className="font-['Figtree',sans-serif] font-bold text-[15px] bg-brand-gradient text-white px-8 py-3.5 rounded-lg hover:brightness-110 transition-all inline-flex items-center gap-2 shadow-lg shadow-orange-500/30">
@@ -89,71 +76,22 @@ export function PrintOMSHero() {
         </motion.div>
       </div>
 
-      {/* 3-panel screen showcase */}
       <div className="relative max-w-[1400px] mx-auto px-4 sm:px-8 pb-0">
         <p className="font-['Figtree',sans-serif] text-[12px] font-semibold text-white/40 text-center uppercase tracking-widest mb-6">
           See it in action
         </p>
-
-        <div
-          className="relative flex items-end justify-center"
-          style={{ perspective: "1200px" }}
-        >
-          {/* Ambient background glow behind the screens */}
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] rounded-full blur-[120px] opacity-40 pointer-events-none z-[-1]"
-            style={{
-              background: "radial-gradient(circle, var(--brand-orange) 0%, #8b5cf6 50%, transparent 100%)"
-            }}
-          />
-
-          {/* Left side panel , slides in from left on scroll */}
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:block w-[30%] mb-4 origin-right -mr-[8%] z-0"
-            style={{ rotateY: -10, scale: 0.88 }}
-            aria-hidden="true"
-          >
+        <div className="relative flex items-end justify-center" style={{ perspective: "1200px" }}>
+          <div className="hidden lg:block absolute left-0 bottom-0 w-[28%] opacity-70 scale-[0.85] origin-bottom-left -translate-x-[8%] translate-y-4">
             <SideScreenPanel variant="left" />
-          </motion.div>
-
-          {/* Center main mockup */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="flex-1 max-w-[860px] relative z-10"
-          >
+          </div>
+          <div className="relative z-10 w-full max-w-4xl">
             <ProductShowcase dark />
-          </motion.div>
-
-          {/* Right side panel , slides in from right on scroll */}
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:block w-[30%] mb-4 origin-left -ml-[8%] z-0"
-            style={{ rotateY: 10, scale: 0.88 }}
-            aria-hidden="true"
-          >
+          </div>
+          <div className="hidden lg:block absolute right-0 bottom-0 w-[28%] opacity-70 scale-[0.85] origin-bottom-right translate-x-[8%] translate-y-4">
             <SideScreenPanel variant="right" />
-          </motion.div>
+          </div>
         </div>
-
-        {/* Fade-to-navy gradient at bottom */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
-          style={{
-            background: "linear-gradient(to bottom, transparent, var(--brand-navy))",
-          }}
-        />
       </div>
     </section>
   );
 }
-

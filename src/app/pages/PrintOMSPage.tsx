@@ -2,14 +2,18 @@
 
 import { useHashScroll } from "../hooks/useHashScroll";
 import { PrintOMSHero } from "../sections/printoms/PrintOMSHero";
-import { ProblemPlatform } from "../sections/home/ProblemPlatform";
-import { PainPoints } from "../sections/printoms/PainPoints";
-import { Roles } from "../sections/printoms/Roles";
-// import { Pricing } from "../sections/printoms/Pricing";
+import { TrustedBy } from "../sections/printoms/TrustedBy";
+import { ProblemSplit } from "../sections/printoms/ProblemSplit";
+import { Outcomes } from "../sections/printoms/Outcomes";
+import { WorkflowPinned } from "../sections/printoms/WorkflowPinned";
+import { FeatureStories } from "../sections/printoms/FeatureStories";
+import { Teams } from "../sections/printoms/Teams";
+import { CustomerPortal } from "../sections/printoms/CustomerPortal";
+import { Reporting } from "../sections/printoms/Reporting";
+import { Testimonials } from "../sections/printoms/Testimonials";
+import { Pricing } from "../sections/printoms/Pricing";
 import { FAQ } from "../sections/printoms/FAQ";
-import { FinalCTA } from "../sections/shared/FinalCTA";
-import { MapScroller } from "../components/motion/MapScroller";
-import { CAPABILITIES } from "../content/printoms";
+import { PrintOMSFinalCTA } from "../sections/printoms/PrintOMSFinalCTA";
 
 export function PrintOMSPage() {
   useHashScroll();
@@ -17,32 +21,18 @@ export function PrintOMSPage() {
   return (
     <>
       <PrintOMSHero />
-      <ProblemPlatform />
-      <PainPoints />
-      <div id="workflow" className="scroll-mt-24">
-        <MapScroller
-          eyebrow="Capabilities"
-          heading="Everything your shop needs in one place"
-          sub="All the tools to run your signage business, connected in PrintOMS."
-          steps={CAPABILITIES}
-        />
-      </div>
-      <Roles />
-      {/* Temporarily hidden
+      <TrustedBy />
+      <ProblemSplit />
+      <Outcomes />
+      <WorkflowPinned />
+      <FeatureStories />
+      <Teams />
+      <CustomerPortal />
+      <Reporting />
+      <Testimonials />
       <Pricing />
-      */}
       <FAQ />
-      <FinalCTA
-        heading={
-          <>
-            Ready to run your shop
-            <br />
-            on PrintOMS?
-          </>
-        }
-        sub="Book a demo. See enquiry to install in one workspace."
-      />
+      <PrintOMSFinalCTA />
     </>
   );
 }
-

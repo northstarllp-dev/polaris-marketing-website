@@ -20,7 +20,10 @@ export function FinalCTA({
   sub?: string;
 }) {
   return (
-    <section id="contact" className="py-28 relative overflow-hidden bg-[var(--brand-navy)] scroll-mt-24">
+    <section
+      id="contact"
+      className="py-28 relative z-10 overflow-hidden bg-[var(--brand-navy)] scroll-mt-24 rounded-b-[2.5rem] shadow-[0_28px_80px_rgba(0,0,0,0.4)]"
+    >
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute inset-0"

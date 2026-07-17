@@ -9,6 +9,7 @@ import {
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import { LivePulse } from "../../components/motion/CountOrPulse";
+import { getPrintomsUrl } from "../../content/site";
 
 const HEADLINE_TOP = ["We", "map", "your", "chaos."];
 const HEADLINE_BOTTOM = ["Then", "we", "build", "the"];
@@ -159,7 +160,7 @@ export function HomeHero() {
             whileTap={{ scale: 0.98 }}
           >
             <Link
-              href="/products/printoms"
+              href={getPrintomsUrl()}
               className="font-['Figtree',sans-serif] font-bold text-[15px] bg-brand-gradient text-white px-8 py-3.5 rounded-lg hover:brightness-110 transition-colors inline-flex items-center gap-2 shadow-lg shadow-orange-500/30"
             >
               Explore PrintOMS <ArrowRight size={16} />

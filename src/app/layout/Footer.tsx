@@ -1,36 +1,35 @@
 "use client";
 
 import Link from "next/link";
+import { getPrintomsUrl } from "../content/site";
 
 const FOOTER_LINKS = {
   Products: [
-    { label: "PrintOMS", to: "/products/printoms" },
-    { label: "More coming soon", to: "/#ecosystem" },
+    { label: "PrintOMS", to: "printoms", kind: "printoms" as const },
+    { label: "More coming soon", to: "/#ecosystem", kind: "path" as const },
   ],
   Company: [
-    { label: "Why Polaris", to: "/#why" },
+    { label: "Why Polaris", to: "/#why", kind: "path" as const },
   ],
   Resources: [
-    // { label: "Pricing", to: "/products/printoms#pricing" },
-    { label: "FAQ", to: "/products/printoms#faq" },
+    { label: "FAQ", to: "faq", kind: "printoms-hash" as const },
   ],
   Contact: [
-    { label: "sales@thepolarislabs.com", to: "mailto:sales@thepolarislabs.com" },
-    { label: "+91 9994400311", to: "tel:+919994400311" },
-    { label: "+91 8189999998", to: "tel:+918189999998" },
+    { label: "sales@thepolarislabs.com", to: "mailto:sales@thepolarislabs.com", kind: "abs" as const },
+    { label: "+91 9994400311", to: "tel:+919994400311", kind: "abs" as const },
+    { label: "+91 8189999998", to: "tel:+918189999998", kind: "abs" as const },
   ],
 };
 
+/** Sticky bottom footer — revealed as main content scrolls up over it */
 export function Footer() {
   return (
-    <footer className="relative bg-[var(--brand-navy-deep)] pt-12 pb-6 overflow-hidden">
-      {/* Ambient top border & glow */}
+    <footer className="sticky bottom-0 z-0 bg-[var(--brand-navy-deep)] pt-12 pb-6 overflow-hidden">
       <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[400px] bg-brand-gradient opacity-5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-10">
-          {/* Brand & CTA Section */}
           <div className="md:col-span-5 flex flex-col items-start">
             <img
               src="/Dark withoutbg.png"
@@ -51,7 +50,6 @@ export function Footer() {
             </a>
           </div>
 
-          {/* Links Section */}
           <div className="md:col-span-7 grid grid-cols-2 sm:flex sm:flex-wrap md:flex-nowrap md:justify-end gap-x-4 gap-y-12 md:gap-16 pt-4">
             {Object.entries(FOOTER_LINKS).map(([section, links]) => (
               <div key={section} className="sm:min-w-[140px]">
@@ -59,25 +57,34 @@ export function Footer() {
                   {section}
                 </h4>
                 <ul className="flex flex-col gap-4">
-                  {links.map((link) => (
-                    <li key={link.label}>
-                      {link.to.startsWith("/") ? (
-                        <Link
-                          href={link.to}
-                          className="font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-brand-gradient transition-colors"
-                        >
-                          {link.label}
-                        </Link>
-                      ) : (
-                        <a
-                          href={link.to}
-                          className="font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-brand-gradient transition-colors"
-                        >
+                  {links.map((link) => {
+                    const href =
+                      link.kind === "printoms"
+                        ? getPrintomsUrl()
+                        : link.kind === "printoms-hash"
+                          ? getPrintomsUrl("#faq")
+                          : link.to;
+                    const className =
+                      "font-['Figtree',sans-serif] font-medium text-[14.5px] text-white/40 hover:text-brand-gradient transition-colors";
+
+                    if (link.kind === "path") {
+                      return (
+                        <li key={link.label}>
+                          <Link href={link.to} className={className}>
+                            {link.label}
+                          </Link>
+                        </li>
+                      );
+                    }
+
+                    return (
+                      <li key={link.label}>
+                        <a href={href} className={className}>
                           {link.label}
                         </a>
-                      )}
-                    </li>
-                  ))}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
