@@ -146,7 +146,6 @@ export function NavBar() {
                         setProductsOpen(false);
                       }}
                       className="block rounded-xl p-3 hover:bg-[var(--brand-surface)] transition-colors"
-                      suppressHydrationWarning
                     >
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-['Figtree',sans-serif] font-bold text-[14px] text-[var(--brand-ink)]">
