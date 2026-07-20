@@ -79,7 +79,7 @@ export function Footer() {
 
                     return (
                       <li key={link.label}>
-                        <a href={href} className={className}>
+                        <a href={href} className={className} suppressHydrationWarning>
                           {link.label}
                         </a>
                       </li>
