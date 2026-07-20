@@ -92,9 +92,15 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="font-['Figtree',sans-serif] font-medium text-[13px] text-white/30">
-            © {new Date().getFullYear()} Polaris. All rights reserved.
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="font-['Figtree',sans-serif] font-medium text-[13px] text-white/30">
+              © {new Date().getFullYear()} Polaris. All rights reserved.
+            </p>
+            <span className="text-white/10 text-[13px]">|</span>
+            <a href="https://virexa.in/" target="_blank" rel="noopener noreferrer" className="font-['Figtree',sans-serif] font-medium text-[13px] text-white/30 hover:text-white transition-colors">
+              Backed by Virexa
+            </a>
+          </div>
           <div className="flex gap-8">
             <a href="#" className="font-['Figtree',sans-serif] font-medium text-[13px] text-white/30 hover:text-white transition-colors">
               Privacy Policy

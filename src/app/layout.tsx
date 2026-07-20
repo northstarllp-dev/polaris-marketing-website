@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { NavBar } from "./layout/NavBar";
 import { Footer } from "./layout/Footer";
+import { BookDemoButton } from "./components/BookDemoButton";
+import { MessageCircle } from "lucide-react";
 import "../styles/index.css";
 
 export const metadata: Metadata = {
@@ -30,6 +32,12 @@ export default function RootLayout({
             <main>{children}</main>
           </div>
           <Footer />
+          
+          <div className="fixed bottom-6 right-6 z-50">
+            <BookDemoButton className="flex items-center justify-center h-14 w-14 rounded-full bg-[var(--brand-orange)] text-white shadow-xl hover:scale-105 transition-transform">
+              <MessageCircle size={26} />
+            </BookDemoButton>
+          </div>
         </div>
       </body>
     </html>

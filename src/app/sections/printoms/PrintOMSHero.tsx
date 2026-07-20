@@ -68,10 +68,10 @@ export function PrintOMSHero() {
             Book a Demo <ArrowRight size={16} />
           </BookDemoButton>
           <a
-            href="#workflow"
+            href="#outcomes"
             className="font-['Figtree',sans-serif] font-semibold text-[15px] text-white/70 border border-white/20 px-8 py-3.5 rounded-lg hover:border-white/40 hover:text-white transition-all"
           >
-            See the workflow
+            See the outcomes
           </a>
         </motion.div>
       </div>

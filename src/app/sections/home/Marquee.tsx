@@ -33,7 +33,8 @@ export function Marquee() {
           <div
             className="flex gap-16 items-center w-max will-change-transform"
             style={{
-              animation: `polaris-marquee ${hovered ? 12 : 28}s linear infinite`,
+              animation: `polaris-marquee 28s linear infinite`,
+              animationPlayState: hovered ? "paused" : "running",
             }}
           >
             {[...LOOP, ...LOOP].map((name, i) => (

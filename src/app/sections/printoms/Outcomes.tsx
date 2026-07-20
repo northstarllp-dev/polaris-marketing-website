@@ -8,7 +8,7 @@ import { Stagger, StaggerItem } from "../../components/motion/Stagger";
 /** Outcome cards — stagger + hover lift / slight rotate / glow */
 export function Outcomes() {
   return (
-    <section className="py-24 bg-white">
+    <section id="outcomes" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <FadeIn className="max-w-2xl mb-14">
           <p className="font-['Figtree',sans-serif] text-[12px] font-bold text-[var(--brand-accent)] uppercase tracking-widest mb-3">

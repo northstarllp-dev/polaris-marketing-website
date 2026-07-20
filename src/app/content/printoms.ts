@@ -205,44 +205,17 @@ export const IMPACT_METRICS = [
   }
 ] as const;
 
-export const FEATURE_STORIES = [
-  {
-    id: "crm",
-    title: "Customer CRM",
-    desc: "A directory built for signage jobs — history, contacts, and lifetime value.",
-    color: "#ff7043",
-    demo: "crm" as const,
-  },
-  {
-    id: "quotation",
-    title: "Quotation",
-    desc: "Quotes build themselves from catalog, site data, GST, and totals.",
-    color: "#0ea5e9",
-    demo: "quote" as const,
-  },
-  {
-    id: "approvals",
-    title: "Approvals",
-    desc: "Customer clicks Approve — status updates across the job instantly.",
-    color: "#8b5cf6",
-    demo: "approve" as const,
-  },
-  {
-    id: "production",
-    title: "Production",
-    desc: "Pending → Cutting → Printing → Fabrication → Installation.",
-    color: "#3b82f6",
-    demo: "production" as const,
-  },
-] as const;
+
 
 export const TEAM_ROLES = [
-  { title: "Owner", desc: "Full pipeline visibility, stage locks, and overrides.", preview: "Pipeline value & KPIs" },
   { title: "Sales", desc: "Quotes grounded in catalog and site measurements.", preview: "Enquiry inbox & quotes" },
+  { title: "Recce", desc: "Site measurements, access details, and structural photos.", preview: "Site visits" },
   { title: "Design", desc: "Proofs, revisions, and production file handoff.", preview: "Approval queue" },
   { title: "Production", desc: "Milestone checklists from procurement through QC.", preview: "Workshop board" },
   { title: "Installation", desc: "Schedules, checklists, photos, and digital handover.", preview: "Crew calendar" },
+  { title: "Accountant", desc: "Invoice syncing, payment collection, and GST reporting.", preview: "Finance dashboard" },
   { title: "Customer", desc: "Portal access to approve, revise, and track.", preview: "Order timeline" },
+  { title: "Owner", desc: "Full pipeline visibility, stage locks, and overrides.", preview: "Pipeline value & KPIs" },
 ] as const;
 
 export const PORTAL_STEPS = [

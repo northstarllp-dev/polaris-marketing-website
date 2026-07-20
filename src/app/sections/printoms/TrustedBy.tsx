@@ -26,7 +26,8 @@ export function TrustedBy() {
           <div
             className="flex gap-16 items-center w-max will-change-transform"
             style={{
-              animation: `polaris-marquee ${hovered ? 18 : 36}s linear infinite`,
+              animation: `polaris-marquee 36s linear infinite`,
+              animationPlayState: hovered ? "paused" : "running",
             }}
           >
             {[...LOOP, ...LOOP].map((name, i) => (

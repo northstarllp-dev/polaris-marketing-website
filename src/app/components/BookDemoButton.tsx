@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle, Phone } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -19,6 +19,7 @@ const DEMO_SUBJECT = "Book a Demo , Polaris";
 
 export const bookDemoWhatsAppHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEMO_MESSAGE)}`;
 export const bookDemoEmailHref = `mailto:${EMAIL}?subject=${encodeURIComponent(DEMO_SUBJECT)}&body=${encodeURIComponent(DEMO_MESSAGE)}`;
+export const bookDemoCallHref = `tel:+${WHATSAPP_NUMBER}`;
 
 type BookDemoButtonProps = {
   className?: string;
@@ -81,6 +82,24 @@ export function BookDemoButton({ className = "", children }: BookDemoButtonProps
                 </span>
                 <span className="block font-['Figtree',sans-serif] text-[13px] text-[var(--brand-muted)]">
                   {EMAIL}
+                </span>
+              </span>
+            </a>
+
+            <a
+              href={bookDemoCallHref}
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-4 rounded-xl border border-[rgba(0,0,0,0.08)] bg-white px-4 py-4 transition-colors hover:border-blue-500/40 hover:bg-blue-50"
+            >
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
+                <Phone size={22} />
+              </span>
+              <span className="text-left">
+                <span className="block font-['Figtree',sans-serif] font-bold text-[15px] text-[var(--brand-ink)]">
+                  Call Us
+                </span>
+                <span className="block font-['Figtree',sans-serif] text-[13px] text-[var(--brand-muted)]">
+                  +91 81899 99998
                 </span>
               </span>
             </a>

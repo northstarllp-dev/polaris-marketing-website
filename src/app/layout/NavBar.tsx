@@ -13,7 +13,13 @@ const NAV_LINKS = [
   { label: "Company", to: "/#about" },
   { label: "How We Work", to: "/#how-we-work" },
   { label: "Why Polaris", to: "/#why" },
-  // { label: "Pricing", to: "/products/printoms#pricing" },
+] as const;
+
+const PRINTOMS_NAV_LINKS = [
+  { label: "Outcomes", to: "#outcomes" },
+  { label: "Workflow", to: "#teams" },
+  { label: "Pricing", to: "#pricing" },
+  { label: "FAQ", to: "#faq" },
 ] as const;
 
 export function NavBar() {
@@ -21,9 +27,19 @@ export function NavBar() {
   const [productsOpen, setProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isPrintOMS = 
+    pathname?.startsWith("/products/printoms") || 
+    (mounted && window.location.hostname.includes("printoms"));
+  const linksToUse = isPrintOMS ? PRINTOMS_NAV_LINKS : NAV_LINKS;
 
   useEffect(() => {
     const onScroll = () => {
@@ -65,15 +81,25 @@ export function NavBar() {
 
   function goTo(to: string, e?: MouseEvent) {
     e?.preventDefault();
-    const [path, hash = ""] = to.split("#");
-    const targetPath = path || "/";
-    const hashPart = hash ? `#${hash}` : "";
+    let targetPath = "/";
+    let hashString = "";
+    
+    if (to.startsWith("#")) {
+      targetPath = pathname;
+      hashString = to.substring(1);
+    } else {
+      const [path, hash = ""] = to.split("#");
+      targetPath = path || "/";
+      hashString = hash;
+    }
+    
+    const hashPart = hashString ? `#${hashString}` : "";
     const behavior: ScrollBehavior = (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? "auto" : "smooth";
 
     if (pathname === targetPath) {
-      if (hash) {
+      if (hashString) {
         if (typeof window !== "undefined" && window.location.hash === hashPart) {
-          scrollToHash(hash, behavior);
+          scrollToHash(hashString, behavior);
         } else {
           router.push(`${targetPath}${hashPart}`);
         }
@@ -194,7 +220,7 @@ export function NavBar() {
             </AnimatePresence>
           </div>
 
-          {NAV_LINKS.map(({ label, to }) => (
+          {linksToUse.map(({ label, to }) => (
             <Link
               key={label}
               href={to}
@@ -204,6 +230,7 @@ export function NavBar() {
               {label}
             </Link>
           ))}
+          <BookDemoButton className={linkClass}>Contact Us</BookDemoButton>
         </div>
 
         <div className="hidden lg:flex items-center gap-2 shrink-0">
@@ -247,18 +274,21 @@ export function NavBar() {
                 }}
                 className={mobileLinkClass}
               >
-                PrintOMS
+                Products
               </button>
-              {NAV_LINKS.map(({ label, to }) => (
-                <button
+              {linksToUse.map(({ label, to }) => (
+                <Link
                   key={label}
-                  type="button"
+                  href={to}
                   onClick={(e) => goTo(to, e)}
                   className={mobileLinkClass}
                 >
                   {label}
-                </button>
+                </Link>
               ))}
+              <BookDemoButton className={`${mobileLinkClass} w-full`}>
+                Contact Us
+              </BookDemoButton>
               <BookDemoButton className="font-['Figtree',sans-serif] text-[14px] font-semibold bg-brand-gradient text-white px-5 py-3 rounded-lg text-center mt-4 w-full">
                 Book a Demo
               </BookDemoButton>

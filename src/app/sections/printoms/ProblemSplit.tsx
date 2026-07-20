@@ -68,6 +68,7 @@ export function ProblemSplit() {
                   loop
                   playsInline
                   autoPlay
+                  controls
                   className="absolute inset-0 h-full w-full object-contain"
                 />
               </div>

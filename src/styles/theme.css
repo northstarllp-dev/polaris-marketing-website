@@ -227,4 +227,22 @@
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
+
+  /* Ensure all interactive elements show a pointer hand cursor */
+  button, 
+  a, 
+  [role="button"],
+  select {
+    cursor: pointer;
+  }
+
+  /* Hide scrollbar globally */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
