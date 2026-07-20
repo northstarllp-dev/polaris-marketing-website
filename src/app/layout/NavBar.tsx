@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { BookDemoButton } from "../components/BookDemoButton";
 import { scrollToHash } from "../hooks/useHashScroll";
-import { PRINTOMS_APP_PATH } from "../content/site";
+import { getPrintomsUrl } from "../content/site";
 
 const NAV_LINKS = [
   { label: "Company", to: "/#about" },
@@ -139,10 +139,10 @@ export function NavBar() {
                 >
                   <div className="p-2">
                     <a
-                      href={PRINTOMS_APP_PATH}
+                      href={getPrintomsUrl()}
                       onClick={(e) => {
                         e.preventDefault();
-                        window.location.href = PRINTOMS_APP_PATH;
+                        window.location.href = getPrintomsUrl();
                         setProductsOpen(false);
                       }}
                       className="block rounded-xl p-3 hover:bg-[var(--brand-surface)] transition-colors"
@@ -162,7 +162,7 @@ export function NavBar() {
                     {/* Temporarily hidden
                     <button
                       type="button"
-                      onClick={(e) => goTo("/products/printoms#pricing", e)}
+                      onClick={(e) => goTo(getPrintomsUrl("#pricing"), e)}
                       className="w-full text-left rounded-xl p-3 hover:bg-[var(--brand-surface)] transition-colors"
                     >
                       <div className="flex items-center gap-2 mb-1">
@@ -242,7 +242,7 @@ export function NavBar() {
               <button
                 type="button"
                 onClick={() => {
-                  window.location.href = PRINTOMS_APP_PATH;
+                  window.location.href = getPrintomsUrl();
                   setOpen(false);
                 }}
                 className={mobileLinkClass}
